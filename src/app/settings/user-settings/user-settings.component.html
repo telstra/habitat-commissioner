@@ -1,0 +1,23 @@
+<div class="mb-3">
+  <h4 class="tdev-text tdev-blue">User Settings</h4>
+</div>
+
+<div class="text-error">
+  <a style="cursor: pointer" (click)="open(confirmModal)">Delete Account</a>
+</div>
+
+<ng-template #confirmModal let-c="close" let-d="dismiss">
+  <div class="modal-header tdev-text tdev-red">
+    <h4 class="modal-title">Delete account</h4>
+    <i class="fa fa-times" (click)="d()"></i>
+  </div>
+  <div class="modal-body">
+    Are you sure you want to delete the account
+    <strong>{{ auth?.user.username }}</strong>?
+    <br>This action cannot be undone!
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="c()">Cancel</button>
+    <button type="button" class="btn btn-tdev-red" (click)="c(true)">Yes, delete it!</button>
+  </div>
+</ng-template>

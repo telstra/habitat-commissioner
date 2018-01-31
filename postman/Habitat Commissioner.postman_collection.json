@@ -1,0 +1,6810 @@
+{
+	"info": {
+		"name": "Habitat Commissioner",
+		"_postman_id": "ae81cda0-3eed-00cf-8a6c-19664dfc55bb",
+		"description": "Express REST API for moving data between orgs and environments in apigee",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "authorization",
+			"description": "Authenticate with the HC API",
+			"item": [
+				{
+					"name": "login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"var token = jsonData.data.token;",
+									"postman.setEnvironmentVariable(\"token\", token);"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "username",
+									"value": "{{apigeeUsername}}",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "{{apigeePassword}}",
+									"description": "",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8080/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"auth",
+								"login"
+							]
+						},
+						"description": "Login to the Habitat Commissioner and receive a token"
+					},
+					"response": [
+						{
+							"id": "763a8536-6661-4ec9-aab8-bed17d6b85df",
+							"name": "200 OK",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/x-www-form-urlencoded"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "username",
+											"value": "{{apigeeUsername}}",
+											"description": "",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "{{apigeePassword}}",
+											"description": "",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:8080/auth/login",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"auth",
+										"login"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Origin, X-Requested-With, Content-Type, Accept",
+									"name": "Access-Control-Allow-Headers",
+									"description": ""
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "POST, GET, PATCH, DELETE, OPTIONS",
+									"name": "Access-Control-Allow-Methods",
+									"description": ""
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*",
+									"name": "Access-Control-Allow-Origin",
+									"description": ""
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive",
+									"name": "Connection",
+									"description": ""
+								},
+								{
+									"key": "Content-Length",
+									"value": "258",
+									"name": "Content-Length",
+									"description": ""
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8",
+									"name": "Content-Type",
+									"description": ""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 11 Dec 2017 04:34:54 GMT",
+									"name": "Date",
+									"description": ""
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"102-QzASmHbyVEU3zBjmSteYz8J3bYg\"",
+									"name": "ETag",
+									"description": ""
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "Express",
+									"name": "X-Powered-By",
+									"description": ""
+								}
+							],
+							"cookie": [],
+							"responseTime": "32",
+							"body": "{\n    \"code\": 200,\n    \"message\": \"Hello, {{apigeeUsername}}!\",\n    \"data\": {\n        \"token\": \"{{access_token}}\"\n    }\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "user",
+			"description": "Update user settings",
+			"item": [
+				{
+					"name": "getUser",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "username",
+									"value": "{{apigeeUsername}}",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "{{apigeePassword}}",
+									"description": "",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8080/user",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"user"
+							]
+						},
+						"description": "Get all information for the logged in user"
+					},
+					"response": [
+						{
+							"id": "756fcbec-9fd1-4377-91f9-526897f9ba34",
+							"name": "200 OK",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "token",
+										"value": "{{token}}"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "username",
+											"value": "{{apigeeUsername}}",
+											"description": "",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "{{apigeePassword}}",
+											"description": "",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:8080/user",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"user"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Origin, X-Requested-With, Content-Type, Accept",
+									"name": "Access-Control-Allow-Headers",
+									"description": ""
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "POST, GET, PATCH, DELETE, OPTIONS",
+									"name": "Access-Control-Allow-Methods",
+									"description": ""
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*",
+									"name": "Access-Control-Allow-Origin",
+									"description": ""
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive",
+									"name": "Connection",
+									"description": ""
+								},
+								{
+									"key": "Content-Length",
+									"value": "1363",
+									"name": "Content-Length",
+									"description": ""
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8",
+									"name": "Content-Type",
+									"description": ""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 11 Dec 2017 04:35:47 GMT",
+									"name": "Date",
+									"description": ""
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"553-IXuFFBMdInISOJBCaIGDvwZzYX4\"",
+									"name": "ETag",
+									"description": ""
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "Express",
+									"name": "X-Powered-By",
+									"description": ""
+								}
+							],
+							"cookie": [],
+							"responseTime": "26",
+							"body": "{\n    \"code\": 200,\n    \"message\": \"{{username}}\",\n    \"data\": {\n        \"username\": \"{{username}}\",\n        \"apiBasicAuthCredentials\": \"Basic {{credentials}}\",\n        \"config\": {\n            \"orgs\": [\n                \"org01\",\n                \"org02\",\n                \"org03\"\n            ],\n            \"repoParentDirectory\": \"path\\\\to\\\\parent\\\\repo\\\\directory\",\n            \"apiHostName\": \"apigee.management-api.hostname/v2\",\n            \"ssl\": {\n                \"enable\": true,\n                \"passphrase\": \"ssl-passphrase\",\n                \"key\": \"path\\\\to\\\\key.pem\",\n                \"cert\": \"path\\\\to\\\\cert.pem\"\n            },\n            \"proxy\": {\n                \"enable\": \"true\",\n                \"username\": \"{{proxyUsername}}\",\n                \"password\": \"{{proxyPassword}}\",\n                \"scheme\": \"http\",\n                \"host\": \"proxy.host.name\",\n                \"port\": \"8080\"\n            },\n            \"tests\": [\n                {\n                    \"id\": \"4b5e6b947929969fcc61ebc72df6e5a7\",\n                    \"name\": \"habitat commissioner\",\n                    \"collection\": \"Habitat Commissioner.postman_collection.json\",\n                    \"environment\": \"Habitat Commisioner.postman_environment.json\"\n                }\n            ]\n        }\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "getRepoParent",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:8080/user/repos",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"user",
+								"repos"
+							]
+						},
+						"description": "Get the names of each directory in the repo parent directory"
+					},
+					"response": [
+						{
+							"id": "d76d80af-c970-4bdd-b764-3ad005691e8e",
+							"name": "200 OK",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "token",
+										"value": "{{token}}"
+									}
+								],
+								"body": {},
+								"url": {
+									"raw": "http://localhost:8080/user/repos",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"user",
+										"repos"
+									]
+								},
+								"description": "Get the names of each directory in the repo parent directory"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"_postman_previewtype": "text",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Origin, X-Requested-With, Content-Type, Accept",
+									"name": "Access-Control-Allow-Headers",
+									"description": "Used in response to a preflight request to indicate which HTTP headers can be used when making the actual request."
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "POST, GET, PATCH, DELETE, OPTIONS",
+									"name": "Access-Control-Allow-Methods",
+									"description": "Specifies the method or methods allowed when accessing the resource. This is used in response to a preflight request."
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*",
+									"name": "Access-Control-Allow-Origin",
+									"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource."
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive",
+									"name": "Connection",
+									"description": "Options that are desired for the connection"
+								},
+								{
+									"key": "Content-Length",
+									"value": "195",
+									"name": "Content-Length",
+									"description": "The length of the response body in octets (8-bit bytes)"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8",
+									"name": "Content-Type",
+									"description": "The mime type of this content"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 19 Dec 2017 01:57:33 GMT",
+									"name": "Date",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"c3-JeGD3R0IjMqbL4nIects6LSX5gY\"",
+									"name": "ETag",
+									"description": "An identifier for a specific version of a resource, often a message digest"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "Express",
+									"name": "X-Powered-By",
+									"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
+								}
+							],
+							"cookie": [],
+							"responseTime": 37,
+							"body": "{\n    \"code\": 200,\n    \"message\": \"Repo directories\",\n    \"data\": [\n        \"repo-1\",\n        \"repo-2\"\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "updateConfig",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"apiHostName\": \"{{hostName}}\",\n\t\"repoParentDirectory\": \"{{repoParentPath}}\",\n\t\"orgs\": {{orgs}}\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/user",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"user"
+							]
+						},
+						"description": "Update the user settings for Apigee API hostname, repo parent directory path and which orgs to hit in Apigee"
+					},
+					"response": [
+						{
+							"id": "40770470-dcab-486a-b39a-fbcdc7d66953",
+							"name": "200 OK",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "token",
+										"value": "{{token}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"apiHostName\": \"{{hostName}}\",\n\t\"repoParentDirectory\": \"{{repoParentPath}}\",\n\t\"orgs\": {{orgs}}\n}"
+								},
+								"url": {
+									"raw": "http://localhost:8080/user",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"user"
+									]
+								},
+								"description": "Update the user settings for Apigee API hostname, repo parent directory path and which orgs to hit in Apigee"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"_postman_previewtype": "text",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Origin, X-Requested-With, Content-Type, Accept",
+									"name": "Access-Control-Allow-Headers",
+									"description": "Used in response to a preflight request to indicate which HTTP headers can be used when making the actual request."
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "POST, GET, PATCH, DELETE, OPTIONS",
+									"name": "Access-Control-Allow-Methods",
+									"description": "Specifies the method or methods allowed when accessing the resource. This is used in response to a preflight request."
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*",
+									"name": "Access-Control-Allow-Origin",
+									"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource."
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive",
+									"name": "Connection",
+									"description": "Options that are desired for the connection"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1173",
+									"name": "Content-Length",
+									"description": "The length of the response body in octets (8-bit bytes)"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8",
+									"name": "Content-Type",
+									"description": "The mime type of this content"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 19 Dec 2017 01:58:10 GMT",
+									"name": "Date",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"495-oMct+5boRHDMGC7x+Ldxd7v9Gf4\"",
+									"name": "ETag",
+									"description": "An identifier for a specific version of a resource, often a message digest"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "Express",
+									"name": "X-Powered-By",
+									"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
+								}
+							],
+							"cookie": [],
+							"responseTime": 29,
+							"body": "{\n    \"code\": 200,\n    \"message\": \"Configuration updated\",\n    \"data\": {\n        \"username\": \"username\",\n        \"apiBasicAuthCredentials\": \"Basic apigee-access-token\",\n        \"config\": {\n            \"orgs\": [\n                \"org\"\n            ],\n            \"repoParentDirectory\": \"absolute\\\\path\\\\to\\\\repo\\\\parent\",\n            \"apiHostName\": \"apigee.management.api.host/v1\",\n            \"ssl\": {\n                \"enable\": true,\n                \"passphrase\": \"ssl-passphrase\",\n                \"key\": \"path\\\\to\\\\key\",\n                \"cert\": \"path\\\\to\\\\cert\"\n            },\n            \"proxy\": {\n                \"enable\": true,\n                \"username\": \"proxy-username\",\n                \"password\": \"proxy-password\",\n                \"scheme\": \"http\",\n                \"host\": \"proxy.host\",\n                \"port\": \"8080\"\n            },\n            \"tests\": [\n                {\n                    \"id\": \"test-id\",\n                    \"name\": \"My postman tests\",\n                    \"collection\": \"MyPostmanTest.postman_collection.json\",\n                    \"environment\": \"MyPostmanTest.postman_environment.json\"\n                }\n            ]\n        }\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "updateProxySettings",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"enable\": true,\n\t\"username\": \"{{proxyUsername}}\",\n\t\"password\": \"{{proxyPassword}}\",\n\t\"scheme\": \"{{proxyScheme}}\",\n\t\"host\": \"{{proxyUrl}}\",\n\t\"port\": \"{{proxyPort}}\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/user/proxy",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"user",
+								"proxy"
+							]
+						},
+						"description": "Update proxy settings for the user"
+					},
+					"response": [
+						{
+							"id": "4e117e7d-f66d-4a87-94b2-1d349dbb237f",
+							"name": "200 OK",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "token",
+										"value": "{{token}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"enable\": true,\n\t\"username\": \"{{proxyUsername}}\",\n\t\"password\": \"{{proxyPassword}}\",\n\t\"scheme\": \"{{proxyScheme}}\",\n\t\"host\": \"{{proxyUrl}}\",\n\t\"port\": \"{{proxyPort}}\"\n}"
+								},
+								"url": {
+									"raw": "http://localhost:8080/user/proxy",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"user",
+										"proxy"
+									]
+								},
+								"description": "Update proxy settings for the user"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"_postman_previewtype": "text",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Origin, X-Requested-With, Content-Type, Accept",
+									"name": "Access-Control-Allow-Headers",
+									"description": "Used in response to a preflight request to indicate which HTTP headers can be used when making the actual request."
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "POST, GET, PATCH, DELETE, OPTIONS",
+									"name": "Access-Control-Allow-Methods",
+									"description": "Specifies the method or methods allowed when accessing the resource. This is used in response to a preflight request."
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*",
+									"name": "Access-Control-Allow-Origin",
+									"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource."
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive",
+									"name": "Connection",
+									"description": "Options that are desired for the connection"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1172",
+									"name": "Content-Length",
+									"description": "The length of the response body in octets (8-bit bytes)"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8",
+									"name": "Content-Type",
+									"description": "The mime type of this content"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 19 Dec 2017 01:59:18 GMT",
+									"name": "Date",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"494-NINg0lPmwC/HUutypWYvM6k2l0k\"",
+									"name": "ETag",
+									"description": "An identifier for a specific version of a resource, often a message digest"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "Express",
+									"name": "X-Powered-By",
+									"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
+								}
+							],
+							"cookie": [],
+							"responseTime": 35,
+							"body": "{\n    \"code\": 200,\n    \"message\": \"Proxy settings updated\",\n    \"data\": {\n        \"username\": \"username\",\n        \"apiBasicAuthCredentials\": \"Basic apigee-access-token\",\n        \"config\": {\n            \"orgs\": [\n                \"org\"\n            ],\n            \"repoParentDirectory\": \"absolute\\\\path\\\\to\\\\repo\\\\parent\",\n            \"apiHostName\": \"apigee.management.api.host/v1\",\n            \"ssl\": {\n                \"enable\": true,\n                \"passphrase\": \"ssl-passphrase\",\n                \"key\": \"path\\\\to\\\\key\",\n                \"cert\": \"path\\\\to\\\\cert\"\n            },\n            \"proxy\": {\n                \"enable\": true,\n                \"username\": \"proxy-username\",\n                \"password\": \"proxy-password\",\n                \"scheme\": \"http\",\n                \"host\": \"proxy.host\",\n                \"port\": \"8080\"\n            },\n            \"tests\": [\n                {\n                    \"id\": \"test-id\",\n                    \"name\": \"My postman tests\",\n                    \"collection\": \"MyPostmanTest.postman_collection.json\",\n                    \"environment\": \"MyPostmanTest.postman_environment.json\"\n                }\n            ]\n        }\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "enableSSL",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "multipart/form-data"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "passphrase",
+									"value": "{{ssl_passphrase}}",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "key",
+									"value": "",
+									"description": "",
+									"type": "file"
+								},
+								{
+									"key": "cert",
+									"value": "",
+									"description": "",
+									"type": "file"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8080/user/ssl",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"user",
+								"ssl"
+							]
+						},
+						"description": "Enable SSL for the user so they can use the Apigee management API using an SSL key and cert"
+					},
+					"response": [
+						{
+							"id": "65578ab5-cea1-4a15-b460-14d407f5034b",
+							"name": "200 OK",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "token",
+										"value": "{{token}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "multipart/form-data"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "passphrase",
+											"value": "{{ssl_passphrase}}",
+											"description": "",
+											"type": "text"
+										},
+										{
+											"key": "key",
+											"value": "",
+											"description": "",
+											"type": "file"
+										},
+										{
+											"key": "cert",
+											"value": "",
+											"description": "",
+											"type": "file"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:8080/user/ssl",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"user",
+										"ssl"
+									]
+								},
+								"description": "Enable SSL for the user so they can use the Apigee management API using an SSL key and cert"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"_postman_previewtype": "text",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Origin, X-Requested-With, Content-Type, Accept",
+									"name": "Access-Control-Allow-Headers",
+									"description": "Used in response to a preflight request to indicate which HTTP headers can be used when making the actual request."
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "POST, GET, PATCH, DELETE, OPTIONS",
+									"name": "Access-Control-Allow-Methods",
+									"description": "Specifies the method or methods allowed when accessing the resource. This is used in response to a preflight request."
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*",
+									"name": "Access-Control-Allow-Origin",
+									"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource."
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive",
+									"name": "Connection",
+									"description": "Options that are desired for the connection"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1161",
+									"name": "Content-Length",
+									"description": "The length of the response body in octets (8-bit bytes)"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8",
+									"name": "Content-Type",
+									"description": "The mime type of this content"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 19 Dec 2017 02:01:28 GMT",
+									"name": "Date",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"489-PWSI9Pa6JDSNJAoA4hNYcgc+0vY\"",
+									"name": "ETag",
+									"description": "An identifier for a specific version of a resource, often a message digest"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "Express",
+									"name": "X-Powered-By",
+									"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
+								}
+							],
+							"cookie": [],
+							"responseTime": 51,
+							"body": "{\n    \"code\": 200,\n    \"message\": \"SSL enabled\",\n    \"data\": {\n        \"username\": \"username\",\n        \"apiBasicAuthCredentials\": \"Basic apigee-access-token\",\n        \"config\": {\n            \"orgs\": [\n                \"org\"\n            ],\n            \"repoParentDirectory\": \"absolute\\\\path\\\\to\\\\repo\\\\parent\",\n            \"apiHostName\": \"apigee.management.api.host/v1\",\n            \"ssl\": {\n                \"enable\": true,\n                \"passphrase\": \"ssl-passphrase\",\n                \"key\": \"path\\\\to\\\\key\",\n                \"cert\": \"path\\\\to\\\\cert\"\n            },\n            \"proxy\": {\n                \"enable\": true,\n                \"username\": \"proxy-username\",\n                \"password\": \"proxy-password\",\n                \"scheme\": \"http\",\n                \"host\": \"proxy.host\",\n                \"port\": \"8080\"\n            },\n            \"tests\": [\n                {\n                    \"id\": \"test-id\",\n                    \"name\": \"My postman tests\",\n                    \"collection\": \"MyPostmanTest.postman_collection.json\",\n                    \"environment\": \"MyPostmanTest.postman_environment.json\"\n                }\n            ]\n        }\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "uploadPostmanTest",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "multipart/form-data"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "my postman test",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "collection",
+									"value": "",
+									"description": "",
+									"type": "file"
+								},
+								{
+									"key": "environment",
+									"value": "",
+									"description": "",
+									"type": "file"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8080/user/tests",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"user",
+								"tests"
+							]
+						},
+						"description": "Upload a postman collection and environment"
+					},
+					"response": [
+						{
+							"id": "fc90411a-0fea-4cdf-8569-24a3b4339ab1",
+							"name": "200 OK",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "token",
+										"value": "{{token}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "multipart/form-data"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "name",
+											"value": "my postman test",
+											"description": "",
+											"type": "text"
+										},
+										{
+											"key": "collection",
+											"value": "",
+											"description": "",
+											"type": "file"
+										},
+										{
+											"key": "environment",
+											"value": "",
+											"description": "",
+											"type": "file"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:8080/user/tests",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"user",
+										"tests"
+									]
+								},
+								"description": "Upload a postman collection and environment"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"_postman_previewtype": "text",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Origin, X-Requested-With, Content-Type, Accept",
+									"name": "Access-Control-Allow-Headers",
+									"description": "Used in response to a preflight request to indicate which HTTP headers can be used when making the actual request."
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "POST, GET, PATCH, DELETE, OPTIONS",
+									"name": "Access-Control-Allow-Methods",
+									"description": "Specifies the method or methods allowed when accessing the resource. This is used in response to a preflight request."
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*",
+									"name": "Access-Control-Allow-Origin",
+									"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource."
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive",
+									"name": "Connection",
+									"description": "Options that are desired for the connection"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1354",
+									"name": "Content-Length",
+									"description": "The length of the response body in octets (8-bit bytes)"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8",
+									"name": "Content-Type",
+									"description": "The mime type of this content"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 19 Dec 2017 02:02:15 GMT",
+									"name": "Date",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"54a-RrPFIepH+d4jm/jRCnmJH0mVjMY\"",
+									"name": "ETag",
+									"description": "An identifier for a specific version of a resource, often a message digest"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "Express",
+									"name": "X-Powered-By",
+									"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
+								}
+							],
+							"cookie": [],
+							"responseTime": 49,
+							"body": "{\n    \"code\": 200,\n    \"message\": \"Test gggg test created\",\n    \"data\": {\n        \"username\": \"username\",\n        \"apiBasicAuthCredentials\": \"Basic apigee-access-token\",\n        \"config\": {\n            \"orgs\": [\n                \"org\"\n            ],\n            \"repoParentDirectory\": \"absolute\\\\path\\\\to\\\\repo\\\\parent\",\n            \"apiHostName\": \"apigee.management.api.host/v1\",\n            \"ssl\": {\n                \"enable\": true,\n                \"passphrase\": \"ssl-passphrase\",\n                \"key\": \"path\\\\to\\\\key\",\n                \"cert\": \"path\\\\to\\\\cert\"\n            },\n            \"proxy\": {\n                \"enable\": true,\n                \"username\": \"proxy-username\",\n                \"password\": \"proxy-password\",\n                \"scheme\": \"http\",\n                \"host\": \"proxy.host\",\n                \"port\": \"8080\"\n            },\n            \"tests\": [\n                {\n                    \"id\": \"test-id\",\n                    \"name\": \"My postman tests\",\n                    \"collection\": \"MyPostmanTest.postman_collection.json\",\n                    \"environment\": \"MyPostmanTest.postman_environment.json\"\n                }\n            ]\n        }\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "getPostmanTest",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "Habitat Commissioner",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "collection",
+									"value": "",
+									"description": "",
+									"type": "file"
+								},
+								{
+									"key": "environment",
+									"value": "",
+									"description": "",
+									"type": "file"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8080/user/tests/{{test_id}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"user",
+								"tests",
+								"{{test_id}}"
+							]
+						},
+						"description": "Get the details of an uploaded postman collection and environment by ID"
+					},
+					"response": []
+				},
+				{
+					"name": "updatePostmanTest",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "multipart/form-data"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "my postman test",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "collection",
+									"value": "",
+									"description": "",
+									"type": "file"
+								},
+								{
+									"key": "environment",
+									"value": "",
+									"description": "",
+									"type": "file"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8080/user/tests/{{test_id}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"user",
+								"tests",
+								"{{test_id}}"
+							]
+						},
+						"description": "Update the collection and/ or environment files for an existing upload"
+					},
+					"response": [
+						{
+							"id": "17ac2b10-52b1-4f07-a00e-9c5a9ddaf201",
+							"name": "200 OK",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "token",
+										"value": "{{token}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "multipart/form-data"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "name",
+											"value": "my postman test",
+											"description": "",
+											"type": "text"
+										},
+										{
+											"key": "collection",
+											"value": "",
+											"description": "",
+											"type": "file"
+										},
+										{
+											"key": "environment",
+											"value": "",
+											"description": "",
+											"type": "file"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:8080/user/tests/{{test_id}}",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"user",
+										"tests",
+										"{{test_id}}"
+									]
+								},
+								"description": "Update the collection and/ or environment files for an existing upload"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"_postman_previewtype": "text",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Origin, X-Requested-With, Content-Type, Accept",
+									"name": "Access-Control-Allow-Headers",
+									"description": "Used in response to a preflight request to indicate which HTTP headers can be used when making the actual request."
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "POST, GET, PATCH, DELETE, OPTIONS",
+									"name": "Access-Control-Allow-Methods",
+									"description": "Specifies the method or methods allowed when accessing the resource. This is used in response to a preflight request."
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*",
+									"name": "Access-Control-Allow-Origin",
+									"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource."
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive",
+									"name": "Connection",
+									"description": "Options that are desired for the connection"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1342",
+									"name": "Content-Length",
+									"description": "The length of the response body in octets (8-bit bytes)"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8",
+									"name": "Content-Type",
+									"description": "The mime type of this content"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 19 Dec 2017 02:03:18 GMT",
+									"name": "Date",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"53e-tvJhXNOMTEJTfMWU3NVL7MvdKyg\"",
+									"name": "ETag",
+									"description": "An identifier for a specific version of a resource, often a message digest"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "Express",
+									"name": "X-Powered-By",
+									"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
+								}
+							],
+							"cookie": [],
+							"responseTime": 60,
+							"body": "{\n    \"code\": 200,\n    \"message\": \"Test updated\",\n    \"data\": {\n        \"username\": \"username\",\n        \"apiBasicAuthCredentials\": \"Basic apigee-access-token\",\n        \"config\": {\n            \"orgs\": [\n                \"org\"\n            ],\n            \"repoParentDirectory\": \"absolute\\\\path\\\\to\\\\repo\\\\parent\",\n            \"apiHostName\": \"apigee.management.api.host/v1\",\n            \"ssl\": {\n                \"enable\": true,\n                \"passphrase\": \"ssl-passphrase\",\n                \"key\": \"path\\\\to\\\\key\",\n                \"cert\": \"path\\\\to\\\\cert\"\n            },\n            \"proxy\": {\n                \"enable\": true,\n                \"username\": \"proxy-username\",\n                \"password\": \"proxy-password\",\n                \"scheme\": \"http\",\n                \"host\": \"proxy.host\",\n                \"port\": \"8080\"\n            },\n            \"tests\": [\n                {\n                    \"id\": \"test-id\",\n                    \"name\": \"My postman tests\",\n                    \"collection\": \"MyPostmanTest.postman_collection.json\",\n                    \"environment\": \"MyPostmanTest.postman_environment.json\"\n                }\n            ]\n        }\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "deletePostmanTest",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:8080/user/tests/{{test_id}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"user",
+								"tests",
+								"{{test_id}}"
+							]
+						},
+						"description": "Delete a postman collection and environment"
+					},
+					"response": [
+						{
+							"id": "d92747dd-9000-44d7-993b-8ae1a8d31fb5",
+							"name": "200 OK",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "token",
+										"value": "{{token}}"
+									}
+								],
+								"body": {},
+								"url": {
+									"raw": "http://localhost:8080/user/tests/{{test_id}}",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"user",
+										"tests",
+										"{{test_id}}"
+									]
+								},
+								"description": "Delete a postman collection and environment"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"_postman_previewtype": "text",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Origin, X-Requested-With, Content-Type, Accept",
+									"name": "Access-Control-Allow-Headers",
+									"description": "Used in response to a preflight request to indicate which HTTP headers can be used when making the actual request."
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "POST, GET, PATCH, DELETE, OPTIONS",
+									"name": "Access-Control-Allow-Methods",
+									"description": "Specifies the method or methods allowed when accessing the resource. This is used in response to a preflight request."
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*",
+									"name": "Access-Control-Allow-Origin",
+									"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource."
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive",
+									"name": "Connection",
+									"description": "Options that are desired for the connection"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1122",
+									"name": "Content-Length",
+									"description": "The length of the response body in octets (8-bit bytes)"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8",
+									"name": "Content-Type",
+									"description": "The mime type of this content"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 19 Dec 2017 02:04:04 GMT",
+									"name": "Date",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"462-k7JPLzyyOTZ7UikMsNgxoUtXkmg\"",
+									"name": "ETag",
+									"description": "An identifier for a specific version of a resource, often a message digest"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "Express",
+									"name": "X-Powered-By",
+									"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
+								}
+							],
+							"cookie": [],
+							"responseTime": 47,
+							"body": "{\n    \"code\": 200,\n    \"message\": \"Postman test deleted\",\n    \"data\": {\n       \"username\": \"username\",\n        \"apiBasicAuthCredentials\": \"Basic apigee-access-token\",\n        \"config\": {\n            \"orgs\": [\n                \"org\"\n            ],\n            \"repoParentDirectory\": \"absolute\\\\path\\\\to\\\\repo\\\\parent\",\n            \"apiHostName\": \"apigee.management.api.host/v1\",\n            \"ssl\": {\n                \"enable\": true,\n                \"passphrase\": \"ssl-passphrase\",\n                \"key\": \"path\\\\to\\\\key\",\n                \"cert\": \"path\\\\to\\\\cert\"\n            },\n            \"proxy\": {\n                \"enable\": true,\n                \"username\": \"proxy-username\",\n                \"password\": \"proxy-password\",\n                \"scheme\": \"http\",\n                \"host\": \"proxy.host\",\n                \"port\": \"8080\"\n            },\n            \"tests\": [\n                {\n                    \"id\": \"test-id\",\n                    \"name\": \"My postman tests\",\n                    \"collection\": \"MyPostmanTest.postman_collection.json\",\n                    \"environment\": \"MyPostmanTest.postman_environment.json\"\n                }\n            ]\n        }\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "disableSSL",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:8080/user/ssl",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"user",
+								"ssl"
+							]
+						},
+						"description": "Disable SSL for the user. This will also delete any previously uploaded key and cert files from the server"
+					},
+					"response": [
+						{
+							"id": "d56f7a3b-420c-40b3-a75c-f65690f95fad",
+							"name": "200 OK",
+							"originalRequest": {
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"_postman_previewtype": "text",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Origin, X-Requested-With, Content-Type, Accept",
+									"name": "Access-Control-Allow-Headers",
+									"description": "Used in response to a preflight request to indicate which HTTP headers can be used when making the actual request."
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "POST, GET, PATCH, DELETE, OPTIONS",
+									"name": "Access-Control-Allow-Methods",
+									"description": "Specifies the method or methods allowed when accessing the resource. This is used in response to a preflight request."
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*",
+									"name": "Access-Control-Allow-Origin",
+									"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource."
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive",
+									"name": "Connection",
+									"description": "Options that are desired for the connection"
+								},
+								{
+									"key": "Content-Length",
+									"value": "823",
+									"name": "Content-Length",
+									"description": "The length of the response body in octets (8-bit bytes)"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8",
+									"name": "Content-Type",
+									"description": "The mime type of this content"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 19 Dec 2017 02:00:30 GMT",
+									"name": "Date",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"337-I/nJ5IyD486nstyKtvUOqys7QM0\"",
+									"name": "ETag",
+									"description": "An identifier for a specific version of a resource, often a message digest"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "Express",
+									"name": "X-Powered-By",
+									"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
+								}
+							],
+							"cookie": [],
+							"responseTime": 38,
+							"body": "{\n    \"code\": 200,\n    \"message\": \"SSL disabled\",\n    \"data\": {\n        \"username\": \"username\",\n        \"apiBasicAuthCredentials\": \"Basic apigee-access-token\",\n        \"config\": {\n            \"orgs\": [\n                \"org\"\n            ],\n            \"repoParentDirectory\": \"absolute\\\\path\\\\to\\\\repo\\\\parent\",\n            \"apiHostName\": \"apigee.management.api.host/v1\",\n            \"ssl\": {\n                \"enable\": false,\n                \"passphrase\": null,\n                \"key\": null,\n                \"cert\": null\n            },\n            \"proxy\": {\n                \"enable\": true,\n                \"username\": \"proxy-username\",\n                \"password\": \"proxy-password\",\n                \"scheme\": \"http\",\n                \"host\": \"proxy.host\",\n                \"port\": \"8080\"\n            },\n            \"tests\": [\n                {\n                    \"id\": \"test-id\",\n                    \"name\": \"My postman tests\",\n                    \"collection\": \"MyPostmanTest.postman_collection.json\",\n                    \"environment\": \"MyPostmanTest.postman_environment.json\"\n                }\n            ]\n        }\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "deleteUser",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:8080/user",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"user"
+							]
+						},
+						"description": "Delete the logged in user account"
+					},
+					"response": [
+						{
+							"id": "6aa7dfce-2b86-4c58-a6c8-413c9dd8a041",
+							"name": "200 OK",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "token",
+										"value": "{{token}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://localhost:8080/user",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"user"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Origin, X-Requested-With, Content-Type, Accept",
+									"name": "Access-Control-Allow-Headers",
+									"description": ""
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "POST, GET, PATCH, DELETE, OPTIONS",
+									"name": "Access-Control-Allow-Methods",
+									"description": ""
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*",
+									"name": "Access-Control-Allow-Origin",
+									"description": ""
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive",
+									"name": "Connection",
+									"description": ""
+								},
+								{
+									"key": "Content-Length",
+									"value": "131",
+									"name": "Content-Length",
+									"description": ""
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8",
+									"name": "Content-Type",
+									"description": ""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 11 Dec 2017 04:43:49 GMT",
+									"name": "Date",
+									"description": ""
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"83-iXIg2hKKk6hgx5G7SR+9jVlg2mY\"",
+									"name": "ETag",
+									"description": ""
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "Express",
+									"name": "X-Powered-By",
+									"description": ""
+								}
+							],
+							"cookie": [],
+							"responseTime": "40",
+							"body": "{\n    \"code\": 200,\n    \"message\": \"{{username}} deleted\",\n    \"data\": \"Operation complete. Please review the logs for more information\"\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "misc",
+			"description": "Miscellaneous helper calls",
+			"item": [
+				{
+					"name": "getAllEnvs",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:8080/api/envs",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"envs"
+							]
+						},
+						"description": "Get the environments for each org set in the user configuration"
+					},
+					"response": [
+						{
+							"id": "72702f50-4f42-4e3d-8e78-200e76de41fa",
+							"name": "getAllEnvs",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "token",
+										"value": "{{token}}"
+									}
+								],
+								"body": {},
+								"url": {
+									"raw": "http://localhost:8080/api/envs",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"envs"
+									]
+								},
+								"description": "Get the environments for each org set in the user configuration"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"_postman_previewtype": "text",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Origin, X-Requested-With, Content-Type, Accept",
+									"name": "Access-Control-Allow-Headers",
+									"description": "Used in response to a preflight request to indicate which HTTP headers can be used when making the actual request."
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "POST, GET, PATCH, DELETE, OPTIONS",
+									"name": "Access-Control-Allow-Methods",
+									"description": "Specifies the method or methods allowed when accessing the resource. This is used in response to a preflight request."
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*",
+									"name": "Access-Control-Allow-Origin",
+									"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource."
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive",
+									"name": "Connection",
+									"description": "Options that are desired for the connection"
+								},
+								{
+									"key": "Content-Length",
+									"value": "137",
+									"name": "Content-Length",
+									"description": "The length of the response body in octets (8-bit bytes)"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8",
+									"name": "Content-Type",
+									"description": "The mime type of this content"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 19 Dec 2017 02:05:13 GMT",
+									"name": "Date",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"89-zgyAfdcnRWIRLYswEhjpzTihuaE\"",
+									"name": "ETag",
+									"description": "An identifier for a specific version of a resource, often a message digest"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "Express",
+									"name": "X-Powered-By",
+									"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
+								}
+							],
+							"cookie": [],
+							"responseTime": 2249,
+							"body": "{\n    \"code\": 200,\n    \"message\": \"Org and envs from apigee\",\n    \"data\": [\n        {\n            \"org\": \"org\",\n            \"envs\": [\n                \"env\",\n                \"env2\",\n                \"env3\"\n            ]\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "getEnvs",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:8080/api/env/{{org}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"env",
+								"{{org}}"
+							]
+						},
+						"description": "Get the environments for a single org"
+					},
+					"response": []
+				},
+				{
+					"name": "runTests",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:8080/api/postman_test/{{test_id}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"postman_test",
+								"{{test_id}}"
+							]
+						},
+						"description": "Run a postman test"
+					},
+					"response": []
+				},
+				{
+					"name": "getEndpoints",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:8080/api",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api"
+							]
+						},
+						"description": "Get the base name of all Habitat Commissioner API endpoints"
+					},
+					"response": [
+						{
+							"id": "d3063fd5-2b0a-42b5-8ccc-a602fbc20e35",
+							"name": "200 OK",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "token",
+										"value": "{{token}}"
+									}
+								],
+								"body": {},
+								"url": {
+									"raw": "http://localhost:8080/api",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Origin, X-Requested-With, Content-Type, Accept",
+									"name": "Access-Control-Allow-Headers",
+									"description": ""
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "POST, GET, PATCH, DELETE, OPTIONS",
+									"name": "Access-Control-Allow-Methods",
+									"description": ""
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*",
+									"name": "Access-Control-Allow-Origin",
+									"description": ""
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive",
+									"name": "Connection",
+									"description": ""
+								},
+								{
+									"key": "Content-Length",
+									"value": "239",
+									"name": "Content-Length",
+									"description": ""
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8",
+									"name": "Content-Type",
+									"description": ""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 11 Dec 2017 05:39:27 GMT",
+									"name": "Date",
+									"description": ""
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"ef-YtXCWeaSgKKo/q6VWTSCTkfWNZ4\"",
+									"name": "ETag",
+									"description": ""
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "Express",
+									"name": "X-Powered-By",
+									"description": ""
+								}
+							],
+							"cookie": [],
+							"responseTime": "88",
+							"body": "{\"code\":200,\"message\":\"All HC base endpoints\",\"data\":[\"apiProducts\",\"caches\",\"companies\",\"developers\",\"kvms\",\"monetizationCurrencies\",\"monetizationPackages\",\"notification-email-templates\",\"proxies\",\"reports\",\"sharedFlows\",\"targetServers\"]}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "api products",
+			"description": "Everything API products",
+			"item": [
+				{
+					"name": "listProducts",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:8080/apiProducts/apigee/list?org={{org}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"apiProducts",
+								"apigee",
+								"list"
+							],
+							"query": [
+								{
+									"key": "org",
+									"value": "{{org}}",
+									"equals": true
+								}
+							]
+						},
+						"description": "List all of the API products in Apigee at the specified org"
+					},
+					"response": [
+						{
+							"id": "d8378e0a-8e2c-47db-835d-9ba344c104c4",
+							"name": "200 OK",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "token",
+										"value": "{{token}}"
+									}
+								],
+								"body": {},
+								"url": {
+									"raw": "http://localhost:8080/apiProducts/apigee/list?org={{org}}",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"apiProducts",
+										"apigee",
+										"list"
+									],
+									"query": [
+										{
+											"key": "org",
+											"value": "{{org}}",
+											"equals": true
+										}
+									]
+								},
+								"description": "List all of the API products in Apigee at the specified org"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"_postman_previewtype": "text",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Origin, X-Requested-With, Content-Type, Accept",
+									"name": "Access-Control-Allow-Headers",
+									"description": "Used in response to a preflight request to indicate which HTTP headers can be used when making the actual request."
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "POST, GET, PATCH, DELETE, OPTIONS",
+									"name": "Access-Control-Allow-Methods",
+									"description": "Specifies the method or methods allowed when accessing the resource. This is used in response to a preflight request."
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*",
+									"name": "Access-Control-Allow-Origin",
+									"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource."
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive",
+									"name": "Connection",
+									"description": "Options that are desired for the connection"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1269",
+									"name": "Content-Length",
+									"description": "The length of the response body in octets (8-bit bytes)"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8",
+									"name": "Content-Type",
+									"description": "The mime type of this content"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 19 Dec 2017 02:08:08 GMT",
+									"name": "Date",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"4f5-lJJJZcAEIH8jiJcI6DR0v6Wu20k\"",
+									"name": "ETag",
+									"description": "An identifier for a specific version of a resource, often a message digest"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "Express",
+									"name": "X-Powered-By",
+									"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
+								}
+							],
+							"cookie": [],
+							"responseTime": 560,
+							"body": "{\n    \"code\": 200,\n    \"message\": \"Message\",\n    \"data\": {\n\t\t\"apigeeData\": \"apigeeData\"\n\t}\n}"
+						}
+					]
+				},
+				{
+					"name": "getProduct",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:8080/apiProducts/apigee/details/{{product_name}}?org={{org}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"apiProducts",
+								"apigee",
+								"details",
+								"{{product_name}}"
+							],
+							"query": [
+								{
+									"key": "org",
+									"value": "{{org}}",
+									"equals": true
+								}
+							]
+						},
+						"description": "Details of single API product from Apigee"
+					},
+					"response": []
+				},
+				{
+					"name": "listRepoProducts",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:8080/apiProducts/repo/list?repo={{repo}}&org={{org}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"apiProducts",
+								"repo",
+								"list"
+							],
+							"query": [
+								{
+									"key": "repo",
+									"value": "{{repo}}",
+									"equals": true
+								},
+								{
+									"key": "org",
+									"value": "{{org}}",
+									"equals": true
+								}
+							]
+						},
+						"description": "List of all API products in the specified repo under the specified org"
+					},
+					"response": []
+				},
+				{
+					"name": "getRepoProduct",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:8080/apiProducts/repo/details/{{product_name}}?org={{org}}&repo={{repo}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"apiProducts",
+								"repo",
+								"details",
+								"{{product_name}}"
+							],
+							"query": [
+								{
+									"key": "org",
+									"value": "{{org}}",
+									"equals": true
+								},
+								{
+									"key": "repo",
+									"value": "{{repo}}",
+									"equals": true
+								}
+							]
+						},
+						"description": "Details of a single API product from the repo"
+					},
+					"response": []
+				},
+				{
+					"name": "exportProducts",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "token",
+								"value": "{{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n\t\"{{product_name}}\",\n\t\"{{product_name}}\"\n]"
+						},
+						"url": {
+							"raw": "http://localhost:8080/apiProducts/repo?org={{org}}&repo={{repo}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"apiProducts",
+								"repo"
+							],
+							"query": [
+								{
+									"key": "org",
+									"value": "{{org}}",
+									"equals": true
+								},
+								{
+									"key": "repo",
+									"value": "{{repo}}",
+									"equals": true
+								}
+							]
+						},
+						"description": "Export API products from the specified org to the specified repo"
+					},
+					"response": []
+				},
+				{
+					"name": "importProducts",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "token",
+								"value": "{{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n\t\"{{product_name}}\",\n\t\"{{product_name}}\"\n]"
+						},
+						"url": {
+							"raw": "http://localhost:8080/apiProducts/apigee?org={{org}}&repo={{repo}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"apiProducts",
+								"apigee"
+							],
+							"query": [
+								{
+									"key": "org",
+									"value": "{{org}}",
+									"equals": true
+								},
+								{
+									"key": "repo",
+									"value": "{{repo}}",
+									"equals": true
+								}
+							]
+						},
+						"description": "Import API products from the specified repo to the specified org in Apigee"
+					},
+					"response": []
+				},
+				{
+					"name": "updateProducts",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "token",
+								"value": "{{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n\t\"{{product_name}}\",\n\t\"{{product_name}}\"\n]"
+						},
+						"url": {
+							"raw": "http://localhost:8080/apiProducts/apigee?org={{org}}&repo={{repo}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"apiProducts",
+								"apigee"
+							],
+							"query": [
+								{
+									"key": "org",
+									"value": "{{org}}",
+									"equals": true
+								},
+								{
+									"key": "repo",
+									"value": "{{repo}}",
+									"equals": true
+								}
+							]
+						},
+						"description": "Updates existing API products in Apigee with data from the repo"
+					},
+					"response": []
+				},
+				{
+					"name": "deleteProduct",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:8080/apiProducts/{{product_name}}?org={{org}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"apiProducts",
+								"{{product_name}}"
+							],
+							"query": [
+								{
+									"key": "org",
+									"value": "{{org}}",
+									"equals": true
+								}
+							]
+						},
+						"description": "Delete an API product from Apigee"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "api proxies",
+			"description": "Everything API proxies",
+			"item": [
+				{
+					"name": "listProxies",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:8080/proxies/apigee/list?org={{org}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"proxies",
+								"apigee",
+								"list"
+							],
+							"query": [
+								{
+									"key": "org",
+									"value": "{{org}}",
+									"equals": true
+								}
+							]
+						},
+						"description": "List all of the proxies in the specified org in Apigee"
+					},
+					"response": []
+				},
+				{
+					"name": "getProxy",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:8080/proxies/apigee/details/{{proxy_name}}?org={{org}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"proxies",
+								"apigee",
+								"details",
+								"{{proxy_name}}"
+							],
+							"query": [
+								{
+									"key": "org",
+									"value": "{{org}}",
+									"equals": true
+								}
+							]
+						},
+						"description": "Details of a proxy in the specified org in Apigee"
+					},
+					"response": []
+				},
+				{
+					"name": "listProxyRevisions",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:8080/proxies/apigee/list/{{proxy_name}}?org={{org}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"proxies",
+								"apigee",
+								"list",
+								"{{proxy_name}}"
+							],
+							"query": [
+								{
+									"key": "org",
+									"value": "{{org}}",
+									"equals": true
+								}
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "getProxyRevision",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:8080/proxies/apigee/details/{{proxy_name}}/{{revision_number}}?org={{org}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"proxies",
+								"apigee",
+								"details",
+								"{{proxy_name}}",
+								"{{revision_number}}"
+							],
+							"query": [
+								{
+									"key": "org",
+									"value": "{{org}}",
+									"equals": true
+								}
+							]
+						},
+						"description": "Details of a single proxy revision in the specified org in Apigee"
+					},
+					"response": []
+				},
+				{
+					"name": "importProxies",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "token",
+								"value": "{{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n    \"{{proxy_name}}\",\n    \"{{proxy_name}}\"\n]"
+						},
+						"url": {
+							"raw": "http://localhost:8080/proxies/apigee?org={{org}}&env={{env}}&repo={{repo}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"proxies",
+								"apigee"
+							],
+							"query": [
+								{
+									"key": "org",
+									"value": "{{org}}",
+									"equals": true
+								},
+								{
+									"key": "env",
+									"value": "{{env}}",
+									"equals": true
+								},
+								{
+									"key": "repo",
+									"value": "{{repo}}",
+									"equals": true
+								}
+							]
+						},
+						"description": "Import proxies from the repo into Apigee. We also deploy the proxy into the specified environment"
+					},
+					"response": []
+				},
+				{
+					"name": "exportProxies",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n\t{\n\t\t\"name\": \"{{proxy_name}}\",\n\t\t\"revision_number\": \"{{revision_number}}\"\n\t},\n\t{\n\t\t\"name\": \"{{proxy_name}}\",\n\t\t\"revision_number\": \"{{revision_number}}\"\n\t}\n]"
+						},
+						"url": {
+							"raw": "http://localhost:8080/proxies/repo/?org={{org}}&repo={{repo}}&env={{env}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"proxies",
+								"repo",
+								""
+							],
+							"query": [
+								{
+									"key": "org",
+									"value": "{{org}}",
+									"equals": true
+								},
+								{
+									"key": "repo",
+									"value": "{{repo}}",
+									"equals": true
+								},
+								{
+									"key": "env",
+									"value": "{{env}}",
+									"equals": true
+								}
+							]
+						},
+						"description": "Export proxies from Apigee into the repo"
+					},
+					"response": []
+				},
+				{
+					"name": "deleteProxy",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:8080/proxies/{{proxy_name}}?org={{org}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"proxies",
+								"{{proxy_name}}"
+							],
+							"query": [
+								{
+									"key": "org",
+									"value": "{{org}}",
+									"equals": true
+								}
+							]
+						},
+						"description": "Delete a proxy from Apigee"
+					},
+					"response": []
+				},
+				{
+					"name": "deleteProxyRevision",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:8080/proxies/{{proxy_name}}/{{revision_number}}?org={{org}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"proxies",
+								"{{proxy_name}}",
+								"{{revision_number}}"
+							],
+							"query": [
+								{
+									"key": "org",
+									"value": "{{org}}",
+									"equals": true
+								}
+							]
+						},
+						"description": "Delete a proxy revision"
+					},
+					"response": []
+				},
+				{
+					"name": "deployProxy",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "token",
+								"value": "{{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:8080/proxies/deploy/{{proxy_name}}/{{revision_number}}?org={{org}}&env={{env}}&repo={{repo}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"proxies",
+								"deploy",
+								"{{proxy_name}}",
+								"{{revision_number}}"
+							],
+							"query": [
+								{
+									"key": "org",
+									"value": "{{org}}",
+									"equals": true
+								},
+								{
+									"key": "env",
+									"value": "{{env}}",
+									"equals": true
+								},
+								{
+									"key": "repo",
+									"value": "{{repo}}",
+									"equals": true
+								}
+							]
+						},
+						"description": "Deploy a revision in Apigee"
+					},
+					"response": []
+				},
+				{
+					"name": "undeployProxy",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:8080/proxies/undeploy/{{proxy_name}}/{{revision_number}}?org={{org}}&env={{env}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"proxies",
+								"undeploy",
+								"{{proxy_name}}",
+								"{{revision_number}}"
+							],
+							"query": [
+								{
+									"key": "org",
+									"value": "{{org}}",
+									"equals": true
+								},
+								{
+									"key": "env",
+									"value": "{{env}}",
+									"equals": true
+								}
+							]
+						},
+						"description": "Undeploy a proxy revision"
+					},
+					"response": []
+				},
+				{
+					"name": "getRepoProxy",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:8080/proxies/repo/details/{{proxy_name}}?org={{org}}&repo={{repo}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"proxies",
+								"repo",
+								"details",
+								"{{proxy_name}}"
+							],
+							"query": [
+								{
+									"key": "org",
+									"value": "{{org}}",
+									"equals": true
+								},
+								{
+									"key": "repo",
+									"value": "{{repo}}",
+									"equals": true
+								}
+							]
+						},
+						"description": "Details of a single proxies configuration file in the repo"
+					},
+					"response": []
+				},
+				{
+					"name": "getProxyDeployments",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:8080/proxies/apigee/deployments/{{proxy_name}}?org={{org}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"proxies",
+								"apigee",
+								"deployments",
+								"{{proxy_name}}"
+							],
+							"query": [
+								{
+									"key": "org",
+									"value": "{{org}}",
+									"equals": true
+								}
+							]
+						},
+						"description": "Get each deployment of specified proxy in Apigee"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "caches",
+			"description": "Everything caches",
+			"item": [
+				{
+					"name": "listCaches",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:8080/caches/apigee/list?org={{org}}&env={{env}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"caches",
+								"apigee",
+								"list"
+							],
+							"query": [
+								{
+									"key": "org",
+									"value": "{{org}}",
+									"equals": true
+								},
+								{
+									"key": "env",
+									"value": "{{env}}",
+									"equals": true
+								}
+							]
+						},
+						"description": "List all caches in Apigee at the specified org and env"
+					},
+					"response": []
+				},
+				{
+					"name": "getCache",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:8080/caches/apigee/details/{{cache_name}}?org={{org}}&env={{env}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"caches",
+								"apigee",
+								"details",
+								"{{cache_name}}"
+							],
+							"query": [
+								{
+									"key": "org",
+									"value": "{{org}}",
+									"equals": true
+								},
+								{
+									"key": "env",
+									"value": "{{env}}",
+									"equals": true
+								}
+							]
+						},
+						"description": "Details of a single cache in Apigee"
+					},
+					"response": []
+				},
+				{
+					"name": "listRepoCaches",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:8080/caches/repo/list?org={{org}}&env={{env}}&repo={{repo}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"caches",
+								"repo",
+								"list"
+							],
+							"query": [
+								{
+									"key": "org",
+									"value": "{{org}}",
+									"equals": true
+								},
+								{
+									"key": "env",
+									"value": "{{env}}",
+									"equals": true
+								},
+								{
+									"key": "repo",
+									"value": "{{repo}}",
+									"equals": true
+								}
+							]
+						},
+						"description": "List of all caches at the specified env in the specified repo"
+					},
+					"response": []
+				},
+				{
+					"name": "getRepoCache",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:8080/caches/repo/details/{{cache_name}}?org={{org}}&env={{env}}&repo={{repo}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"caches",
+								"repo",
+								"details",
+								"{{cache_name}}"
+							],
+							"query": [
+								{
+									"key": "org",
+									"value": "{{org}}",
+									"equals": true
+								},
+								{
+									"key": "env",
+									"value": "{{env}}",
+									"equals": true
+								},
+								{
+									"key": "repo",
+									"value": "{{repo}}",
+									"equals": true
+								}
+							]
+						},
+						"description": "Details of a single cache in the repo"
+					},
+					"response": []
+				},
+				{
+					"name": "exportCaches",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "token",
+								"value": "{{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n\t\"{{cache_name}}\",\n\t\"{{cache_name}}\"\n]"
+						},
+						"url": {
+							"raw": "http://localhost:8080/caches/repo?org={{org}}&env={{env}}&repo={{repo}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"caches",
+								"repo"
+							],
+							"query": [
+								{
+									"key": "org",
+									"value": "{{org}}",
+									"equals": true
+								},
+								{
+									"key": "env",
+									"value": "{{env}}",
+									"equals": true
+								},
+								{
+									"key": "repo",
+									"value": "{{repo}}",
+									"equals": true
+								}
+							]
+						},
+						"description": "Export caches from Apigee into the repo"
+					},
+					"response": []
+				},
+				{
+					"name": "importCaches",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "token",
+								"value": "{{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n  \"{{cache_name}}\",\n  \"{{cache_name}}\"\n]"
+						},
+						"url": {
+							"raw": "http://localhost:8080/caches/apigee?org={{org}}&env={{env}}&repo={{repo}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"caches",
+								"apigee"
+							],
+							"query": [
+								{
+									"key": "org",
+									"value": "{{org}}",
+									"equals": true
+								},
+								{
+									"key": "env",
+									"value": "{{env}}",
+									"equals": true
+								},
+								{
+									"key": "repo",
+									"value": "{{repo}}",
+									"equals": true
+								}
+							]
+						},
+						"description": "Import caches from the repo into Apigee"
+					},
+					"response": []
+				},
+				{
+					"name": "updateCaches",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "token",
+								"value": "{{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n\t\"{{cache_name}}\",\n\t\"{{cache_name}}\n]"
+						},
+						"url": {
+							"raw": "http://localhost:8080/caches/apigee?org={{org}}&env={{env}}&repo={{repo}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"caches",
+								"apigee"
+							],
+							"query": [
+								{
+									"key": "org",
+									"value": "{{org}}",
+									"equals": true
+								},
+								{
+									"key": "env",
+									"value": "{{env}}",
+									"equals": true
+								},
+								{
+									"key": "repo",
+									"value": "{{repo}}",
+									"equals": true
+								}
+							]
+						},
+						"description": "Update existing caches in Apigee with data from the repo"
+					},
+					"response": []
+				},
+				{
+					"name": "deleteCache",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:8080/caches/{{cache_name}}?org={{org}}&env={{env}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"caches",
+								"{{cache_name}}"
+							],
+							"query": [
+								{
+									"key": "org",
+									"value": "{{org}}",
+									"equals": true
+								},
+								{
+									"key": "env",
+									"value": "{{env}}",
+									"equals": true
+								}
+							]
+						},
+						"description": "Delete a cache from Apigee"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "companies",
+			"description": "Everything companies",
+			"item": [
+				{
+					"name": "listCompanies",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:8080/companies/apigee/list?org={{org}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"companies",
+								"apigee",
+								"list"
+							],
+							"query": [
+								{
+									"key": "org",
+									"value": "{{org}}",
+									"equals": true
+								}
+							]
+						},
+						"description": "Get a list of all companies in Apigee"
+					},
+					"response": []
+				},
+				{
+					"name": "getCompany",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:8080/companies/apigee/details/{{company_name}}?org={{org}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"companies",
+								"apigee",
+								"details",
+								"{{company_name}}"
+							],
+							"query": [
+								{
+									"key": "org",
+									"value": "{{org}}",
+									"equals": true
+								}
+							]
+						},
+						"description": "Get a list of all companies in Apigee"
+					},
+					"response": []
+				},
+				{
+					"name": "deleteCompany",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:8080/companies/{{company_name}}?org={{org}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"companies",
+								"{{company_name}}"
+							],
+							"query": [
+								{
+									"key": "org",
+									"value": "{{org}}",
+									"equals": true
+								}
+							]
+						},
+						"description": "Delete a company in Apigee"
+					},
+					"response": []
+				},
+				{
+					"name": "listCompanyApps",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:8080/companies/apigee/list/{{company_name}}?org={{org}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"companies",
+								"apigee",
+								"list",
+								"{{company_name}}"
+							],
+							"query": [
+								{
+									"key": "org",
+									"value": "{{org}}",
+									"equals": true
+								}
+							]
+						},
+						"description": "Get all apps for a specified company"
+					},
+					"response": []
+				},
+				{
+					"name": "getCompanyApp",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:8080/companies/apigee/details/{{company_name}}/{{app_name}}?org={{org}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"companies",
+								"apigee",
+								"details",
+								"{{company_name}}",
+								"{{app_name}}"
+							],
+							"query": [
+								{
+									"key": "org",
+									"value": "{{org}}",
+									"equals": true
+								}
+							]
+						},
+						"description": "Get all apps for a specified company"
+					},
+					"response": []
+				},
+				{
+					"name": "deleteCompanyApp",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:8080/companies/{{company_name}}/{{app_name}}?org={{org}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"companies",
+								"{{company_name}}",
+								"{{app_name}}"
+							],
+							"query": [
+								{
+									"key": "org",
+									"value": "{{org}}",
+									"equals": true
+								}
+							]
+						},
+						"description": "Delete a company in Apigee"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "developers",
+			"description": "Everything developers",
+			"item": [
+				{
+					"name": "listDevelopers",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:8080/developers/apigee/list?org={{org}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"developers",
+								"apigee",
+								"list"
+							],
+							"query": [
+								{
+									"key": "org",
+									"value": "{{org}}",
+									"equals": true
+								}
+							]
+						},
+						"description": "List all developers in Apigee"
+					},
+					"response": []
+				},
+				{
+					"name": "deleteDeveloper",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:8080/developers/{{developer_email}}?org={{org}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"developers",
+								"{{developer_email}}"
+							],
+							"query": [
+								{
+									"key": "org",
+									"value": "{{org}}",
+									"equals": true
+								}
+							]
+						},
+						"description": "Delete a developer from Apigee"
+					},
+					"response": []
+				},
+				{
+					"name": "listDeveloperApps",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:8080/developers/apigee/list/{{developer_email}}?org={{org}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"developers",
+								"apigee",
+								"list",
+								"{{developer_email}}"
+							],
+							"query": [
+								{
+									"key": "org",
+									"value": "{{org}}",
+									"equals": true
+								}
+							]
+						},
+						"description": "All apps for a specified developer"
+					},
+					"response": []
+				},
+				{
+					"name": "deleteDeveloperApp",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:8080/developers/{{developer_email}}/{{app_name}}?org={{org}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"developers",
+								"{{developer_email}}",
+								"{{app_name}}"
+							],
+							"query": [
+								{
+									"key": "org",
+									"value": "{{org}}",
+									"equals": true
+								}
+							]
+						},
+						"description": "Delete a developer app"
+					},
+					"response": []
+				},
+				{
+					"name": "getDeveloper",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:8080/developers/apigee/details/{{developer_email}}?org={{org}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"developers",
+								"apigee",
+								"details",
+								"{{developer_email}}"
+							],
+							"query": [
+								{
+									"key": "org",
+									"value": "{{org}}",
+									"equals": true
+								}
+							]
+						},
+						"description": "Details of a developer"
+					},
+					"response": []
+				},
+				{
+					"name": "getDeveloperApp",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:8080/developers/apigee/details/{{developer_email}}/{{app_name}}?org={{org}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"developers",
+								"apigee",
+								"details",
+								"{{developer_email}}",
+								"{{app_name}}"
+							],
+							"query": [
+								{
+									"key": "org",
+									"value": "{{org}}",
+									"equals": true
+								}
+							]
+						},
+						"description": "Details of a developer app"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "kvms",
+			"description": "Everything key-value maps",
+			"item": [
+				{
+					"name": "listKvms",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:8080/kvms/apigee/list?org={{org}}&env={{env}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"kvms",
+								"apigee",
+								"list"
+							],
+							"query": [
+								{
+									"key": "org",
+									"value": "{{org}}",
+									"equals": true
+								},
+								{
+									"key": "env",
+									"value": "{{env}}",
+									"equals": true
+								}
+							]
+						},
+						"description": "List all KVMs in the specified environment in Apigee"
+					},
+					"response": []
+				},
+				{
+					"name": "listRepoKvms",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:8080/kvms/repo/list?repo={{repo}}&org={{org}}&env={{env}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"kvms",
+								"repo",
+								"list"
+							],
+							"query": [
+								{
+									"key": "repo",
+									"value": "{{repo}}",
+									"equals": true
+								},
+								{
+									"key": "org",
+									"value": "{{org}}",
+									"equals": true
+								},
+								{
+									"key": "env",
+									"value": "{{env}}",
+									"equals": true
+								}
+							]
+						},
+						"description": "List of KVMs in the specified environment from the specified repo"
+					},
+					"response": []
+				},
+				{
+					"name": "getKvm",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:8080/kvms/apigee/details/{{kvm_name}}?org={{org}}&env={{env}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"kvms",
+								"apigee",
+								"details",
+								"{{kvm_name}}"
+							],
+							"query": [
+								{
+									"key": "org",
+									"value": "{{org}}",
+									"equals": true
+								},
+								{
+									"key": "env",
+									"value": "{{env}}",
+									"equals": true
+								}
+							]
+						},
+						"description": "Details of a single KVM in Apigee"
+					},
+					"response": []
+				},
+				{
+					"name": "getRepoKvm",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:8080/kvms/repo/details/{{kvm_name}}?repo={{repo}}&org={{org}}&env={{env}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"kvms",
+								"repo",
+								"details",
+								"{{kvm_name}}"
+							],
+							"query": [
+								{
+									"key": "repo",
+									"value": "{{repo}}",
+									"equals": true
+								},
+								{
+									"key": "org",
+									"value": "{{org}}",
+									"equals": true
+								},
+								{
+									"key": "env",
+									"value": "{{env}}",
+									"equals": true
+								}
+							]
+						},
+						"description": "Details of KVM in the repo"
+					},
+					"response": []
+				},
+				{
+					"name": "listKvmEntries",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:8080/kvms/apigee/list/{{kvm_name}}?org={{org}}&env={{env}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"kvms",
+								"apigee",
+								"list",
+								"{{kvm_name}}"
+							],
+							"query": [
+								{
+									"key": "org",
+									"value": "{{org}}",
+									"equals": true
+								},
+								{
+									"key": "env",
+									"value": "{{env}}",
+									"equals": true
+								}
+							]
+						},
+						"description": "Get a list of all the entries for a specified KVM in Apigee"
+					},
+					"response": []
+				},
+				{
+					"name": "getKvmEntry",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:8080/kvms/apigee/details/{{kvm_name}}/{{entry_name}}?org={{org}}&env={{env}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"kvms",
+								"apigee",
+								"details",
+								"{{kvm_name}}",
+								"{{entry_name}}"
+							],
+							"query": [
+								{
+									"key": "org",
+									"value": "{{org}}",
+									"equals": true
+								},
+								{
+									"key": "env",
+									"value": "{{env}}",
+									"equals": true
+								}
+							]
+						},
+						"description": "Get the details of a single KVM entry in Apigee"
+					},
+					"response": []
+				},
+				{
+					"name": "listRepoKvmEntries",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:8080/kvms/repo/list/{{kvm_name}}?org={{org}}&env={{env}}&repo={{repo}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"kvms",
+								"repo",
+								"list",
+								"{{kvm_name}}"
+							],
+							"query": [
+								{
+									"key": "org",
+									"value": "{{org}}",
+									"equals": true
+								},
+								{
+									"key": "env",
+									"value": "{{env}}",
+									"equals": true
+								},
+								{
+									"key": "repo",
+									"value": "{{repo}}",
+									"equals": true
+								}
+							]
+						},
+						"description": "List of all entries for a single KVM in the repo"
+					},
+					"response": []
+				},
+				{
+					"name": "getRepoKvmEntry",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:8080/kvms/repo/details/{{kvm_name}}/{{entry_name}}?repo={{repo}}&org={{org}}&env={{env}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"kvms",
+								"repo",
+								"details",
+								"{{kvm_name}}",
+								"{{entry_name}}"
+							],
+							"query": [
+								{
+									"key": "repo",
+									"value": "{{repo}}",
+									"equals": true
+								},
+								{
+									"key": "org",
+									"value": "{{org}}",
+									"equals": true
+								},
+								{
+									"key": "env",
+									"value": "{{env}}",
+									"equals": true
+								}
+							]
+						},
+						"description": "Get the details for a single KVM entry in the repo"
+					},
+					"response": []
+				},
+				{
+					"name": "createKvm",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "token",
+								"value": "{{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n\t\"{{kvm_name}}\",\n\t\"{{kvm_name}}\"\n]"
+						},
+						"url": {
+							"raw": "http://localhost:8080/kvms/apigee?repo={{repo}}&org={{org}}&env={{env}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"kvms",
+								"apigee"
+							],
+							"query": [
+								{
+									"key": "repo",
+									"value": "{{repo}}",
+									"equals": true
+								},
+								{
+									"key": "org",
+									"value": "{{org}}",
+									"equals": true
+								},
+								{
+									"key": "env",
+									"value": "{{env}}",
+									"equals": true
+								}
+							]
+						},
+						"description": "Create new entries in an existing KVM in Apigee using data from the repo"
+					},
+					"response": []
+				},
+				{
+					"name": "createKvmEntries",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "token",
+								"value": "{{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n\t\"{{entry_name}}\",\n\t\"{{entry_name}}\"\n]"
+						},
+						"url": {
+							"raw": "http://localhost:8080/kvms/apigee/{{kvm_name}}?repo={{repo}}&org={{org}}&env={{env}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"kvms",
+								"apigee",
+								"{{kvm_name}}"
+							],
+							"query": [
+								{
+									"key": "repo",
+									"value": "{{repo}}",
+									"equals": true
+								},
+								{
+									"key": "org",
+									"value": "{{org}}",
+									"equals": true
+								},
+								{
+									"key": "env",
+									"value": "{{env}}",
+									"equals": true
+								}
+							]
+						},
+						"description": "Create new entries in an existing KVM in Apigee using data from the repo"
+					},
+					"response": []
+				},
+				{
+					"name": "updateKvmEntries",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "token",
+								"value": "{{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n\t\"{{entry_name}}\",\n\t\"{{entry_name}}\"\n]"
+						},
+						"url": {
+							"raw": "http://localhost:8080/kvms/apigee/{{kvm_name}}?repo={{repo}}&org={{org}}&env={{env}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"kvms",
+								"apigee",
+								"{{kvm_name}}"
+							],
+							"query": [
+								{
+									"key": "repo",
+									"value": "{{repo}}",
+									"equals": true
+								},
+								{
+									"key": "org",
+									"value": "{{org}}",
+									"equals": true
+								},
+								{
+									"key": "env",
+									"value": "{{env}}",
+									"equals": true
+								}
+							]
+						},
+						"description": "Update an existing KVM entry using data from the repo\n"
+					},
+					"response": []
+				},
+				{
+					"name": "deleteKvm",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:8080/kvms/{{kvm_name}}?org={{org}}&env={{env}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"kvms",
+								"{{kvm_name}}"
+							],
+							"query": [
+								{
+									"key": "org",
+									"value": "{{org}}",
+									"equals": true
+								},
+								{
+									"key": "env",
+									"value": "{{env}}",
+									"equals": true
+								}
+							]
+						},
+						"description": "Delete a KVM in Apigee"
+					},
+					"response": []
+				},
+				{
+					"name": "deleteKvmEntries",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:8080/kvms/{{kvm_name}}/{{entry_name}}?org={{org}}&env={{env}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"kvms",
+								"{{kvm_name}}",
+								"{{entry_name}}"
+							],
+							"query": [
+								{
+									"key": "org",
+									"value": "{{org}}",
+									"equals": true
+								},
+								{
+									"key": "env",
+									"value": "{{env}}",
+									"equals": true
+								}
+							]
+						},
+						"description": "Delete a KVM entry from an existing KVM in Apigee"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "monetization currencies",
+			"description": "Everything supported currencies",
+			"item": [
+				{
+					"name": "listCurrencies",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:8080/monetizationCurrencies/apigee/list?org={{org}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"monetizationCurrencies",
+								"apigee",
+								"list"
+							],
+							"query": [
+								{
+									"key": "org",
+									"value": "{{org}}",
+									"equals": true
+								}
+							]
+						},
+						"description": "List all supported currencies in the specified org in Apigee"
+					},
+					"response": []
+				},
+				{
+					"name": "getCurrency",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:8080/monetizationCurrencies/apigee/details/{{currency_id}}?org={{org}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"monetizationCurrencies",
+								"apigee",
+								"details",
+								"{{currency_id}}"
+							],
+							"query": [
+								{
+									"key": "org",
+									"value": "{{org}}",
+									"equals": true
+								}
+							]
+						},
+						"description": "Get details of a specified supported currency in Apigee"
+					},
+					"response": []
+				},
+				{
+					"name": "listRepoCurrencies",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:8080/monetizationCurrencies/repo/list?org={{org}}&repo={{repo}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"monetizationCurrencies",
+								"repo",
+								"list"
+							],
+							"query": [
+								{
+									"key": "org",
+									"value": "{{org}}",
+									"equals": true
+								},
+								{
+									"key": "repo",
+									"value": "{{repo}}",
+									"equals": true
+								}
+							]
+						},
+						"description": "List of all currencies in the specified org from the specified repo"
+					},
+					"response": []
+				},
+				{
+					"name": "getRepoCurrency",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:8080/monetizationCurrencies/repo/details/{{currency_id}}?org={{org}}&repo={{repo}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"monetizationCurrencies",
+								"repo",
+								"details",
+								"{{currency_id}}"
+							],
+							"query": [
+								{
+									"key": "org",
+									"value": "{{org}}",
+									"equals": true
+								},
+								{
+									"key": "repo",
+									"value": "{{repo}}",
+									"equals": true
+								}
+							]
+						},
+						"description": "Details of a single currency from the repo"
+					},
+					"response": []
+				},
+				{
+					"name": "exportCurrencies",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "token",
+								"value": "{{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n\t\"{{currency_id}}\",\n\t\"{{currency_id}}\"\n]"
+						},
+						"url": {
+							"raw": "http://localhost:8080/monetizationCurrencies/repo?org={{org}}&repo={{repo}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"monetizationCurrencies",
+								"repo"
+							],
+							"query": [
+								{
+									"key": "org",
+									"value": "{{org}}",
+									"equals": true
+								},
+								{
+									"key": "repo",
+									"value": "{{repo}}",
+									"equals": true
+								}
+							]
+						},
+						"description": "Export supported currencies from Apigee to the repo"
+					},
+					"response": []
+				},
+				{
+					"name": "importCurrencies",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "token",
+								"value": "{{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n\t\"{{currency_id}}\",\n\t\"{{currency_id}}\"\n]"
+						},
+						"url": {
+							"raw": "http://localhost:8080/monetizationCurrencies/apigee?org={{org}}&repo={{repo}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"monetizationCurrencies",
+								"apigee"
+							],
+							"query": [
+								{
+									"key": "org",
+									"value": "{{org}}",
+									"equals": true
+								},
+								{
+									"key": "repo",
+									"value": "{{repo}}",
+									"equals": true
+								}
+							]
+						},
+						"description": "Import currencies from the repo to Apigee"
+					},
+					"response": []
+				},
+				{
+					"name": "updateCurrencies",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "token",
+								"value": "{{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n\t\"{{currency_id}}\",\n\t\"{{currency_id}}\"\n]"
+						},
+						"url": {
+							"raw": "http://localhost:8080/monetizationCurrencies/apigee?org={{org}}&repo={{repo}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"monetizationCurrencies",
+								"apigee"
+							],
+							"query": [
+								{
+									"key": "org",
+									"value": "{{org}}",
+									"equals": true
+								},
+								{
+									"key": "repo",
+									"value": "{{repo}}",
+									"equals": true
+								}
+							]
+						},
+						"description": "Update an existing supported currency in Apigee with data from the repo"
+					},
+					"response": []
+				},
+				{
+					"name": "deleteCurrency",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:8080/monetizationCurrencies/{{currency_id}}?org={{org}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"monetizationCurrencies",
+								"{{currency_id}}"
+							],
+							"query": [
+								{
+									"key": "org",
+									"value": "{{org}}",
+									"equals": true
+								}
+							]
+						},
+						"description": "Delete a supported currency from Apigee"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "monetization packages",
+			"description": "Everything packages and rate plans",
+			"item": [
+				{
+					"name": "listPackages",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:8080/monetizationPackages/apigee/list?org={{org}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"monetizationPackages",
+								"apigee",
+								"list"
+							],
+							"query": [
+								{
+									"key": "org",
+									"value": "{{org}}",
+									"equals": true
+								}
+							]
+						},
+						"description": "List packages in Apigee in the specified org"
+					},
+					"response": []
+				},
+				{
+					"name": "getPackage",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:8080/monetizationPackages/apigee/details/{{package_id}}?org={{org}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"monetizationPackages",
+								"apigee",
+								"details",
+								"{{package_id}}"
+							],
+							"query": [
+								{
+									"key": "org",
+									"value": "{{org}}",
+									"equals": true
+								}
+							]
+						},
+						"description": "Get details of a specified package from Apigee"
+					},
+					"response": []
+				},
+				{
+					"name": "listRepoPackages",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:8080/monetizationPackages/repo/list?org={{org}}&repo={{repo}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"monetizationPackages",
+								"repo",
+								"list"
+							],
+							"query": [
+								{
+									"key": "org",
+									"value": "{{org}}",
+									"equals": true
+								},
+								{
+									"key": "repo",
+									"value": "{{repo}}",
+									"equals": true
+								}
+							]
+						},
+						"description": "List packages in the specified org from the specified repo"
+					},
+					"response": []
+				},
+				{
+					"name": "getRepoPackage",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:8080/monetizationPackages/repo/details/{{package_id}}?org={{org}}&repo={{repo}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"monetizationPackages",
+								"repo",
+								"details",
+								"{{package_id}}"
+							],
+							"query": [
+								{
+									"key": "org",
+									"value": "{{org}}",
+									"equals": true
+								},
+								{
+									"key": "repo",
+									"value": "{{repo}}",
+									"equals": true
+								}
+							]
+						},
+						"description": "Details for a package from the repo"
+					},
+					"response": []
+				},
+				{
+					"name": "exportPackages",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "token",
+								"value": "{{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n\t\"{{package_id}}\",\n\t\"{{package_id}}\"\n]"
+						},
+						"url": {
+							"raw": "http://localhost:8080/monetizationPackages/repo?org={{org}}&repo={{repo}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"monetizationPackages",
+								"repo"
+							],
+							"query": [
+								{
+									"key": "org",
+									"value": "{{org}}",
+									"equals": true
+								},
+								{
+									"key": "repo",
+									"value": "{{repo}}",
+									"equals": true
+								}
+							]
+						},
+						"description": "Export packages from the specified org in Apigee to the repo. Will also export all the rate plans for the specified package"
+					},
+					"response": []
+				},
+				{
+					"name": "importPackages",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n\t\"{{package_id}}\",\n\t\"{{package_id}}\"\n]"
+						},
+						"url": {
+							"raw": "http://localhost:8080/monetizationPackages/apigee/?org={{org}}&repo={{repo}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"monetizationPackages",
+								"apigee",
+								""
+							],
+							"query": [
+								{
+									"key": "org",
+									"value": "{{org}}",
+									"equals": true
+								},
+								{
+									"key": "repo",
+									"value": "{{repo}}",
+									"equals": true
+								}
+							]
+						},
+						"description": "Import packages from the repo to Apigee. Also imports the rate plan data for the package"
+					},
+					"response": []
+				},
+				{
+					"name": "addProduct",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "token",
+								"value": "{{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n\t\"{{product_name}}\",\n\t\"{{product_name}}\"\n]"
+						},
+						"url": {
+							"raw": "http://localhost:8080/monetizationPackages/product/{{package_id}}?org={{org}}&repo={{repo}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"monetizationPackages",
+								"product",
+								"{{package_id}}"
+							],
+							"query": [
+								{
+									"key": "org",
+									"value": "{{org}}",
+									"equals": true
+								},
+								{
+									"key": "repo",
+									"value": "{{repo}}",
+									"equals": true
+								}
+							]
+						},
+						"description": "Add an API product from the repo to an existing package in Apigee. The product with the same ID must also exist in Apigee"
+					},
+					"response": []
+				},
+				{
+					"name": "deletePackage",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:8080/monetizationPackages/{{package_id}}?org={{org}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"monetizationPackages",
+								"{{package_id}}"
+							],
+							"query": [
+								{
+									"key": "org",
+									"value": "{{org}}",
+									"equals": true
+								}
+							]
+						},
+						"description": "Delete a package from Apigee"
+					},
+					"response": []
+				},
+				{
+					"name": "deleteProductFromPackage",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:8080/monetizationPackages/product/{{package_id}}/{{product_id}}?org={{org}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"monetizationPackages",
+								"product",
+								"{{package_id}}",
+								"{{product_id}}"
+							],
+							"query": [
+								{
+									"key": "org",
+									"value": "{{org}}",
+									"equals": true
+								}
+							]
+						},
+						"description": "Delete an API product from a package in Apigee"
+					},
+					"response": []
+				},
+				{
+					"name": "listPackageRatePlans",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:8080/monetizationPackages/apigee/list/{{package_id}}?org={{org}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"monetizationPackages",
+								"apigee",
+								"list",
+								"{{package_id}}"
+							],
+							"query": [
+								{
+									"key": "org",
+									"value": "{{org}}",
+									"equals": true
+								}
+							]
+						},
+						"description": "Get the rate plans for a specified package in Apigee"
+					},
+					"response": []
+				},
+				{
+					"name": "getRatePlan",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:8080/monetizationPackages/apigee/details/{{package_id}}/{{rate_plan_id}}?org={{org}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"monetizationPackages",
+								"apigee",
+								"details",
+								"{{package_id}}",
+								"{{rate_plan_id}}"
+							],
+							"query": [
+								{
+									"key": "org",
+									"value": "{{org}}",
+									"equals": true
+								}
+							]
+						},
+						"description": "Details of a rate plan from Apigee"
+					},
+					"response": []
+				},
+				{
+					"name": "listRepoRatePlans",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:8080/monetizationPackages/rate-plans?org={{org}}&repo={{repo}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"monetizationPackages",
+								"rate-plans"
+							],
+							"query": [
+								{
+									"key": "org",
+									"value": "{{org}}",
+									"equals": true
+								},
+								{
+									"key": "repo",
+									"value": "{{repo}}",
+									"equals": true
+								}
+							]
+						},
+						"description": "List all rate plans in the specified repo"
+					},
+					"response": []
+				},
+				{
+					"name": "getRepoPackageRatePlans",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:8080/monetizationPackages/repo/list/{{package_id}}?org={{org}}&repo={{repo}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"monetizationPackages",
+								"repo",
+								"list",
+								"{{package_id}}"
+							],
+							"query": [
+								{
+									"key": "org",
+									"value": "{{org}}",
+									"equals": true
+								},
+								{
+									"key": "repo",
+									"value": "{{repo}}",
+									"equals": true
+								}
+							]
+						},
+						"description": "List all rate plans for a specified package in the repo"
+					},
+					"response": []
+				},
+				{
+					"name": "getRepoRatePlan",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:8080/monetizationPackages/repo/details/{{package_id}}/{{rateplan_id}}?org={{org}}&repo={{repo}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"monetizationPackages",
+								"repo",
+								"details",
+								"{{package_id}}",
+								"{{rateplan_id}}"
+							],
+							"query": [
+								{
+									"key": "org",
+									"value": "{{org}}",
+									"equals": true
+								},
+								{
+									"key": "repo",
+									"value": "{{repo}}",
+									"equals": true
+								}
+							]
+						},
+						"description": "Details for a specified rate plan within a specified package from the repo"
+					},
+					"response": []
+				},
+				{
+					"name": "createRatePlan",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n\t\"{{rate_plan_id}}\",\n\t\"{{rate_plan_id}}\"\n]"
+						},
+						"url": {
+							"raw": "http://localhost:8080/monetizationPackages/apigee/{{package_id}}/?org={{org}}&repo={{repo}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"monetizationPackages",
+								"apigee",
+								"{{package_id}}",
+								""
+							],
+							"query": [
+								{
+									"key": "org",
+									"value": "{{org}}",
+									"equals": true
+								},
+								{
+									"key": "repo",
+									"value": "{{repo}}",
+									"equals": true
+								}
+							]
+						},
+						"description": "Create new rate plans for an existing package in Apigee using rate plan data from the repo"
+					},
+					"response": []
+				},
+				{
+					"name": "createFutureRatePlan",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:8080/monetizationPackages/apigee/{{package_id}}/{{rate_plan_id}}/?org={{org}}&repo={{repo}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"monetizationPackages",
+								"apigee",
+								"{{package_id}}",
+								"{{rate_plan_id}}",
+								""
+							],
+							"query": [
+								{
+									"key": "org",
+									"value": "{{org}}",
+									"equals": true
+								},
+								{
+									"key": "repo",
+									"value": "{{repo}}",
+									"equals": true
+								}
+							]
+						},
+						"description": "Create a future rate plan for an existing rate plan in Apigee using rate plan data from the repo. The rate_plan_id must exist in the repo and also be an existing rate plan in Apigee belonging to the specified package_id"
+					},
+					"response": []
+				},
+				{
+					"name": "expireRatePlan",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:8080/monetizationPackages/{{package_id}}/{{rate_plan_id}}?org={{org}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"monetizationPackages",
+								"{{package_id}}",
+								"{{rate_plan_id}}"
+							],
+							"query": [
+								{
+									"key": "org",
+									"value": "{{org}}",
+									"equals": true
+								}
+							]
+						},
+						"description": "Expires a rate plan in a package in Apigee. The expiry will be set to the current time in UTC format"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "notification email templates",
+			"description": "Everything notification email templates",
+			"item": [
+				{
+					"name": "listTemplates",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:8080/notification-email-templates/apigee/list?org={{org}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"notification-email-templates",
+								"apigee",
+								"list"
+							],
+							"query": [
+								{
+									"key": "org",
+									"value": "{{org}}",
+									"equals": true
+								}
+							]
+						},
+						"description": "List of email templates from the specified org in Apigee"
+					},
+					"response": []
+				},
+				{
+					"name": "getTemplate",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:8080/notification-email-templates/apigee/details/{{template_id}}?org={{org}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"notification-email-templates",
+								"apigee",
+								"details",
+								"{{template_id}}"
+							],
+							"query": [
+								{
+									"key": "org",
+									"value": "{{org}}",
+									"equals": true
+								}
+							]
+						},
+						"description": "Details of a template from Apigee"
+					},
+					"response": []
+				},
+				{
+					"name": "listRepoTemplates",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:8080/notification-email-templates/repo/list?org={{org}}&repo={{repo}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"notification-email-templates",
+								"repo",
+								"list"
+							],
+							"query": [
+								{
+									"key": "org",
+									"value": "{{org}}",
+									"equals": true
+								},
+								{
+									"key": "repo",
+									"value": "{{repo}}",
+									"equals": true
+								}
+							]
+						},
+						"description": "List of templates from the repo"
+					},
+					"response": []
+				},
+				{
+					"name": "getRepoTemplate",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:8080/notification-email-templates/repo/details/{{template_id}}?org={{org}}&repo={{repo}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"notification-email-templates",
+								"repo",
+								"details",
+								"{{template_id}}"
+							],
+							"query": [
+								{
+									"key": "org",
+									"value": "{{org}}",
+									"equals": true
+								},
+								{
+									"key": "repo",
+									"value": "{{repo}}",
+									"equals": true
+								}
+							]
+						},
+						"description": "Details of a template from the specified repo"
+					},
+					"response": []
+				},
+				{
+					"name": "exportTemplates",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "token",
+								"value": "{{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n\t\"{{template_id}}\",\n\t\"{{template_id}}\"\n]"
+						},
+						"url": {
+							"raw": "http://localhost:8080/notification-email-templates/repo?org={{org}}&repo={{repo}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"notification-email-templates",
+								"repo"
+							],
+							"query": [
+								{
+									"key": "org",
+									"value": "{{org}}",
+									"equals": true
+								},
+								{
+									"key": "repo",
+									"value": "{{repo}}",
+									"equals": true
+								}
+							]
+						},
+						"description": "Export email templates from Apigee to the repo"
+					},
+					"response": []
+				},
+				{
+					"name": "importTemplates",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "token",
+								"value": "{{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n\t\"{{template_id}}\",\n\t\"{{template_id}}\"\n]"
+						},
+						"url": {
+							"raw": "http://localhost:8080/notification-email-templates/apigee?org={{org}}&repo={{repo}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"notification-email-templates",
+								"apigee"
+							],
+							"query": [
+								{
+									"key": "org",
+									"value": "{{org}}",
+									"equals": true
+								},
+								{
+									"key": "repo",
+									"value": "{{repo}}",
+									"equals": true
+								}
+							]
+						},
+						"description": "Import email templates to Apigee using data from the repo"
+					},
+					"response": []
+				},
+				{
+					"name": "updateTemplates",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "token",
+								"value": "{{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n\t\"{{template_id}}\",\n\t\"{{template_id}}\"\n]"
+						},
+						"url": {
+							"raw": "http://localhost:8080/notification-email-templates/apigee?org={{org}}&repo={{repo}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"notification-email-templates",
+								"apigee"
+							],
+							"query": [
+								{
+									"key": "org",
+									"value": "{{org}}",
+									"equals": true
+								},
+								{
+									"key": "repo",
+									"value": "{{repo}}",
+									"equals": true
+								}
+							]
+						},
+						"description": "Update an existing email template in Apigee using data from the repo"
+					},
+					"response": []
+				},
+				{
+					"name": "deleteTemplate",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "token",
+								"value": "{{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:8080/notification-email-templates/{{template_id}}?org={{org}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"notification-email-templates",
+								"{{template_id}}"
+							],
+							"query": [
+								{
+									"key": "org",
+									"value": "{{org}}",
+									"equals": true
+								}
+							]
+						},
+						"description": "Not supported by Apigee or I couldn't get it to work"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "reports",
+			"description": "",
+			"item": [
+				{
+					"name": "listReports",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:8080/reports/apigee/list?org={{org}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"reports",
+								"apigee",
+								"list"
+							],
+							"query": [
+								{
+									"key": "org",
+									"value": "{{org}}",
+									"equals": true
+								}
+							]
+						},
+						"description": "List reports from the specified org in Apigee"
+					},
+					"response": []
+				},
+				{
+					"name": "getReport",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:8080/reports/apigee/details/{{report_name}}?org={{org}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"reports",
+								"apigee",
+								"details",
+								"{{report_name}}"
+							],
+							"query": [
+								{
+									"key": "org",
+									"value": "{{org}}",
+									"equals": true
+								}
+							]
+						},
+						"description": "Details of a report in Apigee"
+					},
+					"response": []
+				},
+				{
+					"name": "listRepoReports",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:8080/reports/repo/list?org={{org}}&repo={{repo}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"reports",
+								"repo",
+								"list"
+							],
+							"query": [
+								{
+									"key": "org",
+									"value": "{{org}}",
+									"equals": true
+								},
+								{
+									"key": "repo",
+									"value": "{{repo}}",
+									"equals": true
+								}
+							]
+						},
+						"description": "List reports in the specified repo"
+					},
+					"response": []
+				},
+				{
+					"name": "getRepoReport",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:8080/reports/repo/details/{{report_name}}?org={{org}}&repo={{repo}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"reports",
+								"repo",
+								"details",
+								"{{report_name}}"
+							],
+							"query": [
+								{
+									"key": "org",
+									"value": "{{org}}",
+									"equals": true
+								},
+								{
+									"key": "repo",
+									"value": "{{repo}}",
+									"equals": true
+								}
+							]
+						},
+						"description": "Details of a report in the repo"
+					},
+					"response": []
+				},
+				{
+					"name": "importReports",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "token",
+								"value": "{{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n\t\"{{report_name}}\",\n\t\"{{report_name}}\"\n]"
+						},
+						"url": {
+							"raw": "http://localhost:8080/reports/apigee?org={{org}}&repo={{repo}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"reports",
+								"apigee"
+							],
+							"query": [
+								{
+									"key": "org",
+									"value": "{{org}}",
+									"equals": true
+								},
+								{
+									"key": "repo",
+									"value": "{{repo}}",
+									"equals": true
+								}
+							]
+						},
+						"description": "Import reports from the repo to Apigee"
+					},
+					"response": []
+				},
+				{
+					"name": "exportReports",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "token",
+								"value": "{{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n\t\"{{report_name}}\",\n\t\"{{report_name}}\"\n]"
+						},
+						"url": {
+							"raw": "http://localhost:8080/reports/repo?org={{org}}&repo={{repo}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"reports",
+								"repo"
+							],
+							"query": [
+								{
+									"key": "org",
+									"value": "{{org}}",
+									"equals": true
+								},
+								{
+									"key": "repo",
+									"value": "{{repo}}",
+									"equals": true
+								}
+							]
+						},
+						"description": "Export reports from Apigee to the repo"
+					},
+					"response": []
+				},
+				{
+					"name": "updateReports",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "token",
+								"value": "{{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n\t\"{{report_name}}\",\n\t\"{{report_name}}\"\n]"
+						},
+						"url": {
+							"raw": "http://localhost:8080/reports/apigee?org={{org}}&repo={{repo}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"reports",
+								"apigee"
+							],
+							"query": [
+								{
+									"key": "org",
+									"value": "{{org}}",
+									"equals": true
+								},
+								{
+									"key": "repo",
+									"value": "{{repo}}",
+									"equals": true
+								}
+							]
+						},
+						"description": "Update existing reports in Apigee with data from the repo"
+					},
+					"response": []
+				},
+				{
+					"name": "deleteReport",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:8080/reports/{{report_id}}?org={{org}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"reports",
+								"{{report_id}}"
+							],
+							"query": [
+								{
+									"key": "org",
+									"value": "{{org}}",
+									"equals": true
+								}
+							]
+						},
+						"description": "Delete a report from Apigee"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "shared flows",
+			"description": "",
+			"item": [
+				{
+					"name": "listSharedFlows",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:8080/sharedFlows/apigee/list?org={{org}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"sharedFlows",
+								"apigee",
+								"list"
+							],
+							"query": [
+								{
+									"key": "org",
+									"value": "{{org}}",
+									"equals": true
+								}
+							]
+						},
+						"description": "List shared flows from the specified org in Apigee"
+					},
+					"response": []
+				},
+				{
+					"name": "getSharedFlow",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:8080/sharedFlows/apigee/details/{{sharedflow_name}}?org={{org}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"sharedFlows",
+								"apigee",
+								"details",
+								"{{sharedflow_name}}"
+							],
+							"query": [
+								{
+									"key": "org",
+									"value": "{{org}}",
+									"equals": true
+								}
+							]
+						},
+						"description": "Details of a shared flow in Apigee"
+					},
+					"response": []
+				},
+				{
+					"name": "listSharedFlowRevisions",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:8080/sharedFlows/apigee/list/{{sharedflow_name}}?org={{org}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"sharedFlows",
+								"apigee",
+								"list",
+								"{{sharedflow_name}}"
+							],
+							"query": [
+								{
+									"key": "org",
+									"value": "{{org}}",
+									"equals": true
+								}
+							]
+						},
+						"description": "List of revision for a speicifed shared flow"
+					},
+					"response": []
+				},
+				{
+					"name": "getSharedFlowRevision",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:8080/sharedFlows/apigee/details/{{sharedflow_name}}/{{revision_number}}?org={{org}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"sharedFlows",
+								"apigee",
+								"details",
+								"{{sharedflow_name}}",
+								"{{revision_number}}"
+							],
+							"query": [
+								{
+									"key": "org",
+									"value": "{{org}}",
+									"equals": true
+								}
+							]
+						},
+						"description": "Details of a single shared flow revision in Apigee"
+					},
+					"response": []
+				},
+				{
+					"name": "listRepoSharedFlows",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:8080/sharedFlows/repo/list?org={{org}}&repo={{repo}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"sharedFlows",
+								"repo",
+								"list"
+							],
+							"query": [
+								{
+									"key": "org",
+									"value": "{{org}}",
+									"equals": true
+								},
+								{
+									"key": "repo",
+									"value": "{{repo}}",
+									"equals": true
+								}
+							]
+						},
+						"description": "List of shared flows in the specified repo"
+					},
+					"response": []
+				},
+				{
+					"name": "getRepoSharedFlow",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:8080/sharedFlows/repo/details/{{shared_flow_name}}?org={{org}}&repo={{repo}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"sharedFlows",
+								"repo",
+								"details",
+								"{{shared_flow_name}}"
+							],
+							"query": [
+								{
+									"key": "org",
+									"value": "{{org}}",
+									"equals": true
+								},
+								{
+									"key": "repo",
+									"value": "{{repo}}",
+									"equals": true
+								}
+							]
+						},
+						"description": "Details of a single shared flow in the repo"
+					},
+					"response": []
+				},
+				{
+					"name": "getSharedFlowDeployments",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:8080/sharedFlows/apigee/deployments/{{shared_flow_name}}?org={{org}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"sharedFlows",
+								"apigee",
+								"deployments",
+								"{{shared_flow_name}}"
+							],
+							"query": [
+								{
+									"key": "org",
+									"value": "{{org}}",
+									"equals": true
+								}
+							]
+						},
+						"description": "Get each deployment of a specified shared flow in Apigee"
+					},
+					"response": []
+				},
+				{
+					"name": "importSharedFlows",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "token",
+								"value": "{{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n    \"{{shared_flow_name}}\",\n    \"{{shared_flow_name}}\"\n]"
+						},
+						"url": {
+							"raw": "http://localhost:8080/sharedFlows/apigee?org={{org}}&env={{env}}&repo={{repo}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"sharedFlows",
+								"apigee"
+							],
+							"query": [
+								{
+									"key": "org",
+									"value": "{{org}}",
+									"equals": true
+								},
+								{
+									"key": "env",
+									"value": "{{env}}",
+									"equals": true
+								},
+								{
+									"key": "repo",
+									"value": "{{repo}}",
+									"equals": true
+								}
+							]
+						},
+						"description": "Import shared flows from the repo to Apigee. Will also deploy the new shared flow"
+					},
+					"response": []
+				},
+				{
+					"name": "exportSharedFlows",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n\t{\n\t\t\"name\": \"{{shared_flow_name}}\",\n\t\t\"revision_number\": \"{{revision_number}}\"\n\t},\n\t{\n\t\t\"name\": \"{{shared_flow_name}}\",\n\t\t\"revision_number\": \"{{revision_number}}\"\n\t}\n]"
+						},
+						"url": {
+							"raw": "http://localhost:8080/sharedFlows/repo?org={{org}}&env={{env}}&repo={{repo}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"sharedFlows",
+								"repo"
+							],
+							"query": [
+								{
+									"key": "org",
+									"value": "{{org}}",
+									"equals": true
+								},
+								{
+									"key": "env",
+									"value": "{{env}}",
+									"equals": true
+								},
+								{
+									"key": "repo",
+									"value": "{{repo}}",
+									"equals": true
+								}
+							]
+						},
+						"description": "Export shared flows from Apigee to the repo"
+					},
+					"response": []
+				},
+				{
+					"name": "deploySharedFlow",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:8080/sharedFlows/deploy/{{shared_flow_name}}/{{revision_number}}?org={{org}}&env={{env}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"sharedFlows",
+								"deploy",
+								"{{shared_flow_name}}",
+								"{{revision_number}}"
+							],
+							"query": [
+								{
+									"key": "org",
+									"value": "{{org}}",
+									"equals": true
+								},
+								{
+									"key": "env",
+									"value": "{{env}}",
+									"equals": true
+								}
+							]
+						},
+						"description": "Deploy a shared flow revision in Apigee"
+					},
+					"response": []
+				},
+				{
+					"name": "undeploySharedFlow",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:8080/sharedFlows/undeploy/{{shared_flow_name}}/{{revision_number}}?org={{org}}&env={{env}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"sharedFlows",
+								"undeploy",
+								"{{shared_flow_name}}",
+								"{{revision_number}}"
+							],
+							"query": [
+								{
+									"key": "org",
+									"value": "{{org}}",
+									"equals": true
+								},
+								{
+									"key": "env",
+									"value": "{{env}}",
+									"equals": true
+								}
+							]
+						},
+						"description": "Undeploy a shared flow revision in Apigee"
+					},
+					"response": []
+				},
+				{
+					"name": "deleteSharedFlowRevision",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:8080/sharedFlows/{{sharedflow_name}}/{{revision_number}}?org={{org}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"sharedFlows",
+								"{{sharedflow_name}}",
+								"{{revision_number}}"
+							],
+							"query": [
+								{
+									"key": "org",
+									"value": "{{org}}",
+									"equals": true
+								}
+							]
+						},
+						"description": "Delete a shared flow revision from Apigee"
+					},
+					"response": []
+				},
+				{
+					"name": "deleteSharedFlow",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:8080/sharedFlows/{{shared_flow_name}}?org={{org}}&env={{env}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"sharedFlows",
+								"{{shared_flow_name}}"
+							],
+							"query": [
+								{
+									"key": "org",
+									"value": "{{org}}",
+									"equals": true
+								},
+								{
+									"key": "env",
+									"value": "{{env}}",
+									"equals": true
+								}
+							]
+						},
+						"description": "Delete a shared flow from Apigee"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "target servers",
+			"description": "",
+			"item": [
+				{
+					"name": "listTargetServers",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:8080/targetServers/apigee/list?org={{org}}&env={{env}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"targetServers",
+								"apigee",
+								"list"
+							],
+							"query": [
+								{
+									"key": "org",
+									"value": "{{org}}",
+									"equals": true
+								},
+								{
+									"key": "env",
+									"value": "{{env}}",
+									"equals": true
+								}
+							]
+						},
+						"description": "List of target servers from the specified environment in Apigee"
+					},
+					"response": []
+				},
+				{
+					"name": "getTargetServer",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:8080/targetServers/apigee/details/{{target_server_name}}?org={{org}}&env={{env}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"targetServers",
+								"apigee",
+								"details",
+								"{{target_server_name}}"
+							],
+							"query": [
+								{
+									"key": "org",
+									"value": "{{org}}",
+									"equals": true
+								},
+								{
+									"key": "env",
+									"value": "{{env}}",
+									"equals": true
+								}
+							]
+						},
+						"description": "Details of a target server from Apigee"
+					},
+					"response": []
+				},
+				{
+					"name": "listRepoTargetServers",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:8080/targetServers/repo/list?org={{org}}&env={{env}}&repo={{repo}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"targetServers",
+								"repo",
+								"list"
+							],
+							"query": [
+								{
+									"key": "org",
+									"value": "{{org}}",
+									"equals": true
+								},
+								{
+									"key": "env",
+									"value": "{{env}}",
+									"equals": true
+								},
+								{
+									"key": "repo",
+									"value": "{{repo}}",
+									"equals": true
+								}
+							]
+						},
+						"description": "List target servers from the specified repo"
+					},
+					"response": []
+				},
+				{
+					"name": "getRepoTargetServer",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:8080/targetServers/repo/details/{{target_server_name}}?org={{org}}&env={{env}}&repo={{repo}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"targetServers",
+								"repo",
+								"details",
+								"{{target_server_name}}"
+							],
+							"query": [
+								{
+									"key": "org",
+									"value": "{{org}}",
+									"equals": true
+								},
+								{
+									"key": "env",
+									"value": "{{env}}",
+									"equals": true
+								},
+								{
+									"key": "repo",
+									"value": "{{repo}}",
+									"equals": true
+								}
+							]
+						},
+						"description": "Details of a target server in the repo"
+					},
+					"response": []
+				},
+				{
+					"name": "exportTargetServers",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "token",
+								"value": "{{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n\t\"{{target_server_name}}\",\n\t\"{{target_server_name}}\"\n]"
+						},
+						"url": {
+							"raw": "http://localhost:8080/targetServers/repo?org={{org}}&env={{env}}&repo={{repo}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"targetServers",
+								"repo"
+							],
+							"query": [
+								{
+									"key": "org",
+									"value": "{{org}}",
+									"equals": true
+								},
+								{
+									"key": "env",
+									"value": "{{env}}",
+									"equals": true
+								},
+								{
+									"key": "repo",
+									"value": "{{repo}}",
+									"equals": true
+								}
+							]
+						},
+						"description": "Export target servers from apigee to the repo"
+					},
+					"response": []
+				},
+				{
+					"name": "importTargetServers",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "token",
+								"value": "{{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n\t\"{{target_server_name}}\",\n\t\"{{target_server_name}}\"\n]"
+						},
+						"url": {
+							"raw": "http://localhost:8080/targetServers/apigee?org={{org}}&env={{env}}&repo={{repo}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"targetServers",
+								"apigee"
+							],
+							"query": [
+								{
+									"key": "org",
+									"value": "{{org}}",
+									"equals": true
+								},
+								{
+									"key": "env",
+									"value": "{{env}}",
+									"equals": true
+								},
+								{
+									"key": "repo",
+									"value": "{{repo}}",
+									"equals": true
+								}
+							]
+						},
+						"description": "Import target servers from the repo to apigee"
+					},
+					"response": []
+				},
+				{
+					"name": "updateTargetServers",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "token",
+								"value": "{{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n\t\"{{target_server_name}}\",\n\t\"{{target_server_name}}\"\n]"
+						},
+						"url": {
+							"raw": "http://localhost:8080/targetServers/apigee?org={{org}}&env={{env}}&repo={{repo}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"targetServers",
+								"apigee"
+							],
+							"query": [
+								{
+									"key": "org",
+									"value": "{{org}}",
+									"equals": true
+								},
+								{
+									"key": "env",
+									"value": "{{env}}",
+									"equals": true
+								},
+								{
+									"key": "repo",
+									"value": "{{repo}}",
+									"equals": true
+								}
+							]
+						},
+						"description": "Update target servers in Apigee"
+					},
+					"response": []
+				},
+				{
+					"name": "deleteTargetServer",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:8080/targetServers/{{target_server_name}}?org={{org}}&env={{env}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"targetServers",
+								"{{target_server_name}}"
+							],
+							"query": [
+								{
+									"key": "org",
+									"value": "{{org}}",
+									"equals": true
+								},
+								{
+									"key": "env",
+									"value": "{{env}}",
+									"equals": true
+								}
+							]
+						},
+						"description": "Delete a target server from Apigee"
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

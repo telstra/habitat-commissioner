@@ -1,0 +1,65 @@
+<nav class="navbar fixed-top">
+  <a class="navbar-brand">
+    <i class="fa fa-bars" (click)="menuActive =! menuActive"></i>&nbsp;&nbsp; Settings
+  </a>
+  <ul class="navbar-nav ml-auto">
+    <button class="btn btn-block btn-tdev" (click)="navigate('/home')">
+      Home
+    </button>
+  </ul>
+</nav>
+
+<div class="wrapper">
+  <!-- settings- -->
+  <nav class="sidebar" [ngClass]="menuActive ? 'active' : ''" [@flyInOut]>
+    <ul class="list-unstyled">
+      <li>
+        <a (click)="selectedSetting = 'config'" [ngClass]="selectedSetting === 'config' ? 'open' : ''">
+          <i class="fa fa-cog"></i>&nbsp;&nbsp; API configuration
+        </a>
+      </li>
+      <li>
+        <a (click)="selectedSetting = 'proxy'" [ngClass]="selectedSetting === 'proxy' ? 'open' : ''">
+          <i class="fa fa-link"></i>&nbsp;&nbsp; Proxy
+        </a>
+      </li>
+      <li>
+        <a (click)="selectedSetting = 'ssl'" [ngClass]="selectedSetting === 'ssl' ? 'open' : ''">
+          <i class="fa fa-key"></i>&nbsp;&nbsp; SSL
+        </a>
+      </li>
+      <li>
+        <a (click)="selectedSetting = 'postman'" [ngClass]="selectedSetting === 'postman' ? 'open' : ''">
+          <i class="fa fa-envelope-o"></i>&nbsp;&nbsp; POSTman tests
+        </a>
+      </li>
+      <li>
+        <a (click)="selectedSetting = 'user'" [ngClass]="selectedSetting === 'user' ? 'open' : ''">
+          <i class="fa fa-user"></i>&nbsp;&nbsp; User settings
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+  <div class="content" [ngClass]="menuActive ? '' : 'active'">
+    <div class="container-fluid">
+      <ng-container [ngSwitch]="selectedSetting">
+        <div *ngSwitchCase="'config'">
+          <app-api-config-settings></app-api-config-settings>
+        </div>
+        <div *ngSwitchCase="'proxy'">
+          <app-proxy-settings></app-proxy-settings>
+        </div>
+        <div *ngSwitchCase="'ssl'">
+          <app-ssl-settings></app-ssl-settings>
+        </div>
+        <div *ngSwitchCase="'postman'">
+          <app-postman-settings></app-postman-settings>
+        </div>
+        <div *ngSwitchCase="'user'">
+          <app-user-settings></app-user-settings>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</div>

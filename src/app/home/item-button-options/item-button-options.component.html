@@ -1,0 +1,60 @@
+<div class="row" *ngIf="item">
+
+  <!-- repo view buttons -->
+  <div *ngIf="state().view === 'repo'">
+
+    <!-- hide when we're looking at a rate plan -->
+    <button *ngIf="!hideCreateButton()" class="btn btn-tdev-green-outline btn-sm m-1" (click)="addToQueue('create')">
+      <i class="fa fa-plus"></i>&nbsp; Add to create queue</button>
+
+    <button *ngIf="!hideUpdateButton()" class="btn btn-tdev-blue-outline btn-sm m-1" (click)="addToQueue('update')">
+      <i class="fa fa-plus"></i>&nbsp; Add to update queue</button>
+
+  </div>
+
+  <!-- apigee view buttons -->
+  <div *ngIf="state().view === 'apigee'">
+
+    <button *ngIf="!hideProcureButton()" class="btn btn-tdev-purple-outline btn-sm m-1" (click)="addToQueue('procure')">
+      <i class="fa fa-plus"></i>&nbsp; Add to procure queue</button>
+
+      <!-- showDeleteModal() -->
+    <button *ngIf="!hideDeleteButton()" class="btn btn-tdev-error-outline btn-sm m-1" (click)="deleteItem()" [disabled]="loaders[getId()] && !loaders[getId()].closed">
+      <span *ngIf="!loaders[getId()] || loaders[getId()] && loaders[getId()].closed">
+        <i class="fa fa-trash"></i>&nbsp; Delete from Apigee
+      </span>
+      <span *ngIf="loaders[getId()] && !loaders[getId()].closed">
+        <i class="fa fa-spinner fa-spin fa-fw"></i>
+      </span>
+    </button>
+
+  </div>
+
+  <!-- more options dropdown button -->
+  <div class="col">
+
+    <span *ngIf="options.length > 0" ngbDropdown>
+      <button class="btn btn-tdev-grey-outline btn-sm mt-1 mb-1" ngbDropdownToggle>
+        <span *ngIf="!loaders['options'] || loaders['options'] && loaders['options'].closed">
+          <i class="fa fa-ellipsis-v"></i>&nbsp;&nbsp; options
+        </span>
+        <span *ngIf="loaders['options'] && !loaders['options'].closed">
+          <i class="fa fa-spinner fa-spin fa-fw"></i>
+        </span>
+      </button>
+      <div ngbDropdownMenu>
+        <button *ngFor="let option of options" class="dropdown-item" (click)="option.modal ? showOptionModal(option) : executeOption(option)">
+          <span [ngStyle]="{ 'color': option.danger ? '#e11e1e' : '' }">{{ option.name }}</span>
+        </button>
+      </div>
+    </span>
+
+  </div>
+
+  <div>
+    <button id="visuals-button" class="btn btn-tdev-outline btn-sm m-1" (click)="onVisuals()">
+      <i class="fa fa-area-chart"></i>&nbsp;&nbsp;Visualize
+    </button>
+  </div>
+
+</div>

@@ -1,0 +1,44 @@
+<div class="container-full">
+  <div class="login-content">
+    <div class="card mb-8">
+      <div class="card-body">
+        <form [formGroup]="loginForm">
+
+          <!-- username -->
+          <div class="form-group">
+            <label for="username">Apigee username</label>
+            <input class="form-control" formControlName="username">
+            <div *ngIf="loginForm.get('username').invalid
+                && loginForm.get('username').touched" class="form-error">
+              <i class="fa fa-exclamation-circle"></i> Username required!
+            </div>
+          </div>
+
+          <!-- password -->
+          <div class="form-group">
+            <label for="password">Apigee password</label>
+            <div class="input-group">
+              <input class="form-control" formControlName="password" [type]="showApigeePassword ? 'text' : 'password'">
+              <button class="input-group-addon" (click)="showApigeePassword =! showApigeePassword">
+                <i [ngClass]="showApigeePassword ? 'fa fa-eye' : 'fa fa-eye-slash'"></i>
+              </button>
+            </div>
+            <div *ngIf="loginForm.get('password').invalid
+                && loginForm.get('password').touched" class="form-error">
+              <i class="fa fa-exclamation-circle"></i> Password required!
+            </div>
+          </div>
+
+          <button class="btn btn-lg btn-block btn-tdev-blue" (click)="login()" [disabled]="loginLoader && !loginLoader.closed">
+            <div *ngIf="!loginLoader || loginLoader && loginLoader.closed; else loading">
+              Login
+            </div>
+            <ng-template #loading>
+              <i class="fa fa-spinner fa-spin fa-fw"></i>
+            </ng-template>
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

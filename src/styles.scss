@@ -1,0 +1,896 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+@font-face {
+  font-family: "TelstraAkkurat-Light";
+  src: url("./assets/fonts/TelstraAkkurat-Light.otf")
+}
+
+$tdev-red:          rgb(241, 92, 91);
+$tdev-orange:       rgb(247, 149, 74);
+$tdev-grey: 	      rgb(130, 132, 134);
+$tdev-purple:       rgb(193, 113, 156);
+$tdev-blue:         rgb(0, 123, 255);
+$tdev-green:        rgb(0, 172, 0);
+$error:             #e11e1e;
+
+$tooltip-text:      #000;
+
+$form-border-width: 1px;
+
+$tdev-default: $tdev-blue;
+$tdev-repo: $tdev-red;
+$tdev-apigee: $tdev-orange;
+
+@mixin btn-repo {
+  color: #fff;
+  background-color: $tdev-repo;
+  border-color: $tdev-repo;
+  transition: all 0.3s;
+  &:hover {
+    color: #fff;
+    background-color: darken($tdev-repo, 15%);
+  }
+  &:not([href]):not([tabindex]):active {
+    box-shadow: 0 0 0 2px lighten($tdev-repo, 15%);
+  }
+  &:focus {
+    outline: 0;
+    box-shadow: 0 0 0 3px lighten($tdev-repo, 15%);
+  }
+}
+
+@mixin btn-repo-outline {
+  color: $tdev-repo;
+  background-color: transparent;
+  border-color: $tdev-repo;
+  &:hover {
+    color: #fff;
+    background-color: $tdev-repo;
+  }
+  &:not([href]):not([tabindex]):active {
+    box-shadow: 0 0 0 2px lighten($tdev-repo, 15%);
+  }
+  &:focus {
+    outline: 0;
+    box-shadow: 0 0 0 3px lighten($tdev-repo, 15%);
+  }
+}
+
+@mixin btn-apigee {
+  color: #fff;
+  background-color: $tdev-apigee;
+  border-color: $tdev-apigee;
+  transition: all 0.3s;
+  &:hover {
+    color: #fff;
+    background-color: darken($tdev-apigee, 15%);
+  }
+  &:not([href]):not([tabindex]):active {
+    box-shadow: 0 0 0 2px lighten($tdev-apigee, 15%);
+  }
+  &:focus {
+    outline: 0;
+    box-shadow: 0 0 0 3px lighten($tdev-apigee, 15%);
+  }
+}
+
+@mixin btn-apigee-outline {
+  color: $tdev-apigee;
+  background-color: transparent;
+  border-color: $tdev-apigee;
+  &:hover {
+    color: #fff;
+    background-color: $tdev-apigee;
+  }
+  &:not([href]):not([tabindex]):active {
+    box-shadow: 0 0 0 2px lighten($tdev-apigee, 15%);
+  }
+  &:focus {
+    outline: 0;
+    box-shadow: 0 0 0 3px lighten($tdev-apigee, 15%);
+  }
+}
+
+@mixin btn-default {
+  color: #fff;
+  background-color: $tdev-default;
+  border-color: $tdev-default;
+  transition: all 0.3s;
+  &:hover {
+    color: #fff;
+    background-color: darken($tdev-default, 15%);
+  }
+  &:not([href]):not([tabindex]):active {
+    box-shadow: 0 0 0 2px lighten($tdev-default, 15%);
+  }
+  &:focus {
+    outline: 0;
+    box-shadow: 0 0 0 3px lighten($tdev-default, 15%);
+  }
+}
+
+@mixin btn-default-outline {
+  color: $tdev-default;
+  background-color: transparent;
+  border-color: $tdev-default;
+  &:hover {
+    color: #fff;
+    background-color: $tdev-default;
+  }
+  &:not([href]):not([tabindex]):active {
+    box-shadow: 0 0 0 2px lighten($tdev-default, 15%);
+  }
+  &:focus {
+    outline: 0;
+    box-shadow: 0 0 0 3px lighten($tdev-default, 15%);
+  }
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  //padding-top: 2rem;
+  min-height: 100%;
+  color: black;
+  overflow-x: hidden;
+  // display: flex;
+  // flex-direction: column;
+}
+
+// visualization tooltip
+div.tooltip {
+  pointer-events: none;
+  background-color: #fff;
+  border: 1px #000 solid;
+  border-radius: 6px;
+  color: $tooltip-text;
+  margin: auto;
+  opacity: 0;
+  padding: 15px;
+  position: fixed;
+  width: 300px;
+  z-index: 9999;
+
+  .tooltip-title {
+    font-size: 1em;
+    font-weight: 600;
+    text-align: center;
+    .tooltip-subtitle {
+      font-size: .8em;
+      margin-top: 5px;
+      font-weight: normal;
+    }
+  }
+  .tooltip-content {
+    font-size: .85em;
+    text-align: left;
+  }
+  hr {
+    margin-top: 5px;
+  }
+}
+
+// scrollbar
+::-webkit-scrollbar-track {
+  width: 5px;
+  background-color: rgba(0,0,0,.03);
+  &:horizontal {
+    height: 5px;
+    background-color: rgba(0,0,0,.03);
+  }
+}
+::-webkit-scrollbar {
+  width: 7px;
+  background-color: rgba(0,0,0,.03);
+  &:horizontal {
+    height: 7px;
+    background-color: rgba(0,0,0,.03);
+  }
+}
+::-webkit-scrollbar-thumb {
+  height: 10px;
+  background-color: lighten($tdev-grey, 25%);
+  &:horizontal {
+    width: 10px;
+    background-color: lighten($tdev-grey, 25%);
+  }
+}
+
+// different states can change the styles of specific elements. Each individual state and the styles of individual elements are 
+// defined here
+.__repo-state {
+  .btn-tdev {
+    @include btn-repo();
+  }
+  .btn-tdev-outline {
+    @include btn-repo-outline();
+  }
+  .card-header {
+    color: $tdev-repo;
+  }
+  .spinner > div {
+    background-color: $tdev-repo;
+  }
+  .loading {
+    color: $tdev-repo;
+  }
+  div.tooltip {
+    .tooltip-title {
+      color: $tdev-repo;
+    }
+    hr {
+      border-top: 1px solid $tdev-repo;
+    }
+  }
+  .node {
+    fill: $tdev-repo;
+    stroke: darken($tdev-repo, 25%);
+  }
+  .navbar {
+    background-color: $tdev-repo;
+  }
+  .sidebar {
+    box-shadow: 0 4px 10px 0 lighten($tdev-repo, 15%), 0 4px 20px 0 lighten($tdev-repo, 15%);
+    .sidebar-item-loader {
+      color: $tdev-repo;
+    }
+    .sidebar-header {
+      background: lighten($tdev-repo, 15%);
+    }
+    hr {
+      background-color: $tdev-repo;
+    }
+    ul {
+      li a {
+        &.open {
+          background-color: $tdev-repo;
+          &:hover {
+            background-color: $tdev-repo;
+          }
+        }
+        &:hover {
+          color: #fff;
+          background: lighten($tdev-repo, 15%);
+        }
+      }
+      ul li {
+        a {
+          cursor: pointer;
+          &.selected {
+            color: $tdev-repo;
+          }
+        }
+        &:last-child {
+          border-bottom: $tdev-repo 1px solid;
+        }
+      }
+    }
+  }
+}
+
+.__apigee-state {
+  .btn-tdev {
+    @include btn-apigee();
+  }
+  .btn-tdev-outline {
+    @include btn-apigee-outline();
+  }
+  .card-header {
+    color: $tdev-apigee;
+  }
+  .spinner > div {
+    background-color: $tdev-apigee;
+  }
+  .loading {
+    color: $tdev-apigee;
+  }
+  div.tooltip {
+    .tooltip-title {
+      color: $tdev-apigee;
+    }
+    hr {
+      border-top: 1px solid $tdev-apigee;
+    }
+  }
+  .node {
+    fill: $tdev-apigee;
+    stroke: darken($tdev-apigee, 25%);
+  }
+  .navbar {
+    background-color: $tdev-apigee;
+  }
+  .sidebar {
+    box-shadow: 0 4px 10px 0 lighten($tdev-apigee, 15%), 0 4px 10px 0 lighten($tdev-apigee, 15%);
+    .sidebar-item-loader {
+      color: $tdev-apigee;
+    }
+    .sidebar-header {
+      background: lighten($tdev-apigee, 15%);
+    }
+    hr {
+      background-color: $tdev-apigee;
+    }
+    ul {
+      li a {
+        &.open {
+          background-color: $tdev-apigee;
+          &:hover {
+            background-color: $tdev-apigee;
+          }
+        }
+        &:hover {
+          color: #fff;
+          background: lighten($tdev-apigee, 15%);
+        }
+      }
+      ul li {
+        a {
+          cursor: pointer;
+          &.selected {
+            color: $tdev-apigee;
+          }
+        }
+        &:last-child {
+          border-bottom: $tdev-apigee 1px solid;
+        }
+      }
+    }
+  }
+}
+
+.__default-state {
+  .btn-tdev {
+    @include btn-default();
+  }
+  .btn-tdev-outline {
+    @include btn-default-outline();
+  }
+  .card-header {
+    color: $tdev-default;
+  }
+  .spinner > div {
+    background-color: $tdev-default;
+  }
+  .loading {
+    color: $tdev-default;
+  }
+  #content-header {
+    color: $tdev-default;
+  }
+  .navbar {
+    background-color: $tdev-default;
+  }
+  .sidebar {
+    ::-webkit-scrollbar-thumb {
+      background-color: $tdev-default;
+    }
+    box-shadow: 0 4px 10px 0 lighten($tdev-default, 15%), 0 4px 10px 0 lighten($tdev-default, 15%);
+    .sidebar-item-loader {
+      color: $tdev-default;
+    }
+    .sidebar-header {
+      background: lighten($tdev-default, 15%);
+    }
+    hr {
+      background-color: $tdev-default;
+    }
+    ul {
+      li a {
+        &.open {
+          background-color: $tdev-default;
+          color: #fff;
+          &:hover {
+            background-color: $tdev-default;
+          }
+        }
+        &:hover {
+          color: #fff;
+          background: lighten($tdev-default, 15%);
+        }
+      }
+      ul li {
+        a {
+          cursor: pointer;
+          &.selected {
+            color: $tdev-default;
+          }
+        }
+        &:last-child {
+          border-bottom: $tdev-default 1px solid;
+        }
+      }
+    }
+  }
+}
+
+.wrapper {
+  display: flex;
+  align-items: stretch;
+  margin-top: 50px;
+}
+
+.navbar {
+  color: white;
+  transition: all 0.3s;
+  img {
+    cursor: pointer;
+    height: 30px;
+    width: auto;
+  }
+  li {
+    margin: 0 2px 0 2px;
+  }
+}
+
+.content {
+  padding: 20px;
+  min-height: 100vh;
+  max-height: 100vh;
+  min-width: 100%;
+  transition: all 0.3s;
+  &.active {
+    padding-left: 250px;
+  }
+}
+
+.sidebar {
+  padding-bottom: 100px;
+  min-width: 250px;
+  max-width: 250px;
+  min-height: 100vh;
+  max-height: 100vh;
+  background: #fff;
+  transition: all 0.3s;
+  position: fixed;
+  z-index: 5;
+  overflow-y: auto;
+  .sidebar-header {
+    padding: 10px;
+    cursor: pointer;
+  }
+  
+  hr {
+    float: center;
+  }
+  
+  ul {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none; 
+    li div {
+      padding: 10px;
+      .form-control {
+        font-size: .8em;
+        &.ng-valid {
+          border-bottom: 1px solid rgba(0,0,0,.15);
+        }
+      }
+      .input-group-addon {
+        font-size: .8em;
+        &:hover {
+          cursor: default;
+        }
+      }
+    }
+    li a {
+      cursor: pointer;
+      padding: 10px;
+      font-size: .9em;
+      display: block;
+      text-overflow: ellipsis;
+      // #sidebar & {
+      //   text-align: left;
+      //   #menu-arrow  {
+      //     float: right;
+      //   }
+      // }
+    }
+    ul li {
+      p {
+        font-size: .8em;
+        text-indent: 5px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      a {
+        cursor: pointer;
+        font-size: .8em;
+        text-indent: 5px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      ul li {
+        p {
+          font-size: .8em;
+          text-indent: 10px;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+        a {
+          cursor: pointer;
+          font-size: .8em;
+          text-indent: 10px;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+      }
+    }
+  }
+}
+
+.sidebar.active {
+  margin-left: -250px;
+}
+
+.btn, .form-control, .card {
+  border-radius: 4px;
+}
+
+.fileUpload input.upload {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 0;
+  padding: 0;
+  font-size: 20px;
+  cursor: pointer;
+  opacity: 0;
+  filter: alpha(opacity=0);
+}
+
+.fa-times {
+  cursor: pointer;
+}
+
+.loading {
+  text-align: center;
+  padding: 1em;
+  .text {
+      margin-top: 0.5em;
+  }
+}
+
+.center-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .center-content {
+    text-align: center;
+    padding: 1em;
+    max-width: 50%;
+  }
+}
+
+.form-control:focus {
+  border-color: rgba(0,0,0,.15);
+  border-bottom: $tdev-blue $form-border-width solid;
+  box-shadow: none;
+}
+
+.form-control.ng-valid {
+  border-bottom: $tdev-green $form-border-width solid;
+}
+
+.form-control.ng-invalid.ng-touched {
+  border-bottom: $error $form-border-width solid;
+}
+
+.form-error {
+  margin-top: .3em;
+  font-size: .9em;
+  color: $error;
+}
+
+.btn {
+  cursor: pointer;
+  &:disabled {
+    cursor: not-allowed;
+  }
+  text-transform: uppercase;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.btn-tdev-red {
+  color: #fff;
+  background-color: $tdev-red;
+  border-color: $tdev-red;
+  &:hover {
+    color: #fff;
+    background-color: darken($tdev-red, 15%);
+  }
+  &:not([href]):not([tabindex]):active {
+    box-shadow: 0 0 0 2px lighten($tdev-red, 15%);
+  }
+  &:focus {
+    outline: 0;
+    box-shadow: 0 0 0 3px lighten($tdev-red, 15%);
+  }
+}
+
+.btn-tdev-purple {
+  color: #fff;
+  background-color: $tdev-purple;
+  border-color: $tdev-purple;
+  &:hover {
+    color: #fff;
+    background-color: darken($tdev-purple, 15%);
+  }
+  &:not([href]):not([tabindex]):active {
+    box-shadow: 0 0 0 2px lighten($tdev-purple, 15%);
+  }
+  &:focus {
+    outline: 0;
+    box-shadow: 0 0 0 3px lighten($tdev-purple, 15%);
+  }
+}
+
+.btn-tdev-purple-outline {
+  color: $tdev-purple;
+  background-color: transparent;
+  border-color: $tdev-purple;
+  &:hover {
+    color: #fff;
+    background-color: $tdev-purple;
+  }
+  &:not([href]):not([tabindex]):active {
+    box-shadow: 0 0 0 2px lighten($tdev-purple, 15%);
+  }
+  &:focus {
+    outline: 0;
+    box-shadow: 0 0 0 3px lighten($tdev-purple, 15%);
+  }
+}
+
+.btn-tdev-green {
+  color: #fff;
+  background-color: $tdev-green;
+  border-color: $tdev-green;
+  &:hover {
+    color: #fff;
+    background-color: darken($tdev-green, 15%);
+  }
+  &:not([href]):not([tabindex]):active {
+    box-shadow: 0 0 0 2px lighten($tdev-green, 15%);
+  }
+  &:focus {
+    outline: 0;
+    box-shadow: 0 0 0 3px lighten($tdev-green, 15%);
+  }
+}
+
+.btn-tdev-green-outline {
+  color: $tdev-green;
+  background-color: transparent;
+  border-color: $tdev-green;
+  &:hover {
+    color: #fff;
+    background-color: $tdev-green;
+  }
+  &:not([href]):not([tabindex]):active {
+    box-shadow: 0 0 0 2px lighten($tdev-green, 15%);
+  }
+  &:focus {
+    outline: 0;
+    box-shadow: 0 0 0 3px lighten($tdev-green, 15%);
+  }
+}
+
+.btn-tdev-orange {
+  color: #fff;
+  background-color: $tdev-orange;
+  border-color: $tdev-orange;
+  &:hover {
+    color: #fff;
+    background-color: darken($tdev-orange, 15%);
+  }
+  &:not([href]):not([tabindex]):active {
+    box-shadow: 0 0 0 2px lighten($tdev-orange, 15%);
+  }
+  &:focus {
+    outline: 0;
+    box-shadow: 0 0 0 3px lighten($tdev-orange, 15%);
+  }
+}
+
+.btn-tdev-blue {
+  color: #fff;
+  background-color: $tdev-blue;
+  border-color: $tdev-blue;
+  &:hover {
+    color: #fff;
+    background-color: darken($tdev-blue, 15%);
+  }
+  &:not([href]):not([tabindex]):active {
+    box-shadow: 0 0 0 2px lighten($tdev-blue, 15%);
+  }
+  &:focus {
+    outline: 0;
+    box-shadow: 0 0 0 3px lighten($tdev-blue, 15%);
+  }
+}
+
+.btn-tdev-blue-outline {
+  color: $tdev-blue;
+  background-color: transparent;
+  border-color: $tdev-blue;
+  &:hover {
+    color: #fff;
+    background-color: $tdev-blue;
+  }
+  &:not([href]):not([tabindex]):active {
+    box-shadow: 0 0 0 2px lighten($tdev-blue, 15%);
+  }
+  &:focus {
+    outline: 0;
+    box-shadow: 0 0 0 3px lighten($tdev-blue, 15%);
+  }
+}
+
+.btn-tdev-grey {
+  color: #fff;
+  background-color: $tdev-grey;
+  border-color: $tdev-grey;
+  &:hover {
+    color: #fff;
+    background-color: darken($tdev-grey, 15%);
+  }
+  &:not([href]):not([tabindex]):active {
+    box-shadow: 0 0 0 2px lighten($tdev-grey, 15%);
+  }
+  &:focus {
+    outline: 0;
+    box-shadow: 0 0 0 3px lighten($tdev-grey, 15%);
+  }
+}
+
+.btn-tdev-grey-outline {
+  color: $tdev-grey;
+  background-color: transparent;
+  border-color: $tdev-grey;
+  &:hover {
+    color: #fff;
+    background-color: $tdev-grey;
+  }
+  &:not([href]):not([tabindex]):active {
+    box-shadow: 0 0 0 2px lighten($tdev-grey, 15%);
+  }
+  &:focus {
+    outline: 0;
+    box-shadow: 0 0 0 3px lighten($tdev-grey, 15%);
+  }
+}
+
+.btn-tdev-error {
+  color: #fff;
+  background-color: $error;
+  border-color: $error;
+  &:hover {
+    color: #fff;
+    background-color: darken($error, 15%);
+  }
+  &:not([href]):not([tabindex]):active {
+    box-shadow: 0 0 0 2px lighten($error, 15%);
+  }
+  &:focus {
+    outline: 0;
+    box-shadow: 0 0 0 3px lighten($error, 15%);
+  }
+}
+
+.btn-tdev-error-outline {
+  color: $error;
+  background-color: transparent;
+  border-color: $error;
+  &:hover {
+    color: #fff;
+    background-color: $error;
+  }
+  &:not([href]):not([tabindex]):active {
+    box-shadow: 0 0 0 2px lighten($error, 15%);
+  }
+  &:focus {
+    outline: 0;
+    box-shadow: 0 0 0 3px lighten($error, 15%);
+  }
+}
+
+.tdev-text {
+  &.tdev-green {
+    color: $tdev-green;
+  }
+  &.tdev-blue {
+    color: $tdev-blue;
+  }
+  &.tdev-red {
+    color: $tdev-red;
+  }
+  &.tdev-grey {
+    color: $tdev-grey;
+  }
+  &.tdev-orange {
+    color: $tdev-orange;
+  }
+  &.tdev-purple {
+    color: $tdev-purple;
+  }
+  &.error {
+    color: $error;
+  }
+}
+
+.btn-link {
+  color: $tdev-blue;
+  &:hover,&:focus {
+    color: darken($tdev-blue, 15%);
+  }
+}
+
+.text-error {
+  color: $error;
+}
+
+.input-group-addon {
+  cursor: pointer;
+}
+
+.raw-card {
+  min-height: 60vh;
+  max-height: 60vh;
+  overflow: auto;
+  background-color: rgba(0,0,0,.03);
+}
+
+.underline {
+  display: inline-block;
+  position: relative;
+}
+.underline:after {
+  position: absolute;
+  content: '';
+  bottom: -2px;
+  left: 0px;
+  height: 1px;
+  width: 0%;
+  background-color: $tdev-blue;
+  animation: underline .5s ease-in forwards;
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+      margin-left: -250px;
+      box-shadow: none;
+  }
+  .sidebar.active {
+      margin-left: 0;
+      box-shadow: 0 4px 10px 0 lighten(rgb(130, 132, 134), 15%), 0 4px 20px 0 lighten(rgb(130, 132, 134), 15%);
+  }
+  .content {
+    padding-left: 0px;
+    &.active {
+      padding-left: 0px;
+    }
+  }
+  .raw-card {
+    min-height: 40vh;
+    max-height: 40vh;
+  }
+}
+
+@keyframes underline {
+  to {
+    background-color: $tdev-green;
+    width: 100%;
+  }
+}

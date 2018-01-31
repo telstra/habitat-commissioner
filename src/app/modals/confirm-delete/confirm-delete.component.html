@@ -1,0 +1,23 @@
+<!-- modal to confirm deletion of apigee items -->
+<div class="modal-header tdev-text tdev-red">
+  <h4 class="modal-title">Confirm deletion {{ item ? 'of ' + getDisplayName() : '' }}</h4>
+  <i class="fa fa-times" (click)="activeModal.dismiss()"></i>
+</div>
+<div class="modal-body">
+  <span *ngIf="!item">
+    Are you sure want to perform this delete operation?
+  </span>
+  <span *ngIf="item">
+    Are you sure you want to delete
+    <strong class="tdev-text tdev-red">{{ getDisplayName() }}</strong> from
+    <span *ngIf="item.parent">
+      <strong class="tdev-text tdev-red">{{ item.parent }}</strong> from </span>
+    <strong class="tdev-text tdev-red">{{ item.base | fileName }}</strong>?
+    <br>
+    <strong>This action will be performed in Apigee and cannot be undone if successful!</strong>
+  </span>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-outline-dark" (click)="activeModal.dismiss()">Cancel</button>
+  <button type="button" class="btn btn-tdev-red" (click)="activeModal.close(true)">Yes, delete it!</button>
+</div>

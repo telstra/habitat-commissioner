@@ -1,0 +1,47 @@
+$tdev-red:          rgb(241, 92, 91);
+$tdev-orange:       rgb(247, 149, 74);
+$tdev-grey: 	      rgb(130, 132, 134);
+$tdev-purple:       rgb(193, 113, 156);
+$tdev-blue:         rgb(0, 123, 255);
+$tdev-green:        rgb(0, 172, 0);
+
+.container-full {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  resize: both;
+  overflow: auto;
+
+  background-color: $tdev-blue;
+  //background-color: lighten($tdev-blue, 30%);
+  //background-color: rgba(0,0,0,.03);
+
+  .login-content {
+    min-width: 50%;
+    max-width: 90%;
+    max-height: 90%;
+    
+    .card {
+      width: 100%;
+      //box-shadow: -1px 1px 18px lighten($tdev-blue, 20%);
+
+      // .file-upload {
+      //   position: relative;
+      //   overflow: hidden;
+      //   margin-top: .5em;
+      //   margin-bottom: 1em;
+      //   input.upload {
+      //     position: absolute;  
+      //     top: 0;
+      //     right: 0;
+      //     margin: 0;
+      //     padding: 0;
+      //     cursor: pointer;
+      //     opacity: 0;
+      //     filter: alpha(opacity=0);
+      //   }
+      // }
+    }
+  }
+}

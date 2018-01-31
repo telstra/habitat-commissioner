@@ -1,0 +1,56 @@
+<nav id="header-bar" class="navbar fixed-top">
+  <a class="navbar-brand">
+    <i class="fa fa-bars" (click)="menuActive =! menuActive"></i>&nbsp;&nbsp; Postman Testing
+  </a>
+  <ul class="navbar-nav ml-auto">
+    <button class="btn btn-block btn-tdev" (click)="returnHome()">
+      Home
+    </button>
+  </ul>
+</nav>
+
+<div class="wrapper">
+
+  <!-- postman -->
+  <nav class="sidebar" [ngClass]="menuActive ? 'active' : ''" [@flyInOut]>
+    <ul class="list-unstyled">
+      <li *ngFor="let test of tests">
+        <a (click)="selectedTest = test" [ngClass]="selectedTest === test ? 'open' : ''">
+          <i class="fa fa-cog"></i>&nbsp;&nbsp; {{ test.name | fileName }}
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+  <div class="content" [ngClass]="menuActive ? '' : 'active'">
+    <div class="card m-3">
+      <div class="card-body">
+        <div class="card-title">
+          <div class="row">
+            <div class="col-8">
+              <h4>{{ selectedTest ? selectedTest.name : 'Select a test from the sidebar to get started!' }}</h4>
+            </div>
+            <div class="col-4">
+              <button *ngIf="selectedTest" class="btn btn-tdev-blue-outline btn-block" style="float: right" (click)="runTest(selectedTest)" [disabled]="loading[selectedTest.id] && !loading[selectedTest.id].closed">
+                <span *ngIf="loading[selectedTest.id] && !loading[selectedTest.id].closed">
+                  <i class="fa fa-spinner fa-spin fa-fw"></i>
+                </span>
+                <span *ngIf="!loading[selectedTest.id] || loading[selectedTest.id] && loading[selectedTest.id].closed">
+                  Run tests
+                </span>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="selectedTest">
+          <h5 *ngIf="loading[selectedTest.id] && !loading[selectedTest.id].closed" class="tdev-text tdev-blue postman-loading">
+            Running
+          </h5>
+          <br>
+          <app-log></app-log>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

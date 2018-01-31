@@ -1,0 +1,112 @@
+$tdev-grey:   rgb(130, 132, 134);
+$tdev-blue:   rgb(0, 123, 255);
+$tdev-green:  rgb(0, 172, 0);
+$tdev-purple: rgb(193, 113, 156);
+
+.card-header {
+  .create & {
+    color: $tdev-green;
+  }
+  .update & {
+    color: $tdev-blue;
+  }
+  .procure & {
+    color: $tdev-purple;
+  }
+}
+
+nav {
+  max-height: 60vh;
+  overflow: auto;
+}
+
+.form-control {
+  font-size: .8em;
+  &:focus {
+    border-bottom: 1px solid rgba(0,0,0,.15);
+  }
+  &.ng-valid {
+    border-bottom: 1px solid rgba(0,0,0,.15);
+  }
+}
+.input-group-addon {
+  font-size: .8em;
+  &:hover {
+    cursor: default;
+  }
+}
+
+ul {
+  li a {
+    cursor: pointer;
+    padding: 10px;
+    font-size: .9em;
+    display: block;
+    text-overflow: ellipsis;
+    text-align: left;
+    #menu-arrow  {
+      float: right;
+    }
+    &.open {
+      color: #fff;
+      .create & {
+        background-color: $tdev-green;
+      }
+      .update & {
+        background-color: $tdev-blue;
+      }
+      .procure & {
+        background-color: $tdev-purple;
+      }
+      &:hover {
+        .create & {
+          background-color: $tdev-green;
+        }
+        .update & {
+          background-color: $tdev-blue;
+        }
+        .procure & {
+          background-color: $tdev-purple;
+        }
+      }
+    }
+    &:hover {
+      color: #fff;
+      .create & {
+        background-color: $tdev-green;
+      }
+      .update & {
+        background-color: $tdev-blue;
+      }
+      .procure & {
+        background-color: $tdev-purple;
+      }
+    }
+  }
+  li ul li {
+    background-color: rgba(0,0,0,.03);
+    &:last-child {
+      .create & {
+        border-bottom: $tdev-green 1px solid;
+      }
+      .update & {
+        border-bottom: $tdev-blue 1px solid;
+      }
+      .procure & {
+        border-bottom: $tdev-purple 1px solid;
+      }
+    }
+   a {
+      cursor: default;
+      font-size: .8em;
+      text-indent: 5px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      &:hover {
+        color: #000;
+        background: rgba(0,0,0,.03);
+      }
+    }
+  }
+}

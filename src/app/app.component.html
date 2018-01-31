@@ -1,0 +1,5 @@
+<div id="app-main" [ngClass]="stateService.state$.getValue().view === 'repo' ? '__repo-state' : stateService.state$.getValue().view === 'apigee' ? '__apigee-state' : '__default-state'">
+  <router-outlet></router-outlet>
+</div>
+<app-error></app-error>
+<app-toast></app-toast>

@@ -1,0 +1,16 @@
+<div class="toast-content">
+  <div *ngFor="let toast of toasts; let i = index" [@flyInOut]>
+    <div *ngIf="i < 5" class="card mb-3" [ngClass]="toast.code >= 400 && toast.code <= 500 ? 'error' : ''">
+      <div class="card-text">
+        <div class="row justify-content-md-center">
+          <div class="col-1">
+            <i [ngClass]="toast.code >= 400 && toast.code <= 500 ? 'fa fa-exclamation-circle' : 'fa fa-check'"></i>
+          </div>
+          <div class="col">
+            <span id="toast-message">{{ toast.message || 'OK' }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

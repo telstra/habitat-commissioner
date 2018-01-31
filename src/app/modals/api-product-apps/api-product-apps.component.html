@@ -1,0 +1,33 @@
+<div class="modal-header tdev-text tdev-orange">
+  <h4 class="modal-title">{{ appType === 'companies' ? 'Company apps ' : 'Developer apps ' }} for {{ displayName }}</h4>
+  <i class="fa fa-times" (click)="activeModal.dismiss()"></i>
+</div>
+<div class="modal-body">
+  <div *ngIf="loading && !loading.closed" class="loading tdev-text tdev-orange">
+    <i class="fa fa-spinner fa-spin fa-fw"></i>
+    <div class="text">Please wait. This may take a while...</div>
+  </div>
+  <div>
+    <p *ngIf="list.length === 0">No results found!</p>
+
+    <div *ngIf="list.length > 0" class="card-body">
+      <table class="table table-responsive">
+        <thead>
+          <tr>
+            <th>{{ appType === 'companies' ? 'Company' : 'Developer' }}</th>
+            <th>App</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of list">
+            <td>{{ item.companyName ? item.companyName : item.createdBy }}</td>
+            <td>{{ item.name }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-tdev-orange" (click)="activeModal.close()">Close</button>
+</div>

@@ -1,0 +1,22 @@
+$tdev-green:        rgb(0, 172, 0);
+$error:             #e11e1e;
+
+.toast-content {
+  position: fixed;
+  min-width: 20%;
+  max-width: 50%;
+  margin: 10px;
+  bottom: 0;
+  right: 0;
+  .card {
+    background-color: $tdev-green;
+    color: #fff;
+    padding: 10px;
+    &.error {
+      background-color: $error;
+    }
+    #toast-message {
+      float: right;
+    }
+ }
+}

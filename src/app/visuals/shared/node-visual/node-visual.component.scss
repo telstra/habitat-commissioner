@@ -1,0 +1,34 @@
+$tdev-blue:         rgb(0, 123, 255);
+$tdev-green:        rgb(0, 172, 0);
+$tdev-purple:       rgb(193, 113, 156);
+
+.node {
+  cursor: pointer;
+  transition: stroke-width 0.1s ease-out,
+      fill 0.1s ease-out,
+      stroke 0.1s ease-out;
+
+  stroke-width: 2;
+  &.root {
+    fill: $tdev-green;
+    stroke: darken($tdev-green, 15%);
+  }
+  &.connector {
+    fill: $tdev-blue;
+    stroke: darken($tdev-blue, 15%);
+  }
+}
+
+.node-name {
+  // font-size: 5px;
+  // text-align: left;
+  // color: white;
+  // background: transparent;
+  // max-width: 100px;
+  // white-space: nowrap;
+  // overflow: hidden;
+  // text-overflow: ellipsis;
+
+  fill: white;
+  text-anchor: middle;
+}

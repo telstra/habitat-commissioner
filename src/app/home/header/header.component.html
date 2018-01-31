@@ -1,0 +1,94 @@
+<nav class="navbar navbar-expand-lg fixed-top">
+  <a class="navbar-brand">
+    <img src="./assets/img/logo-sm.png" class="d-inline-block align-top mr-3" (click)="logoClicked()"> Habitat Commissioner
+  </a>
+  <button class="navbar-toggler" type="button" (click)="isCollapsed = !isCollapsed">
+    <i class="fa fa-bars" style="color: white"></i>
+  </button>
+
+  <div class="collapse navbar-collapse" [ngbCollapse]="isCollapsed">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item dropdown" placement="left" [ngbTooltip]="'View'">
+        <div ngbDropdown>
+          <button class="btn btn-block btn-tdev" ngbDropdownToggle>
+            <i class="fa fa-eye"></i>&nbsp;&nbsp; {{ state().view || '-' }}
+          </button>
+          <div ngbDropdownMenu>
+            <button class="dropdown-item" (click)="stateService.view('repo')">
+              Repo
+            </button>
+            <button class="dropdown-item" (click)="stateService.view('apigee')">
+              Apigee
+            </button>
+          </div>
+        </div>
+      </li>
+
+      <li class="nav-item dropdown" placement="left" [ngbTooltip]="'Organization'">
+        <div ngbDropdown>
+          <button class="btn btn-block btn-tdev" ngbDropdownToggle>
+            <i class="fa fa-sitemap"></i>&nbsp;&nbsp; {{ state().org || '-' }}
+          </button>
+          <div ngbDropdownMenu>
+            <button *ngIf="!auth.user.config.orgs" class="dropdown-item" disabled>
+              No organizations set! You can set organizations from the Settings menu
+            </button>
+            <button *ngFor="let org of auth.user.config.orgs" class="dropdown-item" (click)="stateService.org(org)">
+              {{ org }}
+            </button>
+          </div>
+        </div>
+      </li>
+
+      <li class="nav-item dropdown" placement="left" [ngbTooltip]="'Environment'">
+        <div ngbDropdown>
+          <button class="btn btn-block btn-tdev" ngbDropdownToggle>
+            <i class="fa fa-envira"></i>&nbsp;&nbsp; {{ state().env || '-' }}
+          </button>
+          <div ngbDropdownMenu>
+
+            <button *ngIf="!state().org; else showEnvs" class="dropdown-item" disabled>
+              No organization selected!
+            </button>
+            <button *ngIf="state().org && !stateService.environments" class="dropdown-item" disabled>
+              <app-button-loading-spinner></app-button-loading-spinner>
+            </button>
+            <ng-template #showEnvs>
+              <button *ngFor="let env of stateService.environments" class="dropdown-item" (click)="stateService.env(env)">
+                {{ env }}
+              </button>
+            </ng-template>
+          </div>
+        </div>
+      </li>
+
+      <li class="nav-item dropdown" placement="left" [ngbTooltip]="'Local repo'">
+        <div ngbDropdown>
+          <button class="btn btn-block btn-tdev" ngbDropdownToggle>
+            <i class="fa fa-folder"></i>&nbsp;&nbsp; {{ state().repo || '-' }}
+          </button>
+          <div ngbDropdownMenu>
+            <button *ngIf="!auth.user.config.repoParentDirectory" class="dropdown-item" disabled>
+              No parent directory set! You can set a parent directory from the Settings menu
+            </button>
+            <button *ngIf="auth.user.config.repoParentDirectory && !repos" class="dropdown-item" disabled>
+              <app-button-loading-spinner></app-button-loading-spinner>
+            </button>
+            <button *ngFor="let repo of repos" class="dropdown-item" (click)="stateService.repo(repo)">
+              {{ repo }}
+            </button>
+          </div>
+        </div>
+      </li>
+    </ul>
+
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item" placement="left" ngbTooltip="Refresh">
+        <button class="btn btn-block btn-tdev" (click)="setHeader()">
+          <i class="fa fa-refresh"></i>
+        </button>
+      </li>
+    </ul>
+
+  </div>
+</nav>

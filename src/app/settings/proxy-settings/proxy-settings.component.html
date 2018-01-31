@@ -1,0 +1,78 @@
+<form [formGroup]="settingsForm">
+
+  <div class="mb-3">
+    <h4 class="tdev-text tdev-blue">Proxy Settings</h4>
+  </div>
+
+  <div class="form-group">
+    <label class="custom-control custom-checkbox">
+      <input type="checkbox" class="custom-control-input" formControlName="enable">
+      <span class="custom-control-indicator"></span>
+      <span class="custom-control-description">Enable proxy</span>
+    </label>
+  </div>
+
+  <div class="form-group">
+    <label for="username">
+      Username
+      <app-popover [content]="'Your proxy username'"></app-popover>
+    </label>
+    <input class="form-control" formControlName="username">
+    <div *ngIf="settingsForm.get('username').invalid
+        && settingsForm.get('username').touched" class="form-error">
+      Proxy username required!
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="username">
+      Password
+      <app-popover [content]="'Your proxy password'"></app-popover>
+    </label>
+    <div class="input-group">
+      <input class="form-control" formControlName="password" [type]="showPassword ? 'text' : 'password'">
+      <button class="input-group-addon" (click)="showPassword =! showPassword">
+        <i [ngClass]="showPassword ? 'fa fa-eye' : 'fa fa-eye-slash'"></i>
+      </button>
+    </div>
+    <div *ngIf="settingsForm.get('password').invalid
+          && settingsForm.get('password').touched" class="form-error">
+      Proxy password required!
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label>
+      Proxy URL
+      <app-popover [content]="'Full URL for your proxy'"></app-popover>
+    </label>
+    <div class="input-group">
+      <select class="form-control col-3" formControlName="scheme">
+        <option disabled selected hidden>Scheme</option>
+        <option>http</option>
+        <option>https</option>
+      </select>
+      <span id="url-addon" class="input-group-addon">://</span>
+      <input class="form-control col-6" formControlName="host" placeholder="Host">
+      <span id="url-addon" class="input-group-addon">:</span>
+      <input class="form-control col-3" formControlName="port" type="tel" placeholder="Port">
+    </div>
+    <div *ngIf="settingsForm.get('scheme').invalid && settingsForm.get('scheme').touched
+        || settingsForm.get('host').invalid && settingsForm.get('host').touched
+        || settingsForm.get('port').invalid && settingsForm.get('port').touched" class="form-error">
+      All url parameters are required!
+    </div>
+  </div>
+
+  <div class="mt-3 mb-3">
+    <button class="btn btn-tdev-blue" (click)="save()" [disabled]="loading && !loading.closed">
+      <span *ngIf="loading && !loading.closed">
+        <app-button-loading-spinner [color]="'white'"></app-button-loading-spinner>
+      </span>
+      <span *ngIf="!loading || loading && loading.closed">
+        Save Proxy settings
+      </span>
+    </button>
+  </div>
+
+</form>

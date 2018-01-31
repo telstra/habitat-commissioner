@@ -1,0 +1,80 @@
+<!-- visualization -->
+<app-visualization *ngIf="showVisuals" (close)="toggleVisuals()"></app-visualization>
+
+<!-- navbar -->
+<app-header (toggleMenu)="toggleMenu()"></app-header>
+
+<div #target class="wrapper">
+
+  <!-- Sidebar -->
+  <app-sidebar [menuActive]="menuActive" (viewLog)="viewLog()" (loadingItem)="itemLoading = $event"></app-sidebar>
+
+  <!-- Page Content id="content" -->
+  <div class="content" [ngClass]="menuActive ? '' : 'active'">
+
+    <div class="container-fluid">
+      <!-- default screen -->
+      <div *ngIf="!state().item && state().create_queue.length === 0 && state().procure_queue.length === 0 && state().update_queue.length === 0; else item"
+        class="center-box">
+        <div class="center-content">
+          <img src="./assets/img/logo.png">
+          <p class="text-muted">Configure your API calls and select an Apigee component from the side bar to get started!</p>
+        </div>
+      </div>
+
+      <!-- item selected -->
+      <ng-template #item>
+        <div class="row">
+          <div class="col item-base text-muted">
+            <!-- state().item?.base | fileName -->
+            {{ state().item ? (state().item?.base | fileName) : 'Nothing selected' }} {{ state().item?.parent ? ' > ' + displayName(state().item.parent)
+            : '' }}
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 col-md-8">
+            <!-- item-card -->
+            <div class="card mt-3 mb-3">
+              <div *ngIf="!itemLoading; else loadingItem" class="card-body">
+                <h4 class="card-title">
+                  <i [appMenuItemIcon]="state().item?.base"></i>&nbsp;&nbsp; {{ state().item ? displayName() : 'No item selected' }}
+                </h4>
+                <div class="m-1">
+                  <app-item-button-options [item]="state().item" (showVisuals)="toggleVisuals()"></app-item-button-options>
+                </div>
+                <app-item-details [data]="state().item?.data"></app-item-details>
+              </div>
+            </div>
+          </div>
+
+          <!-- queues -->
+          <div class="col-12 col-md-4 mt-3">
+            <div *ngIf="state().view === 'repo'">
+              <!-- create -->
+              <app-item-queues [type]="'create'" [queue]="queue('create')"></app-item-queues>
+              <!-- update -->
+              <app-item-queues [type]="'update'" [queue]="queue('update')"></app-item-queues>
+            </div>
+
+            <div *ngIf="state().view === 'apigee'">
+              <!-- procure -->
+              <app-item-queues [type]="'procure'" [queue]="queue('procure')"></app-item-queues>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+
+      <!-- (scroll)="scrollTo(target)" -->
+      <app-log [hidden]="!log"></app-log>
+
+    </div>
+  </div>
+
+</div>
+
+<ng-template #loadingItem>
+  <div class="loading">
+    <i class="fa fa-circle-o-notch fa-spin fa-fw"></i>
+    <div class="text">Please wait...</div>
+  </div>
+</ng-template>

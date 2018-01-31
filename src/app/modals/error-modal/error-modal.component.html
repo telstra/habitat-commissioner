@@ -1,0 +1,15 @@
+<div class="modal-header tdev-text error">
+  <h4 class="modal-title">{{ error?.code ? '[' + error.code + ']' : '' }} An error occured!</h4>
+  <i class="fa fa-times" (click)="activeModal.close('Close click')"></i>
+</div>
+<div class="modal-body">
+  <p>{{ error?.message }}</p>
+  <strong class="tdev-text error">Error: </strong>
+  <div class="card raw-card">
+    <pre>{{ error?.error | json }}</pre>
+    <pre>{{ error?.data | json }}</pre>
+  </div>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Close</button>
+</div>

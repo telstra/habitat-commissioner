@@ -1,0 +1,78 @@
+<div class="card mb-3" [ngClass]="type">
+  <div class="card-header" (click)="isCollapsed['toggle'] = !isCollapsed['toggle']">
+    <strong>
+      <span class="text-capitalize">{{ type }}</span> queues
+    </strong>
+    <i [ngClass]="isCollapsed['toggle'] ? 'fa fa-angle-right' : 'fa fa-angle-down'" style="float: right"></i>
+  </div>
+  <div *ngIf="isCollapsed['toggle']">
+    <div class="container-fluid">
+      <div *ngIf="!queue || queue.length === 0" class="loading tdev-text" [ngClass]="type === 'create' ? 'tdev-green' : type === 'update' ? 'tdev-blue' : 'tdev-purple'">
+        <i class="fa fa-exclamation-circle"></i>
+        <div class="text">
+          <p>Nothing added yet!</p>
+          <p>You can add items to the queue by clicking the
+            <strong>add to {{ type }} queue</strong> button.</p>
+        </div>
+      </div>
+    </div>
+
+    <nav>
+      <ul class="list-unstyled">
+        <li *ngFor="let el of queue">
+
+          <span *ngIf="el.items && el.items.length > 0">
+
+            <a (click)="isCollapsed[el.base] = !isCollapsed[el.base]" [ngClass]="isCollapsed[el.base] ? '': 'open'">
+              <i id="menu-icon" [appMenuItemIcon]="el.base"></i>&nbsp;&nbsp;
+              <span id="menu-text">{{ el.base | fileName }} - {{ el.items.length }} item{{ el.items.length > 1 ? 's' : '' }}</span>
+              <i id="menu-arrow" [ngClass]="isCollapsed[el.base] ? 'fa fa-caret-down' : 'fa fa-caret-up'"></i>
+            </a>
+            <ul class="list-unstyled" *ngIf="!isCollapsed[el.base]">
+              <li class="p-3">
+                <div class="row">
+                  <div class="col-10">
+                    <button class="btn btn-sm btn-block" [ngClass]="type === 'create' ? 'btn-tdev-green-outline' : type === 'update' ? 'btn-tdev-blue-outline' : 'btn-tdev-purple-outline'"
+                      (click)="execute(type, el)" [disabled]="loading[el.base] && !loading[el.base].closed">
+                      <span *ngIf="!loading[el.base] || loading[el.base] && loading[el.base].closed; else buttonLoading">
+                        {{ type }} {{ el.base | fileName }}
+                      </span>
+                    </button>
+                  </div>
+                  <div class="col-2 align-self-center">
+                    <i class="fa fa-trash tdev-text error" style="cursor: pointer; float: right" (click)="clearQueue(el.base)" placement="top"
+                      [ngbTooltip]="'Clear all'" container="body"></i>
+                  </div>
+                </div>
+              </li>
+
+              <!-- search bar -->
+              <li>
+                <div class="input-group col-10">
+                  <button class="input-group-addon" disabled>
+                    <i class="fa fa-search"></i>
+                  </button>
+                  <input class="form-control" [(ngModel)]="searchStrings[el.base]" placeholder="Search...">
+                </div>
+              </li>
+
+              <li *ngFor="let item of (sorted(el.items) | fuse:searchStrings[el.base]:{keys: ['name', 'displayName', 'id']})" @listItemAnimation>
+                <a>
+                  <i class="fa fa-angle-right"></i>&nbsp; {{ item.name || item }}{{ item.revision_number ? ' revision: ' + item.revision_number : '' }}
+                  <i class="fa fa-times tdev-text error" style="float: right" (click)="removeFromQueue(el.base, item)" placement="top" [ngbTooltip]="'Remove'"
+                    container="body"></i>
+                </a>
+              </li>
+            </ul>
+
+          </span>
+
+        </li>
+      </ul>
+    </nav>
+  </div>
+</div>
+
+<ng-template #buttonLoading>
+  <i class="fa fa-spinner fa-spin fa-fw"></i>
+</ng-template>

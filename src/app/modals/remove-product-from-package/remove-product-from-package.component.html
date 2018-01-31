@@ -1,0 +1,25 @@
+<!-- modal to confirm deletion of apigee items -->
+<div class="modal-header tdev-text tdev-orange">
+  <h4 class="modal-title">Remove API products from {{ item.displayName }}</h4>
+  <i class="fa fa-times" (click)="activeModal.dismiss()"></i>
+</div>
+<div class="modal-body">
+  <div *ngIf="loading && !loading.closed" class="container-fluid">
+    <div class="loading tdev-text tdev-orange">
+      <i class="fa fa-spinner fa-spin fa-fw"></i>
+      <div class="text">Loading API products...</div>
+    </div>
+  </div>
+  <div *ngIf="options.length > 0" class="form-group" style="max-height: 60vh; overflow: auto">
+    <label for="control">API product to remove</label>
+    <select class="form-control" [(ngModel)]="selected">
+      <option disabled selected hidden></option>
+      <option *ngFor="let option of options">
+        {{ option }}
+    </select>
+  </div>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-outline-dark" (click)="activeModal.dismiss()">Cancel</button>
+  <button type="button" class="btn btn-tdev-red" (click)="close()" [disabled]="!selected">Remove product</button>
+</div>

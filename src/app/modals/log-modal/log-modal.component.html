@@ -1,0 +1,21 @@
+<div class="modal-header" [ngClass]="log.meta?.statusCode >= 400 && log.meta?.statusCode <= 500 ? 'tdev-text error' : 'tdev-text tdev-blue'">
+  <h4 class="modal-title">Log Data</h4>
+  <i class="fa fa-times" (click)="activeModal.close('Close click')"></i>
+</div>
+<div class="modal-body">
+  <ng-container *ngIf="log.meta; else noMetaData">
+    <div class="card raw-card">
+      <div *ngFor="let key of log.meta | keys">
+        <strong>{{ key }}:</strong>
+        <pre>{{ log.meta[key] | json }}</pre>
+      </div>
+    </div>
+  </ng-container>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Close</button>
+</div>
+
+<ng-template #noMetaData>
+  <p>No additional data</p>
+</ng-template>

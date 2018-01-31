@@ -1,0 +1,156 @@
+<nav class="sidebar" [ngClass]="menuActive ? 'active' : ''" [@flyInOut]>
+
+  <div class="sidebar-header">
+    <div class="row">
+      <div class="col">
+        <strong>
+          {{ state().view?.toUpperCase() || 'Habitat Commissioner'}}
+        </strong>
+      </div>
+      <div *ngIf="state().view" class="col align-self-center" placement="right" ngbTooltip="Refresh items">
+        <i class="fa fa-refresh" style="float: right" (click)="reset()"></i>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="!loaders['resources'] || loaders['resources'] && loaders['resources'].closed; else loadingResources">
+
+    <ul class="list-unstyled">
+      <div *ngIf="!state().view || !state().org || !state().env || !state().repo" class="container-fluid">
+        <div class="loading">
+          <i class="fa fa-exclamation-circle"></i>
+          <div class="text">Set parameters in the header bar above to have Apigee components appear here!</div>
+        </div>
+      </div>
+
+      <!-- sidebar contents, hide companies and developers in the repo view -->
+      <span *ngIf="state().view && state().org && state().env && state().repo">
+        <li *ngFor="let el of list" [hidden]="state().view === 'repo' && (el === 'companies' || el === 'developers')">
+          <!-- top level element name -->
+          <a (click)="isCollapsed[el] = !isCollapsed[el]; getItems(el)" [ngClass]="isCollapsed[el] ? 'open': ''">
+            <i [appMenuItemIcon]="el"></i>&nbsp;&nbsp; {{ el | fileName }}
+            <i id="menu-arrow" [ngClass]="isCollapsed[el] ? 'fa fa-caret-up' : 'fa fa-caret-down'"></i>
+          </a>
+
+          <!-- element data -->
+          <ul class="list-unstyled" *ngIf="isCollapsed[el]">
+
+            <!-- loading -->
+            <li *ngIf="loaders[el] && !loaders[el].closed" style="text-align: center">
+              <i class="fa fa-circle-o-notch fa-spin fa-fw sidebar-item-loader"></i>
+            </li>
+
+            <!-- empty -->
+            <li *ngIf="items[el] && items[el].length === 0" @listItemAnimation>
+              <p>
+                <i class="fa fa-exclamation-circle"></i>&nbsp;&nbsp;No data!
+              </p>
+            </li>
+
+            <!-- data -->
+            <!-- search bar -->
+            <li *ngIf="items[el] && items[el].length > 0">
+              <div class="input-group">
+                <button class="input-group-addon" disabled>
+                  <i class="fa fa-search"></i>
+                </button>
+                <input class="form-control" [(ngModel)]="searchStrings[el]" placeholder="Search...">
+              </div>
+            </li>
+
+            <!-- no data -->
+            <li *ngIf="loaders[el] && loaders[el].closed && items[el] && items[el].length === 0
+            || loaders[el] && loaders[el].closed && !items[el]">
+              <a>
+                <i class="fa fa-exclamation-circle"></i>&nbsp;&nbsp;No data!
+              </a>
+            </li>
+
+            <li *ngFor="let item of (items[el] | fuse:searchStrings[el]:{keys: ['name', 'displayName', 'id']})" @listItemAnimation>
+              <a (click)="setSelected(el, item)" [ngClass]="selected === getId(item) ? 'selected' : ''" placement="right" [ngbTooltip]="getId(item)"
+                container="body">
+                <i class="fa fa-angle-right"></i>&nbsp; {{ getDisplayName(item) }}
+              </a>
+
+              <!-- nested data -->
+              <ul *ngIf="selected === getId(item)" class="list-unstyled">
+
+                <!-- loading -->
+                <li *ngIf="loaders[el][getId(item)] && !loaders[el][getId(item)].closed" style="text-align: center">
+                  <i class="fa fa-circle-o-notch fa-spin fa-fw sidebar-item-loader"></i>
+                </li>
+
+                <!-- sub-title -->
+                <li *ngIf="items[el][getId(item)] && selected === getId(item)" @listItemAnimation>
+                  <a (click)="isCollapsed[getId(item)] = !isCollapsed[getId(item)]">
+                    <i [ngClass]="isCollapsed[getId(item)] ? 'fa fa-folder-o' : 'fa fa-folder-open-o'"></i>&nbsp;&nbsp; {{ el === 'developers' || el === 'companies' ? 'Apps' : el === 'monetizationPackages'
+                    ? 'Rate plans' : el === 'kvms' ? 'Entries' : 'Revisions' }} &nbsp;&nbsp;
+                    <i [ngClass]="isCollapsed[getId(item)] ? 'fa fa-angle-right' : 'fa fa-angle-down'"></i>
+                  </a>
+                </li>
+                <span *ngIf="!isCollapsed[getId(item)]">
+
+                  <!-- no data -->
+                  <li *ngIf="items[el][getId(item)] && items[el][getId(item)].length === 0" @listItemAnimation>
+                    <a>
+                      <i class="fa fa-exclamation-circle"></i>&nbsp;&nbsp;No data!
+                    </a>
+                  </li>
+
+                  <!-- data -->
+                  <li *ngFor="let nestedItem of items[el][getId(item)]" placement="right" [ngbTooltip]="getId(nestedItem)" container="body"
+                    @listItemAnimation>
+                    <a (click)="nestedSelected = getId(nestedItem); setItem(el, getId(nestedItem), item)" [ngClass]="nestedSelected === getId(nestedItem) ? 'selected' : ''">
+                      <i class="fa fa-angle-right"></i>&nbsp;&nbsp;{{ getDisplayName(nestedItem) }}
+                    </a>
+                  </li>
+                </span>
+              </ul>
+            </li>
+
+          </ul>
+
+        </li>
+      </span>
+    </ul>
+
+    <hr>
+
+    <ul class="list-unstyled">
+      <li>
+        <a (click)="toggleLog()">
+          <i class="fa fa-info-circle"></i>&nbsp;&nbsp; Toggle logs
+        </a>
+      </li>
+      <li>
+        <a (click)="navigate('/postman-testing')">
+          <i class="fa fa-bar-chart"></i>&nbsp;&nbsp; Postman testing
+        </a>
+      </li>
+      <li>
+        <a (click)="navigate('/swagger')">
+          <i class="fa fa-book"></i>&nbsp;&nbsp; API reference
+        </a>
+      </li>
+      <li>
+        <a (click)="navigate('/settings')">
+          <i class="fa fa-wrench"></i>&nbsp;&nbsp; Configuration and settings
+        </a>
+      </li>
+      <li>
+        <a (click)="signout()">
+          <i class="fa fa-sign-out"></i>&nbsp;&nbsp; Logout
+        </a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<ng-template #loadingResources>
+  <div class="container-fluid">
+    <div class="loading">
+      <i class="fa fa-circle-o-notch fa-spin fa-fw"></i>
+      <div class="text">Please wait...</div>
+    </div>
+  </div>
+</ng-template>

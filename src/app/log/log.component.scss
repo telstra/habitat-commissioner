@@ -1,0 +1,16 @@
+$verbose:   #007bff;
+$info:      #28a745;
+$error:     #dc3545;
+
+.all {
+    color: black;
+}
+.verbose {
+    color: $verbose;
+}
+.info {
+    color: $info;
+}
+.error {
+    color: $error;
+}

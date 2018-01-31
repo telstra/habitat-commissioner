@@ -1,0 +1,56 @@
+$tdev-blue: rgb(0, 123, 255);
+$error:     #e11e1e;
+
+.form-control:disabled {
+  background-color: #fff;
+}
+
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  color: black;
+}
+::-moz-placeholder { /* Firefox 19+ */
+  color: black;
+}
+:-ms-input-placeholder { /* IE 10+ */
+  color: black;
+}
+:-moz-placeholder { /* Firefox 18- */
+  color: black;
+}
+
+.buttons {
+  float: right;
+  i {
+    margin: 0px 10px 0px 10px;
+    cursor: pointer;
+  }
+}
+
+// .fileUpload input.upload {
+//   position: absolute;
+//   top: 0;
+//   right: 0;
+//   margin: 0;
+//   padding: 0;
+//   font-size: 20px;
+//   cursor: pointer;
+//   opacity: 0;
+//   filter: alpha(opacity=0);
+// }
+
+// .form-control:disabled {
+//   background-color: #fff;
+// }
+
+// ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+//   color: black;
+// }
+// ::-moz-placeholder { /* Firefox 19+ */
+//   color: black;
+// }
+// :-ms-input-placeholder { /* IE 10+ */
+//   color: black;
+// }
+// :-moz-placeholder { /* Firefox 18- */
+//   color: black;
+// }

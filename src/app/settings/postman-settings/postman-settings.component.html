@@ -1,0 +1,124 @@
+<div class="mb-3">
+  <h4 class="tdev-text tdev-blue">POSTman tests</h4>
+</div>
+
+<div class="mb-3">
+  <button class="btn btn-sm btn-link" (click)="editTest(editModal)">
+    <i class="fa fa-plus"></i>&nbsp;&nbsp;New test
+  </button>
+</div>
+
+<div *ngFor="let test of tests">
+  <div class="card mb-3">
+    <div class="card-body tdev-text tdev-blue">
+      <h5 class="card-title">
+        {{ test.name }}
+        <span class="buttons">
+          <i class="fa fa-eye" (click)="viewTest(detailsModal, test.id)" placement="top" [ngbTooltip]="'View'"></i>
+          <i class="fa fa-pencil" (click)="editTest(editModal, test.id)" placement="top" [ngbTooltip]="'Edit'"></i>
+          <i class="fa fa-trash tdev-text error" (click)="deleteTest(test.id)" placement="top" [ngbTooltip]="'Delete'"></i>
+        </span>
+      </h5>
+    </div>
+  </div>
+</div>
+
+<!-- edit modal -->
+<ng-template #editModal let-c="close" let-d="dismiss">
+  <div class="modal-header tdev-text tdev-blue">
+    <h4 class="modal-title">{{ selectedTest.name || 'New test' }}</h4>
+    <i class="fa fa-times" (click)="c()"></i>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="postmanForm">
+
+      <!-- name -->
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input class="form-control" formControlName="name">
+        <div *ngIf="postmanForm.get('name').invalid && postmanForm.get('name').touched" class="form-error">
+          Name is required!
+        </div>
+      </div>
+
+      <!-- collection -->
+      <div class="form-group">
+        <label for="collection">
+          Collection
+          <app-popover [content]="'Collection file. Must be a .json file'"></app-popover>
+        </label>
+        <div class="fileUpload input-group">
+          <span class="input-group-btn">
+            <div class="btn btn-tdev-blue-outline">
+              <i class="fa fa-search"></i>&nbsp;&nbsp;Browse
+              <input type="file" class="upload" (change)="upload($event, 'collection')">
+            </div>
+          </span>
+          <input class="form-control" disabled [placeholder]="collection.display || ''">
+        </div>
+        <div *ngIf="collection.error" class="form-error">{{ collection.error }}!</div>
+      </div>
+
+      <!-- environment -->
+      <div class="form-group">
+        <label for="collection">
+          Environment
+          <app-popover [content]="'Environment file. Must be a .json file'"></app-popover>
+        </label>
+        <div class="fileUpload input-group">
+          <span class="input-group-btn">
+            <div class="btn btn-tdev-blue-outline">
+              <i class="fa fa-search"></i>&nbsp;&nbsp;Browse
+              <input type="file" class="upload" (change)="upload($event, 'environment')">
+            </div>
+          </span>
+          <input class="form-control" disabled [placeholder]="environment.display || ''">
+        </div>
+        <div *ngIf="environment.error" class="form-error">{{ environment.error }}!</div>
+      </div>
+
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="c()">Cancel</button>
+    <button type="button" class="btn btn-tdev-blue-outline" [disabled]="!postmanForm.valid" (click)="c(true)">Save</button>
+  </div>
+</ng-template>
+
+<!-- view details modal -->
+<ng-template #detailsModal let-c="close" let-d="dismiss">
+  <div class="modal-header tdev-text tdev-blue">
+    <h4 class="modal-title">{{ selectedTest.name }}</h4>
+    <i class="fa fa-times" (click)="c()"></i>
+  </div>
+  <div class="modal-body">
+    <ngb-accordion [closeOthers]="true">
+      <ngb-panel id="static-1" title="Collection">
+        <ng-template ngbPanelContent>
+          <ng-container *ngIf="collectionDetails; else noDetails">
+            <div class="card raw-card mt-3">
+              <pre>{{ collectionDetails | json }}</pre>
+            </div>
+          </ng-container>
+        </ng-template>
+      </ngb-panel>
+      <ngb-panel id="static-2" title="Environment">
+        <ng-template ngbPanelContent>
+          <ng-container *ngIf="environmentDetails; else noDetails">
+            <div class="card raw-card mt-3">
+              <pre>{{ environmentDetails | json }}</pre>
+            </div>
+          </ng-container>
+        </ng-template>
+      </ngb-panel>
+    </ngb-accordion>
+    <ng-template #noDetails>
+      <div class="tdev-text tdev-red">
+        <p>No details!</p>
+      </div>
+    </ng-template>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="c()">Close</button>
+  </div>
+</ng-template>

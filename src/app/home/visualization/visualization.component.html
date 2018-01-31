@@ -1,0 +1,26 @@
+<div class="backdrop">
+  <div class="visual-content">
+
+    <button class="btn close-btn" (click)="onClose()">
+      <i class="fa fa-times-circle"></i>&nbsp;&nbsp; Close
+    </button>
+
+    <div *ngIf="loading" class="visuals-loading">
+      <img src="./assets/img/logo-sm.png">
+      <h5>Loading!</h5>
+      <p><ngb-progressbar type="primary" [value]="loadingProgress" height="10px" [striped]="true" [animated]="true"></ngb-progressbar></p>
+      <p>{{ loadingText }}</p>
+    </div>
+
+    <graph *ngIf="!loading" [nodes]="nodes" [links]="links"></graph>
+
+    <div class="title">
+      <div class="subtitle">
+        <i [appMenuItemIcon]="state().item.base"></i>
+        {{ state().item.base | fileName }}
+      </div>
+      <h4>{{ displayName() }}</h4>
+    </div>
+
+  </div>
+</div>

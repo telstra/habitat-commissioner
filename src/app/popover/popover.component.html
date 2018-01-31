@@ -1,0 +1,7 @@
+<ng-template #popContent>{{ content }}</ng-template>
+<ng-template #popTitle>{{ title }}</ng-template>
+
+<button type="button" class="btn btn-link" [placement]="placement"
+        [ngbPopover]="popContent" triggers="mouseenter:mouseleave:manual" container="body">
+  <i class="fa fa-question-circle"></i>
+</button>

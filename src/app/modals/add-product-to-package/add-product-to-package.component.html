@@ -1,0 +1,25 @@
+<div class="modal-header tdev-text tdev-orange">
+  <h4 class="modal-title">Add API products to {{ displayName }}</h4>
+  <i class="fa fa-times" (click)="activeModal.dismiss()"></i>
+</div>
+<div class="modal-body">
+  <div *ngIf="loading && !loading.closed" class="container-fluid">
+    <div class="loading tdev-text tdev-orange">
+      <i class="fa fa-spinner fa-spin fa-fw"></i>
+      <div class="text">Loading API products...</div>
+    </div>
+  </div>
+  <ul class="list-group" style="max-height: 60vh; overflow: auto">
+    <li *ngFor="let option of options; let i = index" class="list-group-item">
+      <label class="custom-control custom-checkbox">
+        <input type="checkbox" class="custom-control-input" [(ngModel)]="selected[option]">
+        <span class="custom-control-description">{{ option }}</span>
+        <span class="custom-control-indicator"></span>
+      </label>
+    </li>
+  </ul>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-outline-dark" (click)="activeModal.dismiss()">Cancel</button>
+  <button type="button" class="btn btn-tdev-orange" (click)="close()">Confirm</button>
+</div>

@@ -1,0 +1,43 @@
+<div class="card">
+  <div class="card-header text-capitalize" [ngClass]="logLevel">
+    Logs: {{ logLevel }}
+    <div style="float: right">
+      <button class="btn btn-outline-dark" (click)="toggleLogLevel('all')">All</button>
+      <button class="btn btn-outline-primary" (click)="toggleLogLevel('verbose')">Verbose</button>
+      <button class="btn btn-outline-success" (click)="toggleLogLevel('info')">Info</button>
+      <button class="btn btn-outline-danger" (click)="toggleLogLevel('error')">Error</button>
+    </div>
+  </div>
+  <div class="card-body" style="overflow: auto; max-height: 80vh">
+    <table class="table table-responsive">
+      <thead #anchor>
+        <tr>
+          <th>Timestamp</th>
+          <th>Level</th>
+          <th>Code</th>
+          <th>Message</th>
+          <th>Data</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let log of displayLogs">
+          <td>{{ log.timestamp | date: 'dd/MM/yyyy hh:mm:ss' }}</td>
+          <td class="text-uppercase" [ngClass]="log.level">{{ log.level }}</td>
+          <td>{{ log.meta && log.meta.statusCode ? log.meta.statusCode : '' }}</td>
+          <td>{{ log.message }}</td>
+          <td>
+            <button class="btn btn-outline-dark" (click)="openDataModal(log)">Data</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <hr>
+    <div class="row justify-content-center">
+      <p>End of log</p>
+    </div>
+    <div style="float: right">
+        <button class="btn btn-outline-dark" (click)="scrollTop(anchor)">Top of log</button> 
+      <!-- <button class="btn btn-outline-dark" (click)="emitScroll()">Scroll to top</button> -->
+    </div>
+  </div>
+</div>
