@@ -45,7 +45,28 @@ export class LogComponent implements OnInit {
     return date != null ? date.getTime() : 0;
   }
 
-  toggleDisplay() {
+  // toggleDisplay() {
+  //   if (this.logLevel === 'all') {
+  //     this.displayLogs = this.logs;
+  //   } else {
+  //     this.logs.forEach(log => {
+  //       if (log.level === this.logLevel) {
+  //         this.displayLogs.unshift(log);
+  //       }
+  //     });
+  //   }
+
+  //   this.displayLogs.sort((a, b) => {
+  //     return this.getTime(new Date(b.timestamp)) - this.getTime(new Date(a.timestamp));
+  //   });
+  // }
+
+  toggleLogLevel(logLevel) {
+    this.logLevel = logLevel;
+
+    this.displayLogs = [];
+    // this.toggleDisplay();
+    
     if (this.logLevel === 'all') {
       this.displayLogs = this.logs;
     } else {
@@ -59,13 +80,6 @@ export class LogComponent implements OnInit {
     this.displayLogs.sort((a, b) => {
       return this.getTime(new Date(b.timestamp)) - this.getTime(new Date(a.timestamp));
     });
-  }
-
-  toggleLogLevel(logLevel) {
-    this.logLevel = logLevel;
-
-    this.displayLogs = [];
-    this.toggleDisplay();
   }
 
   ngOnInit() {

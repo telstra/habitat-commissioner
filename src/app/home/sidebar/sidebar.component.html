@@ -25,7 +25,8 @@
 
       <!-- sidebar contents, hide companies and developers in the repo view -->
       <span *ngIf="state().view && state().org && state().env && state().repo">
-        <li *ngFor="let el of list" [hidden]="state().view === 'repo' && (el === 'companies' || el === 'developers')">
+        <!-- [hidden]="state().view === 'repo' && (el === 'companies' || el === 'developers')" -->
+        <li *ngFor="let el of list">
           <!-- top level element name -->
           <a (click)="isCollapsed[el] = !isCollapsed[el]; getItems(el)" [ngClass]="isCollapsed[el] ? 'open': ''">
             <i [appMenuItemIcon]="el"></i>&nbsp;&nbsp; {{ el | fileName }}
@@ -50,10 +51,7 @@
             <!-- data -->
             <!-- search bar -->
             <li *ngIf="items[el] && items[el].length > 0">
-              <div class="input-group">
-                <button class="input-group-addon" disabled>
-                  <i class="fa fa-search"></i>
-                </button>
+              <div class="form-group">
                 <input class="form-control" [(ngModel)]="searchStrings[el]" placeholder="Search...">
               </div>
             </li>
@@ -66,7 +64,7 @@
               </a>
             </li>
 
-            <li *ngFor="let item of (items[el] | fuse:searchStrings[el]:{keys: ['name', 'displayName', 'id']})" @listItemAnimation>
+            <li *ngFor="let item of (items[el] | fuse:searchStrings[el]:{keys: ['name', 'displayName', 'id', 'developerId', 'email']})" @listItemAnimation>
               <a (click)="setSelected(el, item)" [ngClass]="selected === getId(item) ? 'selected' : ''" placement="right" [ngbTooltip]="getId(item)"
                 container="body">
                 <i class="fa fa-angle-right"></i>&nbsp; {{ getDisplayName(item) }}

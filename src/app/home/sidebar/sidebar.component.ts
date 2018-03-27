@@ -165,12 +165,12 @@ export class SidebarComponent implements OnInit, OnDestroy {
 
   // get display name for an item in sidebar
   getDisplayName(item) {
-    return item.displayName || item.name || item.id || item;
+    return item.displayName || item.name || item.id || item.email || item;
   }
 
   // get the id for an item in the sidebar
   getId(item) {
-    return item.id || item.name || item;
+    return item.id || item.name || item.developerId || item.appId || item;
   }
 
   ngOnInit() {

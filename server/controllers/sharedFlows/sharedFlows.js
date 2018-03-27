@@ -113,6 +113,9 @@ router.post('/apigee', validateHostName, validateRepo, validateEnv, validateBody
       // check the file exists first
       if (await fileHelper.checkExists(`${res.locals.repoFilePath}/${sharedflow}`)) {
 
+        // create a temp directory for the user if it doesnt exist
+        await fileHelper.createDir(path.resolve(__dirname, `../../resources/tmp/${res.locals.user.username}`));
+
         // zip the bundle
         var destPath = path.resolve(__dirname, `../../resources/tmp/${res.locals.user.username}/${sharedflow}@#${Math.floor(Date.now() / 1000)}.zip`);
         await fileHelper.zip(

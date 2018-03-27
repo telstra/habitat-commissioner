@@ -138,6 +138,7 @@ router.post('/apigee', validateHostName, validateRepo, validateEnv, validateBody
           await xmlHelper.updateProxyInformation(_path, 'MessageLogging', 'Syslog', pol);
         }));
 
+        // create a temp directory for the user if it doesnt exist
         await fileHelper.createDir(path.resolve(__dirname, `../../resources/tmp/${res.locals.user.username}`));
 
         // zip the directory

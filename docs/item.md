@@ -7,3 +7,14 @@ Clicking on an indivdual item will display the items details in the center of sc
 
 
 <img src="images/sidebar-repo.PNG" alt="Side bar"/>
+
+
+
+###### Front end guide contents
+- [Initial set up](./setup.md)
+- [Settings options in the header](./header_options.md)
+- [Item queues](./queues.md)
+- [Additional options](./additional_options.md)
+- [Winston logger](./logger.md)
+- [Automated testing](./testing.md)
+- [Data viusalization](./visuals.md)

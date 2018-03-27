@@ -1,6 +1,6 @@
 var jwt = require('jsonwebtoken'),
-  User = require('../models/user');
-responseHelper = require('../helpers/response-helper'),
+  User = require('../models/user'),
+  responseHelper = require('../helpers/response-helper'),
   config = require('../config/config');
 
 /**

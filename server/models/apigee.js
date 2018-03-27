@@ -20,10 +20,10 @@ exports.get = (resourcePath, userData, isMonetization) => {
     r.get(options, (err, res) => {
       logger.verbose(`Get ${resourcePath}`);
       if (err) {
-        logger.error(err);
+        //logger.error(err);
         return reject(err);
       }
-      logger.result(res);
+      //logger.result(res);
       resolve(res);
     });
   });

@@ -10,3 +10,14 @@ At the top of the main screen in the HC app is header bar. From left to right, t
 
 
 After selecting values for all of the options in the header bar the [side bar](./item.md) will be populated with data pertaining to the selected view. From the sidebar you can select individual Apigee items and perform data operations on them.
+
+
+
+###### Front end guide contents
+- [Initial set up](./setup.md)
+- [Selecting an item from the sider bar](./item.md)
+- [Item queues](./queues.md)
+- [Additional options](./additional_options.md)
+- [Winston logger](./logger.md)
+- [Automated testing](./testing.md)
+- [Data viusalization](./visuals.md)

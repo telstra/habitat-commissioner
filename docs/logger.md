@@ -3,3 +3,14 @@ The HC API uses [winston](https://www.npmjs.com/package/winston) to log events t
 
 
 The logs are useful in many ways and detailed information of each event can be seen by clicking on 'data' button. This is also the only way to see what the results of each API call were. The management API can fail, but the HC API will not, so the results of each API call are not always immediatly obvious in the front end app. Please use the logger component and 'data' button to review the results of each request sent to the HC API.
+
+
+
+###### Front end guide contents
+- [Initial set up](./setup.md)
+- [Settings options in the header](./header_options.md)
+- [Selecting an item from the sider bar](./item.md)
+- [Item queues](./queues.md)
+- [Additional options](./additional_options.md)
+- [Automated testing](./testing.md)
+- [Data viusalization](./visuals.md)

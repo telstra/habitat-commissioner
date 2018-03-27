@@ -48,15 +48,12 @@
 
               <!-- search bar -->
               <li>
-                <div class="input-group col-10">
-                  <button class="input-group-addon" disabled>
-                    <i class="fa fa-search"></i>
-                  </button>
+                <div class="col-10">
                   <input class="form-control" [(ngModel)]="searchStrings[el.base]" placeholder="Search...">
                 </div>
               </li>
 
-              <li *ngFor="let item of (sorted(el.items) | fuse:searchStrings[el.base]:{keys: ['name', 'displayName', 'id']})" @listItemAnimation>
+              <li *ngFor="let item of (sorted(el.items) | fuse:searchStrings[el.base]:{keys: ['name', 'displayName', 'id', 'developerId', 'email']})" @listItemAnimation>
                 <a>
                   <i class="fa fa-angle-right"></i>&nbsp; {{ item.name || item }}{{ item.revision_number ? ' revision: ' + item.revision_number : '' }}
                   <i class="fa fa-times tdev-text error" style="float: right" (click)="removeFromQueue(el.base, item)" placement="top" [ngbTooltip]="'Remove'"

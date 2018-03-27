@@ -10,7 +10,10 @@
       <app-popover [content]="'Apigee management API URL, including the /v number'"></app-popover>
     </label>
     <div class="input-group">
-      <span class="input-group-addon">https://</span>
+      <!-- <span class="input-group-addon">https://</span> -->
+      <div class="input-group-prepend">
+        <span class="input-group-text">https://</span>
+      </div>
       <input class="form-control" formControlName="apiHostName">
     </div>
     <div *ngIf="settingsForm.get('apiHostName').invalid

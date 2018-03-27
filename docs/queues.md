@@ -17,3 +17,14 @@ Each queue can hold multiple items of different types and is essentially what ma
 The output of executing a queue request can be seen in the [logger](./logger.md) at the bottom of the home screen. Additionally, multiple queues for different item types can be run simultaneously.
 
 <img src="images/queues.PNG" alt="Create and update queues"/>
+
+
+
+###### Front end guide contents
+- [Initial set up](./setup.md)
+- [Settings options in the header](./header_options.md)
+- [Selecting an item from the sider bar](./item.md)
+- [Additional options](./additional_options.md)
+- [Winston logger](./logger.md)
+- [Automated testing](./testing.md)
+- [Data viusalization](./visuals.md)

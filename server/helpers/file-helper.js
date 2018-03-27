@@ -141,11 +141,12 @@ exports.write = (resourcePath, data) => {
  * @param {string} destPath path to store the zipped directory
  */
 exports.zip = (srcPath, destPath) => {
-  return new Promise((resolve, reject) => {
-    fs.access(srcPath, (err) => {
-      if (err) {
-        return reject(err);
-      }
+  return new Promise(async (resolve, reject) => {
+    try {
+      // check that the source path exists
+      await fs.access(srcPath);
+
+      // zip it all up
       zipFolder(srcPath, destPath, (err, r) => {
         //logger.verbose(`Zipping ${srcPath}`);
         if (err) {
@@ -153,7 +154,9 @@ exports.zip = (srcPath, destPath) => {
         }
         resolve();
       });
-    });
+    } catch (e) {
+      reject(e);
+    }
   });
 }
 

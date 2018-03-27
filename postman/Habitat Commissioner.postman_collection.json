@@ -66,7 +66,7 @@
 					},
 					"response": [
 						{
-							"id": "763a8536-6661-4ec9-aab8-bed17d6b85df",
+							"id": "9447614d-737a-4100-9529-171effe3f210",
 							"name": "200 OK",
 							"originalRequest": {
 								"method": "POST",
@@ -219,7 +219,7 @@
 					},
 					"response": [
 						{
-							"id": "756fcbec-9fd1-4377-91f9-526897f9ba34",
+							"id": "7a4555de-f391-4fa7-9f72-0bc08057a776",
 							"name": "200 OK",
 							"originalRequest": {
 								"method": "GET",
@@ -350,7 +350,7 @@
 					},
 					"response": [
 						{
-							"id": "d76d80af-c970-4bdd-b764-3ad005691e8e",
+							"id": "68f47429-1dbb-4baf-b4cb-04734fd7f871",
 							"name": "200 OK",
 							"originalRequest": {
 								"method": "GET",
@@ -474,7 +474,7 @@
 					},
 					"response": [
 						{
-							"id": "40770470-dcab-486a-b39a-fbcdc7d66953",
+							"id": "6407579c-bb3a-4698-981a-37f2ef5a50c2",
 							"name": "200 OK",
 							"originalRequest": {
 								"method": "PUT",
@@ -605,7 +605,7 @@
 					},
 					"response": [
 						{
-							"id": "4e117e7d-f66d-4a87-94b2-1d349dbb237f",
+							"id": "4a834bd5-b399-4307-982b-3db07ae30035",
 							"name": "200 OK",
 							"originalRequest": {
 								"method": "PUT",
@@ -756,7 +756,7 @@
 					},
 					"response": [
 						{
-							"id": "65578ab5-cea1-4a15-b460-14d407f5034b",
+							"id": "7430c982-d395-42cb-98e2-6c25e3aa0000",
 							"name": "200 OK",
 							"originalRequest": {
 								"method": "POST",
@@ -926,7 +926,7 @@
 					},
 					"response": [
 						{
-							"id": "fc90411a-0fea-4cdf-8569-24a3b4339ab1",
+							"id": "1c29f908-925c-4a3b-a547-f2c4fae8295d",
 							"name": "200 OK",
 							"originalRequest": {
 								"method": "POST",
@@ -1147,7 +1147,7 @@
 					},
 					"response": [
 						{
-							"id": "17ac2b10-52b1-4f07-a00e-9c5a9ddaf201",
+							"id": "062f49b1-f7f7-4272-bf31-f6a25dfc1152",
 							"name": "200 OK",
 							"originalRequest": {
 								"method": "PUT",
@@ -1293,7 +1293,7 @@
 					},
 					"response": [
 						{
-							"id": "d92747dd-9000-44d7-993b-8ae1a8d31fb5",
+							"id": "1ebf6926-6862-4950-821d-9409ad3cb9b7",
 							"name": "200 OK",
 							"originalRequest": {
 								"method": "DELETE",
@@ -1415,7 +1415,7 @@
 					},
 					"response": [
 						{
-							"id": "d56f7a3b-420c-40b3-a75c-f65690f95fad",
+							"id": "e4150071-39ad-49d2-86bf-559655dc796f",
 							"name": "200 OK",
 							"originalRequest": {
 								"header": [],
@@ -1519,7 +1519,7 @@
 					},
 					"response": [
 						{
-							"id": "6aa7dfce-2b86-4c58-a6c8-413c9dd8a041",
+							"id": "a1415fae-b826-4c1c-9914-66312b785844",
 							"name": "200 OK",
 							"originalRequest": {
 								"method": "DELETE",
@@ -1643,7 +1643,7 @@
 					},
 					"response": [
 						{
-							"id": "72702f50-4f42-4e3d-8e78-200e76de41fa",
+							"id": "d8e991cb-2111-49c3-9a1c-807d91dc7199",
 							"name": "getAllEnvs",
 							"originalRequest": {
 								"method": "GET",
@@ -1816,7 +1816,7 @@
 					},
 					"response": [
 						{
-							"id": "d3063fd5-2b0a-42b5-8ccc-a602fbc20e35",
+							"id": "0195187b-6947-4473-9789-a30497d8ed5a",
 							"name": "200 OK",
 							"originalRequest": {
 								"method": "GET",
@@ -1945,7 +1945,7 @@
 					},
 					"response": [
 						{
-							"id": "d8378e0a-8e2c-47db-835d-9ba344c104c4",
+							"id": "db9bc91d-4ed3-48b3-ae60-5702bcaa32a0",
 							"name": "200 OK",
 							"originalRequest": {
 								"method": "GET",
@@ -3274,13 +3274,18 @@
 					"response": []
 				},
 				{
-					"name": "deleteCompany",
+					"name": "listRepoCompanies",
 					"request": {
-						"method": "DELETE",
-						"header": [],
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}"
+							}
+						],
 						"body": {},
 						"url": {
-							"raw": "http://localhost:8080/companies/{{company_name}}?org={{org}}",
+							"raw": "http://localhost:8080/companies/repo/list?org={{org}}&repo={{repo}}",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -3288,6 +3293,48 @@
 							"port": "8080",
 							"path": [
 								"companies",
+								"repo",
+								"list"
+							],
+							"query": [
+								{
+									"key": "org",
+									"value": "{{org}}",
+									"equals": true
+								},
+								{
+									"key": "repo",
+									"value": "{{repo}}",
+									"equals": true
+								}
+							]
+						},
+						"description": "Get a list of all companies in the repo"
+					},
+					"response": []
+				},
+				{
+					"name": "getRepoCompany",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:8080/companies/repo/details/{{company_name}}?org={{org}}&repo={{repo}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"companies",
+								"repo",
+								"details",
 								"{{company_name}}"
 							],
 							"query": [
@@ -3295,10 +3342,247 @@
 									"key": "org",
 									"value": "{{org}}",
 									"equals": true
+								},
+								{
+									"key": "repo",
+									"value": "{{repo}}",
+									"equals": true
 								}
 							]
 						},
-						"description": "Delete a company in Apigee"
+						"description": "Get the details of a single company from the repo"
+					},
+					"response": []
+				},
+				{
+					"name": "exportCompanies",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n\t\"{{company_name}}\",\n\t\"{{company_name}}\"\n]"
+						},
+						"url": {
+							"raw": "http://localhost:8080/companies/repo?org={{org}}&repo={{repo}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"companies",
+								"repo"
+							],
+							"query": [
+								{
+									"key": "org",
+									"value": "{{org}}",
+									"equals": true
+								},
+								{
+									"key": "repo",
+									"value": "{{repo}}",
+									"equals": true
+								}
+							]
+						},
+						"description": "Export companies from Apigee to the repo. Also exports any apps for each company"
+					},
+					"response": []
+				},
+				{
+					"name": "importCompanies",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n\t\"{{company_name}}\",\n\t\"{{company_name}}\"\n]"
+						},
+						"url": {
+							"raw": "http://localhost:8080/companies/apigee?org={{org}}&repo={{repo}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"companies",
+								"apigee"
+							],
+							"query": [
+								{
+									"key": "org",
+									"value": "{{org}}",
+									"equals": true
+								},
+								{
+									"key": "repo",
+									"value": "{{repo}}",
+									"equals": true
+								}
+							]
+						},
+						"description": "Import companies from the repo to Apigee"
+					},
+					"response": []
+				},
+				{
+					"name": "importCompanyApps",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n\t\"{{app_name}}\",\n\t\"{{app_name}}\"\n]"
+						},
+						"url": {
+							"raw": "http://localhost:8080/companies/apigee/{{company_name}}?org={{org}}&repo={{repo}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"companies",
+								"apigee",
+								"{{company_name}}"
+							],
+							"query": [
+								{
+									"key": "org",
+									"value": "{{org}}",
+									"equals": true
+								},
+								{
+									"key": "repo",
+									"value": "{{repo}}",
+									"equals": true
+								}
+							]
+						},
+						"description": "Import company apps from the repo into Apigee"
+					},
+					"response": []
+				},
+				{
+					"name": "updateCompanies",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n\t\"{{company_name}}\",\n\t\"{{company_name}}\"\n]"
+						},
+						"url": {
+							"raw": "http://localhost:8080/companies/apigee?org={{org}}&repo={{repo}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"companies",
+								"apigee"
+							],
+							"query": [
+								{
+									"key": "org",
+									"value": "{{org}}",
+									"equals": true
+								},
+								{
+									"key": "repo",
+									"value": "{{repo}}",
+									"equals": true
+								}
+							]
+						},
+						"description": "Update existing companies in Apigee with data from the repo"
+					},
+					"response": []
+				},
+				{
+					"name": "updateCompanyApps",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n\t\"{{app_name}}\",\n\t\"{{app_name}}\"\n]"
+						},
+						"url": {
+							"raw": "http://localhost:8080/companies/apigee/{{companyName}}?org={{org}}&repo={{repo}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"companies",
+								"apigee",
+								"{{companyName}}"
+							],
+							"query": [
+								{
+									"key": "org",
+									"value": "{{org}}",
+									"equals": true
+								},
+								{
+									"key": "repo",
+									"value": "{{repo}}",
+									"equals": true
+								}
+							]
+						},
+						"description": "Update existing apps for a company in Apigee with data from the repo"
 					},
 					"response": []
 				},
@@ -3376,6 +3660,118 @@
 					"response": []
 				},
 				{
+					"name": "listRepoCompanyApps",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:8080/companies/repo/list/{{company_name}}?org={{org}}&repo={{repo}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"companies",
+								"repo",
+								"list",
+								"{{company_name}}"
+							],
+							"query": [
+								{
+									"key": "org",
+									"value": "{{org}}",
+									"equals": true
+								},
+								{
+									"key": "repo",
+									"value": "{{repo}}",
+									"equals": true
+								}
+							]
+						},
+						"description": "Get all apps for a company in the repo"
+					},
+					"response": []
+				},
+				{
+					"name": "getRepoCompanyApp",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:8080/companies/repo/details/{{company_name}}/{{app_name}}?org={{org}}&repo={{repo}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"companies",
+								"repo",
+								"details",
+								"{{company_name}}",
+								"{{app_name}}"
+							],
+							"query": [
+								{
+									"key": "org",
+									"value": "{{org}}",
+									"equals": true
+								},
+								{
+									"key": "repo",
+									"value": "{{repo}}",
+									"equals": true
+								}
+							]
+						},
+						"description": "Get the details for a company app from the repo"
+					},
+					"response": []
+				},
+				{
+					"name": "deleteCompany",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:8080/companies/{{company_name}}?org={{org}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"companies",
+								"{{company_name}}"
+							],
+							"query": [
+								{
+									"key": "org",
+									"value": "{{org}}",
+									"equals": true
+								}
+							]
+						},
+						"description": "Delete a company in Apigee"
+					},
+					"response": []
+				},
+				{
 					"name": "deleteCompanyApp",
 					"request": {
 						"method": "DELETE",
@@ -3447,9 +3843,9 @@
 					"response": []
 				},
 				{
-					"name": "deleteDeveloper",
+					"name": "getDeveloper",
 					"request": {
-						"method": "DELETE",
+						"method": "GET",
 						"header": [
 							{
 								"key": "token",
@@ -3458,7 +3854,7 @@
 						],
 						"body": {},
 						"url": {
-							"raw": "http://localhost:8080/developers/{{developer_email}}?org={{org}}",
+							"raw": "http://localhost:8080/developers/apigee/details/{{developer_email}}?org={{org}}",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -3466,6 +3862,8 @@
 							"port": "8080",
 							"path": [
 								"developers",
+								"apigee",
+								"details",
 								"{{developer_email}}"
 							],
 							"query": [
@@ -3476,7 +3874,320 @@
 								}
 							]
 						},
-						"description": "Delete a developer from Apigee"
+						"description": "Details of a developer"
+					},
+					"response": []
+				},
+				{
+					"name": "listRepoDevelopers",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:8080/developers/repo/list?org={{org}}&repo={{repo}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"developers",
+								"repo",
+								"list"
+							],
+							"query": [
+								{
+									"key": "org",
+									"value": "{{org}}",
+									"equals": true
+								},
+								{
+									"key": "repo",
+									"value": "{{repo}}",
+									"equals": true
+								}
+							]
+						},
+						"description": "Get all developers from the repo"
+					},
+					"response": []
+				},
+				{
+					"name": "getRepoDeveloper",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:8080/developers/repo/details/{{developer_id}}?org={{org}}&repo={{repo}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"developers",
+								"repo",
+								"details",
+								"{{developer_id}}"
+							],
+							"query": [
+								{
+									"key": "org",
+									"value": "{{org}}",
+									"equals": true
+								},
+								{
+									"key": "repo",
+									"value": "{{repo}}",
+									"equals": true
+								}
+							]
+						},
+						"description": "Details of a developer from the repo"
+					},
+					"response": []
+				},
+				{
+					"name": "exportDevelopers",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n\t\"{{developer_email}}\",\n\t\"{{developer_email}}\"\n]"
+						},
+						"url": {
+							"raw": "http://localhost:8080/developers/repo?org={{org}}&repo={{repo}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"developers",
+								"repo"
+							],
+							"query": [
+								{
+									"key": "org",
+									"value": "{{org}}",
+									"equals": true
+								},
+								{
+									"key": "repo",
+									"value": "{{repo}}",
+									"equals": true
+								}
+							]
+						},
+						"description": "Export developers from Apigee. Also exports apps for each developer. The request body can be developer emails or IDs"
+					},
+					"response": []
+				},
+				{
+					"name": "importDevelopers",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n\t\"{{developerId}}\",\n\t\"{{developerId}}\"\n]"
+						},
+						"url": {
+							"raw": "http://localhost:8080/developers/apigee?org={{org}}&repo={{repo}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"developers",
+								"apigee"
+							],
+							"query": [
+								{
+									"key": "org",
+									"value": "{{org}}",
+									"equals": true
+								},
+								{
+									"key": "repo",
+									"value": "{{repo}}",
+									"equals": true
+								}
+							]
+						},
+						"description": "Import developers into Apigee from the repo. Each element in the body is the develper ID"
+					},
+					"response": []
+				},
+				{
+					"name": "importDeveloperApps",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n\t\"{{app_name}}\",\n\t\"{{app_name}}\"\n]"
+						},
+						"url": {
+							"raw": "http://localhost:8080/developers/apigee/{{developer_id}}?org={{org}}&repo={{repo}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"developers",
+								"apigee",
+								"{{developer_id}}"
+							],
+							"query": [
+								{
+									"key": "org",
+									"value": "{{org}}",
+									"equals": true
+								},
+								{
+									"key": "repo",
+									"value": "{{repo}}",
+									"equals": true
+								}
+							]
+						},
+						"description": "Import developer apps into Apigee from the repo. Each element in the body is an app name"
+					},
+					"response": []
+				},
+				{
+					"name": "updateDevelopers",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n\t\"{{developer_id}}\",\n\t\"{{developer_id}}\"\n]"
+						},
+						"url": {
+							"raw": "http://localhost:8080/developers/apigee?org={{org}}&repo={{repo}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"developers",
+								"apigee"
+							],
+							"query": [
+								{
+									"key": "org",
+									"value": "{{org}}",
+									"equals": true
+								},
+								{
+									"key": "repo",
+									"value": "{{repo}}",
+									"equals": true
+								}
+							]
+						},
+						"description": "Update existing developers in Apigee with data from the repo. Each element in the body is the develper ID"
+					},
+					"response": []
+				},
+				{
+					"name": "updateDeveloperApps",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n\t\"{{app_name}}\",\n\t\"{{app_name}}\"\n]"
+						},
+						"url": {
+							"raw": "http://localhost:8080/developers/apigee/{{developer_id}}?org={{org}}&repo={{repo}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"developers",
+								"apigee",
+								"{{developer_id}}"
+							],
+							"query": [
+								{
+									"key": "org",
+									"value": "{{org}}",
+									"equals": true
+								},
+								{
+									"key": "repo",
+									"value": "{{repo}}",
+									"equals": true
+								}
+							]
+						},
+						"description": "Update existing developer apps in Apigee. Each element in the request body is the app name"
 					},
 					"response": []
 				},
@@ -3517,77 +4228,6 @@
 					"response": []
 				},
 				{
-					"name": "deleteDeveloperApp",
-					"request": {
-						"method": "DELETE",
-						"header": [
-							{
-								"key": "token",
-								"value": "{{token}}"
-							}
-						],
-						"body": {},
-						"url": {
-							"raw": "http://localhost:8080/developers/{{developer_email}}/{{app_name}}?org={{org}}",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"developers",
-								"{{developer_email}}",
-								"{{app_name}}"
-							],
-							"query": [
-								{
-									"key": "org",
-									"value": "{{org}}",
-									"equals": true
-								}
-							]
-						},
-						"description": "Delete a developer app"
-					},
-					"response": []
-				},
-				{
-					"name": "getDeveloper",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "token",
-								"value": "{{token}}"
-							}
-						],
-						"body": {},
-						"url": {
-							"raw": "http://localhost:8080/developers/apigee/details/{{developer_email}}?org={{org}}",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"developers",
-								"apigee",
-								"details",
-								"{{developer_email}}"
-							],
-							"query": [
-								{
-									"key": "org",
-									"value": "{{org}}",
-									"equals": true
-								}
-							]
-						},
-						"description": "Details of a developer"
-					},
-					"response": []
-				},
-				{
 					"name": "getDeveloperApp",
 					"request": {
 						"method": "GET",
@@ -3621,6 +4261,158 @@
 							]
 						},
 						"description": "Details of a developer app"
+					},
+					"response": []
+				},
+				{
+					"name": "listRepoDevelopersApps",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:8080/developers/repo/list/b00c6f97-fc72-4db8-8ea1-033351d62c12?org={{org}}&repo={{repo}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"developers",
+								"repo",
+								"list",
+								"b00c6f97-fc72-4db8-8ea1-033351d62c12"
+							],
+							"query": [
+								{
+									"key": "org",
+									"value": "{{org}}",
+									"equals": true
+								},
+								{
+									"key": "repo",
+									"value": "{{repo}}",
+									"equals": true
+								}
+							]
+						},
+						"description": "All apps for a specified developer in the repo"
+					},
+					"response": []
+				},
+				{
+					"name": "getRepoDeveloperApp",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:8080/developers/repo/details/{{developerId}}/{{appName}}?org={{org}}&repo={{repo}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"developers",
+								"repo",
+								"details",
+								"{{developerId}}",
+								"{{appName}}"
+							],
+							"query": [
+								{
+									"key": "org",
+									"value": "{{org}}",
+									"equals": true
+								},
+								{
+									"key": "repo",
+									"value": "{{repo}}",
+									"equals": true
+								}
+							]
+						},
+						"description": "Details for an app for a specified developer in the repo"
+					},
+					"response": []
+				},
+				{
+					"name": "deleteDeveloper",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:8080/developers/{{developer_email}}?org={{org}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"developers",
+								"{{developer_email}}"
+							],
+							"query": [
+								{
+									"key": "org",
+									"value": "{{org}}",
+									"equals": true
+								}
+							]
+						},
+						"description": "Delete a developer from Apigee"
+					},
+					"response": []
+				},
+				{
+					"name": "deleteDeveloperApp",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:8080/developers/{{developer_email}}/{{app_name}}?org={{org}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"developers",
+								"{{developer_email}}",
+								"{{app_name}}"
+							],
+							"query": [
+								{
+									"key": "org",
+									"value": "{{org}}",
+									"equals": true
+								}
+							]
+						},
+						"description": "Delete a developer app"
 					},
 					"response": []
 				}

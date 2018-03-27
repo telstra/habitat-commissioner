@@ -24,9 +24,16 @@ exports.request = (userData) => {
 exports.urlOptions = (resourcePath, userData, isMonetization, body) => {
   if (!userData) { return {}; }
   var url;
-  isMonetization
-    ? url = `https://${userData.config.apiHostName}/mataap/mint/organizations`
-    : url = `https://${userData.config.apiHostName}/mataap/o`;
+
+  if (userData.config.apiHostName.indexOf("api.enterprise.apigee") >= 0) { // If external apigee return normal url
+    isMonetization
+      ? url = `https://${userData.config.apiHostName}/mint/organizations`
+      : url = `https://${userData.config.apiHostName}/organizations`;
+  } else {
+    isMonetization
+      ? url = `https://${userData.config.apiHostName}/mataap/mint/organizations`
+      : url = `https://${userData.config.apiHostName}/mataap/o`;
+  }
 
   return {
     url: `${url}/${resourcePath}`,

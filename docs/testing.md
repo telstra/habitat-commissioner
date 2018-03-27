@@ -6,3 +6,14 @@ After selecting a test suite from the side bar, clicking the 'RUN TESTS' button 
 
 
 <img src="images/postman_testing.PNG" alt="Postman testing" width="800px"/>
+
+
+
+###### Front end guide contents
+- [Initial set up](./setup.md)
+- [Settings options in the header](./header_options.md)
+- [Selecting an item from the sider bar](./item.md)
+- [Item queues](./queues.md)
+- [Additional options](./additional_options.md)
+- [Winston logger](./logger.md)
+- [Data viusalization](./visuals.md)

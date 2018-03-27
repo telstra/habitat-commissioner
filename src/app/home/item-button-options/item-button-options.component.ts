@@ -25,7 +25,7 @@ export class ItemButtonOptionsComponent implements OnInit, OnChanges {
   @Output() showVisuals: EventEmitter<void> = new EventEmitter<void>();
 
   // hide procure button when any of these are the item.base
-  hideProcure = ['companies', 'developers', 'kvms'];
+  hideProcure = ['kvms'];
   // hide update button when these are the item.base
   hideUpdate = ['proxies', 'sharedFlows', 'monetizationPackages', 'kvms'];
   // more options
@@ -50,12 +50,20 @@ export class ItemButtonOptionsComponent implements OnInit, OnChanges {
     if (this.checkRatePlan()) {
       return true;
     }
+    // hide when company or developer app
+    if(this.checkApp()) {
+      return true;
+    }
     return false;
   }
 
   hideUpdateButton() {
     // hide for anything with a base in the hideUpdate array
     if (this.hideUpdate.indexOf(this.item.base) !== -1) {
+      return true;
+    }
+    // hide for company/ developer apps
+    if(this.checkApp()) {
       return true;
     }
     return false;
@@ -68,6 +76,10 @@ export class ItemButtonOptionsComponent implements OnInit, OnChanges {
     }
     // hide for kvm entries
     if (this.checkKvmEntry()) {
+      return true;
+    }
+    // hide for company/ developer apps
+    if(this.checkApp()) {
       return true;
     }
     return false;
@@ -196,6 +208,11 @@ export class ItemButtonOptionsComponent implements OnInit, OnChanges {
     this.stateService.queue(type);
   }
 
+  // check if the current item is a developer or company app
+  checkApp() {
+    return (this.item.base === 'companies' || this.item.base === 'developers') && this.item.parent;
+  }
+
   // check if the current item is a rate plan
   checkRatePlan() {
     return this.item.base === 'monetizationPackages' && this.item.parent;
@@ -241,6 +258,10 @@ export class ItemButtonOptionsComponent implements OnInit, OnChanges {
       // kvm entry
       else if (this.item.base === 'kvms' && this.item.parent) {
         this.options = this.utils.repoKvmEntryOptions(this.item);
+      }
+      // company/ developer app
+      else if(this.checkApp()) {
+        this.options = this.utils.repoAppOptions(this.item);
       }
     }
   }

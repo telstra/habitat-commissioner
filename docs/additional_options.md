@@ -17,3 +17,12 @@ Some items allow for additional operations to be performed on them.
 - **Monetization rate plans:** Attempt to end date the selected rate plan. The end date will be set as the current time.
 
 - **Proxy or Shared Flow revision:** Deploy, undeploy or delete the selected proxy/ shared flow revision
+
+###### Front end guide contents
+- [Initial set up](./setup.md)
+- [Settings options in the header](./header_options.md)
+- [Selecting an item from the sider bar](./item.md)
+- [Item queues](./queues.md)
+- [Winston logger](./logger.md)
+- [Automated testing](./testing.md)
+- [Data viusalization](./visuals.md)

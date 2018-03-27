@@ -80,7 +80,7 @@ router.get('/', async (req, res, next) => {
 // get folders in the repo parent directory
 router.get('/repos', async (req, res, next) => {
   try {
-    if(!res.locals.user.config.repoParentDirectory) {
+    if (!res.locals.user.config.repoParentDirectory) {
       return responseHelper.handleError(res, `No repo parent directory set!`);
     }
     responseHelper.handleResponse(res, 'Repo directories', await fileHelper.readDir(res.locals.user.config.repoParentDirectory));

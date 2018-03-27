@@ -15,7 +15,7 @@ module.exports = async (req, res, next) => {
     var entries = [];
 
     req.body.forEach(el => {
-      if (!fileData.find(x => x.id ? x.id === el : x.name === el)) {
+      if (!fileData.find(x => x.developerId ? x.developerId === el : x.id ? x.id === el : x.name === el)) {
         logger.error(`${el} not found in ${res.locals.repoFilePath}!`);
       } else {
         entries.push(el);

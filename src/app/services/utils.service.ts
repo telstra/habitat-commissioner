@@ -62,6 +62,13 @@ export class UtilsService {
     ]
   }
 
+  repoAppOptions(item): IOption[] {
+    return [
+      { name: 'Add this app', method: 'Post', endpoint: `/${item.base}/apigee/${item.parent.name}`, payload: [item.data.name] },
+      { name: 'Update this app', method: 'Put', endpoint: `/${item.base}/apigee/${item.parent.name}`, payload: [item.data.name] }
+    ]
+  }
+
   apigeeRevisionOptions(item): IOption[] {
     let name, revision;
     if (item.base === 'sharedFlows') {

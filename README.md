@@ -34,6 +34,23 @@ npm start
 ```
 This will start the express server and the Habitat Commissioner API can be used at http://localhost:8080
 
+
+If you would like to use the front end application you will need to open two terminals in the Habitat Commissioner diretory. In one terminal run
+```
+npm run build
+```
+This will start a live reload server of the application code. Alternatively run
+```
+npm run build:prod
+```
+To build a production version of the front end code without live reloading functions.
+
+In the other terminal run
+```
+npm start
+```
+To start the express server.
+
 Navigating to http://localhost:8080 in your browser will take you to the Habitat Commissioner front end application.
 
 
@@ -77,7 +94,6 @@ Where *myProdOrg* is the name of the org within Apigee that you want to move dat
 This is a very simple end to end example of what the main use of the Habitat Commissioner does. For a more detailed explanation of all of the HC API endpoints please see the [swagger](./swagger/swagger.yaml) included in this repo          
 
 
-
 ### Habitat Commissioner front example application
 To help demonstrate the functionality of the Habitat Commissioner this repo also includes a front end application that implements all of the functionality of the API. At our organization, we use this application to migrate our API's from development orgs into production.
 
@@ -100,3 +116,6 @@ The application code will now be rebuilt as you save changes. However, because t
 | [Winston logger](./docs/logger.md)                            | Use the logging capabilites of the HC API to track your API calls |
 | [Automated testing](./docs/testing.md)                        | Import existing postman collections and environments and run end to end tests |
 | [Data viusalization](./docs/visuals.md)                       | Visualize your API's with D3.js                                   |
+
+### Expanding on the Habitat Commissioner API and front end app
+A tutorial on expanding the Habitat Commissioner to include additionally functionality can be found [here](./docs/tutorial/intro.md). In this tutorial we add functionality to procure, create and update companies and company apps.

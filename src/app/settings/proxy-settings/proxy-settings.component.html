@@ -5,11 +5,10 @@
   </div>
 
   <div class="form-group">
-    <label class="custom-control custom-checkbox">
-      <input type="checkbox" class="custom-control-input" formControlName="enable">
-      <span class="custom-control-indicator"></span>
-      <span class="custom-control-description">Enable proxy</span>
-    </label>
+    <div class="custom-control custom-checkbox mr-sm-2">
+      <input type="checkbox" class="custom-control-input" id="customControlAutosizing" formControlName="enable">
+      <label class="custom-control-label" for="customControlAutosizing">Enable proxy</label>
+    </div>
   </div>
 
   <div class="form-group">
@@ -31,9 +30,11 @@
     </label>
     <div class="input-group">
       <input class="form-control" formControlName="password" [type]="showPassword ? 'text' : 'password'">
-      <button class="input-group-addon" (click)="showPassword =! showPassword">
-        <i [ngClass]="showPassword ? 'fa fa-eye' : 'fa fa-eye-slash'"></i>
-      </button>
+      <div class="input-group-append">
+        <button class="btn btn-outline-secondary" (click)="showPassword =! showPassword">
+          <i [ngClass]="showPassword ? 'fa fa-eye' : 'fa fa-eye-slash'"></i>
+        </button>
+      </div>
     </div>
     <div *ngIf="settingsForm.get('password').invalid
           && settingsForm.get('password').touched" class="form-error">

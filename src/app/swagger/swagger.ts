@@ -2481,9 +2481,374 @@ const SWAGGER = {
         }
       }
     },
+    "/companies/repo/list": {
+      "get": {
+        "description": "Get a list of all companies in the repo",
+        "summary": "List company apps in the repo",
+        "tags": [
+          "companies"
+        ],
+        "operationId": "listRepoCompanies",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "org",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "org name"
+          },
+          {
+            "name": "repo",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "repo name"
+          },
+          {
+            "name": "token",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "access token"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ApigeeResponse"
+            }
+          }
+        }
+      }
+    },
+    "/companies/repo/details/{company_name}": {
+      "get": {
+        "description": "Get the details of a single company from the repo",
+        "summary": "Get the details of a single company from the repo",
+        "tags": [
+          "companies"
+        ],
+        "operationId": "getRepoCompany",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "org",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "org name"
+          },
+          {
+            "name": "repo",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "repo name"
+          },
+          {
+            "name": "company_name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "company name"
+          },
+          {
+            "name": "token",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "access token"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ApigeeResponse"
+            }
+          }
+        }
+      }
+    },
+    "/companies/repo": {
+      "post": {
+        "description": "Export companies from Apigee to the repo. Also exports any apps for each company",
+        "summary": "Export companies and company apps from Apigee",
+        "tags": [
+          "companies"
+        ],
+        "operationId": "exportCompanies",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "org",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "org name"
+          },
+          {
+            "name": "repo",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "repo name"
+          },
+          {
+            "name": "token",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "access token"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ApigeeRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ApigeeResponse"
+            }
+          }
+        }
+      }
+    },
+    "/companies/apigee": {
+      "post": {
+        "description": "Import companies from the repo to Apigee",
+        "summary": "Import companies from the repo to Apigee",
+        "tags": [
+          "companies"
+        ],
+        "operationId": "importCompanies",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "org",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "org name"
+          },
+          {
+            "name": "repo",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "repo name"
+          },
+          {
+            "name": "token",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "access token"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ApigeeRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ApigeeResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "description": "Update existing companies in Apigee with data from the repo",
+        "summary": "Update existing companies in Apigee with data from the repo",
+        "tags": [
+          "companies"
+        ],
+        "operationId": "updateCompanies",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "org",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "org name"
+          },
+          {
+            "name": "repo",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "repo name"
+          },
+          {
+            "name": "token",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "access token"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ApigeeRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ApigeeResponse"
+            }
+          }
+        }
+      }
+    },
+    "/companies/apigee/{company_name}": {
+      "post": {
+        "description": "Import company apps from the repo into Apigee",
+        "summary": "Import company apps from the repo into Apigee",
+        "tags": [
+          "companies"
+        ],
+        "operationId": "importCompanyApps",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "org",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "org name"
+          },
+          {
+            "name": "repo",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "repo name"
+          },
+          {
+            "name": "token",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "access token"
+          },
+          {
+            "name": "company_name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "company name"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ApigeeRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ApigeeResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "description": "Update existing apps for a company in Apigee with data from the repo",
+        "summary": "Update existing apps for a company in Apigee with data from the repo",
+        "tags": [
+          "companies"
+        ],
+        "operationId": "updateCompanyApps",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "org",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "org name"
+          },
+          {
+            "name": "repo",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "repo name"
+          },
+          {
+            "name": "company_name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "company name"
+          },
+          {
+            "name": "token",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "access token"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ApigeeRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ApigeeResponse"
+            }
+          }
+        }
+      }
+    },
     "/companies/apigee/list/{company_name}": {
       "get": {
-        "description": "Get all apps for a specified company",
+        "description": "Get all apps for a specified company in Apigee",
         "summary": "List company apps",
         "tags": [
           "companies"
@@ -2527,7 +2892,7 @@ const SWAGGER = {
     },
     "/companies/apigee/details/{company_name}/{app_name}": {
       "get": {
-        "description": "Get all apps for a specified company",
+        "description": "Get all apps for a specified company in Apigee",
         "summary": "Get a company app",
         "tags": [
           "companies"
@@ -2543,6 +2908,115 @@ const SWAGGER = {
             "required": true,
             "type": "string",
             "description": "org name"
+          },
+          {
+            "name": "token",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "access token"
+          },
+          {
+            "name": "company_name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "company name"
+          },
+          {
+            "name": "app_name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "app name"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ApigeeResponse"
+            }
+          }
+        }
+      }
+    },
+    "/companies/repo/list{company_name}": {
+      "get": {
+        "description": "Get all apps for a company in the repo",
+        "summary": "Get all apps for a company in the repo",
+        "tags": [
+          "companies"
+        ],
+        "operationId": "listRepoCompanyApp",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "org",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "org name"
+          },
+          {
+            "name": "repo",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "repo name"
+          },
+          {
+            "name": "token",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "access token"
+          },
+          {
+            "name": "company_name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "company name"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ApigeeResponse"
+            }
+          }
+        }
+      }
+    },
+    "/companies/repo/details/{company_name}/{app_name}": {
+      "get": {
+        "description": "Get the details for a company app from the repo",
+        "summary": "Get a company app from the repo",
+        "tags": [
+          "companies"
+        ],
+        "operationId": "getRepoCompanyApp",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "org",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "org name"
+          },
+          {
+            "name": "repo",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "repo name"
           },
           {
             "name": "token",
@@ -2733,6 +3207,371 @@ const SWAGGER = {
             "required": true,
             "type": "string",
             "description": "developer email or ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ApigeeResponse"
+            }
+          }
+        }
+      }
+    },
+    "/developers/repo/list": {
+      "get": {
+        "description": "Get all developers from the repo",
+        "summary": "List developers in the repo",
+        "tags": [
+          "developers"
+        ],
+        "operationId": "listRepoDevelopers",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "org",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "org name"
+          },
+          {
+            "name": "repo",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "repo name"
+          },
+          {
+            "name": "token",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "access token"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ApigeeResponse"
+            }
+          }
+        }
+      }
+    },
+    "/developers/repo/details/{developer_id}": {
+      "get": {
+        "description": "Get the details of a developer from the repo",
+        "summary": "Details of a developer from the repo",
+        "tags": [
+          "developers"
+        ],
+        "operationId": "getRepoDevelopers",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "org",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "org name"
+          },
+          {
+            "name": "repo",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "repo name"
+          },
+          {
+            "name": "developer_id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "developer ID"
+          },
+          {
+            "name": "token",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "access token"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ApigeeResponse"
+            }
+          }
+        }
+      }
+    },
+    "/developers/repo": {
+      "post": {
+        "description": "Export developers from Apigee. Also exports apps for each developer. The request body can be developer emails or IDs",
+        "summary": "Export developers and developer apps from Apigee",
+        "tags": [
+          "developers"
+        ],
+        "operationId": "exportDevelopers",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "org",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "org name"
+          },
+          {
+            "name": "repo",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "repo name"
+          },
+          {
+            "name": "token",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "access token"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ApigeeRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ApigeeResponse"
+            }
+          }
+        }
+      }
+    },
+    "/developers/apigee": {
+      "post": {
+        "description": "Import developers into Apigee from the repo. Each element in the body is the develper ID",
+        "summary": "Import developers into Apigee",
+        "tags": [
+          "developers"
+        ],
+        "operationId": "importDevelopers",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "org",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "org name"
+          },
+          {
+            "name": "repo",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "repo name"
+          },
+          {
+            "name": "token",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "access token"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ApigeeRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ApigeeResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "description": "Update existing developers in Apigee with data from the repo. Each element in the body is the develper ID",
+        "summary": "Update developers in Apigee",
+        "tags": [
+          "developers"
+        ],
+        "operationId": "updateDevelopers",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "org",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "org name"
+          },
+          {
+            "name": "repo",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "repo name"
+          },
+          {
+            "name": "token",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "access token"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ApigeeRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ApigeeResponse"
+            }
+          }
+        }
+      }
+    },
+    "/developers/apigee/{developer_id}": {
+      "post": {
+        "description": "Import developer apps into Apigee from the repo. Each element in the body is an app name",
+        "summary": "Import developer apps into Apigee",
+        "tags": [
+          "developers"
+        ],
+        "operationId": "importDeveloperApps",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "org",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "org name"
+          },
+          {
+            "name": "repo",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "repo name"
+          },
+          {
+            "name": "developer_id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "developer ID"
+          },
+          {
+            "name": "token",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "access token"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ApigeeRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ApigeeResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "description": "Update existing developer apps in Apigee with data from the repo. Each element in the request body is the app name",
+        "summary": "Update developer apps in Apigee",
+        "tags": [
+          "developers"
+        ],
+        "operationId": "updateDeveloperApps",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "org",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "org name"
+          },
+          {
+            "name": "repo",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "repo name"
+          },
+          {
+            "name": "developer_id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "developer ID"
+          },
+          {
+            "name": "token",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "access token"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ApigeeRequest"
+            }
           }
         ],
         "responses": {

@@ -7,3 +7,14 @@ The settings page is divided into 5 sections:
 - **SSL:** If your Apigee management API requires mutual SSL you can set the passphrase and upload the necessary key and cert files here.
 - **POSTman Tests:** Upload postman test suites here. A test suite needs a name, collection and environment. Test suites created here can be executed via the [Postman tests](./testing.md) page.
 - **User settings:** Remove your account details from the HC API here.
+
+
+
+###### Front end guide contents
+- [Settings options in the header](./header_options.md)
+- [Selecting an item from the sider bar](./item.md)
+- [Item queues](./queues.md)
+- [Additional options](./additional_options.md)
+- [Winston logger](./logger.md)
+- [Automated testing](./testing.md)
+- [Data viusalization](./visuals.md)
