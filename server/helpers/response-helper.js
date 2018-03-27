@@ -20,6 +20,7 @@ exports.handleResponse = (res, message, data) => {
  * @param {*} e error data
  */
 exports.handleError = (res, e) => {
+  console.trace(e);
   return e.body ?
     res.status(e.body.code || 500).json(
       new ApigeeError(e)
