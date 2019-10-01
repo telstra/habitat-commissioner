@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+  hc_service:
+    container_name: hc_apigee
+    build:
+      context: .
+      dockerfile: Dockerfile
+    working_dir: /usr/src/app
+    volumes:
+      - .:/usr/src/app
+      - $HOME/logs:/var/log
+    ports:
+      - '8081:8080'
+      # - '9229:9229'
+    environment:
+      - INSTANCE=hc_env
